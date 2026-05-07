@@ -1,0 +1,74 @@
+# ============================================================
+# IoTeams IIUM — GitHub Pages Auto-Deploy
+# .github/workflows/deploy.yml
+#
+# Automatically deploys the site to GitHub Pages whenever
+# code is pushed to the main branch.
+#
+# HOW IT WORKS:
+# 1. Push to main branch triggers this workflow
+# 2. GitHub checks out the code
+# 3. Uploads the files as a GitHub Pages artifact
+# 4. Deploys to GitHub Pages
+# 5. Site is live at your GitHub Pages URL
+#
+# SETUP REQUIRED (one-time):
+# Repository → Settings → Pages → Source:
+# Set to "GitHub Actions" (not "Deploy from branch")
+# ============================================================
+
+name: Deploy IoTeams Website
+
+on:
+  # Trigger on push to main branch
+  push:
+    branches: [ "main" ]
+
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+# Set permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only allow one deployment at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build & Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Step 1 — Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2 — Configure GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Step 3 — Upload site files as artifact
+      # Excludes dev/helper files that shouldn't be public
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+          # Note: GitHub Pages serves all files in the repo root
+          # Files in .gitignore are already excluded from the repo
+
+      # Step 4 — Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      # Step 5 — Print the deployed URL
+      - name: Print deployed URL
+        run: echo "✅ IoTeams website deployed to ${{ steps.deployment.outputs.page_url }}"

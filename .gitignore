@@ -1,0 +1,58 @@
+# IoTeams IIUM — .gitignore
+# Files and folders Git should NOT track
+
+# ── OS files ────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V500
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── VS Code ─────────────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ── Node (if ever used for tooling) ─────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ── Environment / secrets ────────────────────────────────────
+.env
+.env.local
+.env.production
+*.env
+secrets.js
+config.local.js
+
+# ── PHP temp / cache ─────────────────────────────────────────
+*.log
+/tmp/
+/cache/
+
+# ── Build artifacts ──────────────────────────────────────────
+/dist/
+/build/
+*.min.css.map
+*.min.js.map
+
+# ── Editor backup files ──────────────────────────────────────
+*~
+*.swp
+*.swo
+*.bak
+*.orig
+
+# ── Test / debug files ───────────────────────────────────────
+font-test.html
+_base-template.html
+
+# ── Personal notes ───────────────────────────────────────────
+TODO.md
+NOTES.md
+SCRATCH.md

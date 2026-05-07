@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Our Story Page
+  pages/our-story.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Page Hero
+  4. Our Story — founding narrative
+  5. Timeline — key milestones
+  6. Values — what we stand for
+  7. Team — leadership & members
+  8. CTA — join us
+  9. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story — IoTeams IIUM</title>
+  <meta name="description" content="Learn about IoTeams IIUM — how we started, our mission, our values, and the team behind the Internet of Things Society at IIUM.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Our Story — IoTeams IIUM">
+  <meta property="og:description" content="Learn how IoTeams IIUM was founded in 2022, our mission, core values, and the team building the future of IoT at IIUM.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/our-story.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Our Story — IoTeams IIUM">
+  <meta name="twitter:description" content="Learn how IoTeams IIUM was founded in 2022, our mission, core values, and the team building the future of IoT at IIUM.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/our-story.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       TIMELINE SECTION
+    ══════════════════════════════════════ */
+    #timeline {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .timeline-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: var(--space-xl);
+      padding-left: 0;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border-gold);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      margin-bottom: var(--space-xl);
+      position: relative;
+    }
+
+    /* Alternate left/right */
+    .timeline-item:nth-child(even) .timeline-content {
+      grid-column: 3;
+      grid-row: 1;
+      text-align: left;
+      padding-left: var(--space-xl);
+    }
+
+    .timeline-item:nth-child(even) .timeline-spacer {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      grid-column: 1;
+      text-align: right;
+      padding-right: var(--space-xl);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-spacer {
+      grid-column: 3;
+    }
+
+    /* Center dot */
+    .timeline-dot {
+      grid-column: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-dot-inner {
+      width: 14px;
+      height: 14px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 3px solid var(--black);
+      box-shadow: 0 0 0 1px var(--gold);
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      padding-bottom: var(--space-md);
+    }
+
+    .timeline-year {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .timeline-content h3 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-content p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ══════════════════════════════════════
+       VALUES SECTION
+    ══════════════════════════════════════ */
+    #values {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .values-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    .value-card {
+      background: var(--black-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      text-align: center;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .value-card h3 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: var(--space-xs);
+    }
+
+    .value-card p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ══════════════════════════════════════
+       TEAM SECTION
+    ══════════════════════════════════════ */
+    #team {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .team-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    /* Leadership row */
+    .team-leadership {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* General members row */
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    .member-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .team-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+      text-align: center;
+    }
+
+    .team-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+    }
+
+    .team-card-img {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--black-4);
+      position: relative;
+    }
+
+    .team-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%);
+      transition: filter var(--transition-slow), transform var(--transition-slow);
+    }
+
+    .team-card:hover .team-card-img img {
+      filter: grayscale(0%);
+      transform: scale(1.04);
+    }
+
+    /* Placeholder avatar */
+    .team-avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black-3);
+    }
+
+    .team-avatar-placeholder i {
+      font-size: 3rem;
+      color: var(--white-muted);
+    }
+
+    .team-card-body {
+      padding: var(--space-md);
+    }
+
+    .team-card h4 {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .team-card .role {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-xs);
+      display: block;
+    }
+
+    .team-card p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin-bottom: var(--space-sm);
+      line-height: 1.6;
+    }
+
+    .team-social {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .team-social a {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .team-social a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Smaller cards for general members */
+    .team-members .team-card-body {
+      padding: var(--space-sm);
+    }
+
+    .team-members .team-card h4 {
+      font-size: var(--fs-sm);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      .timeline::before { left: 24px; }
+      .timeline-item {
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: auto;
+      }
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: left;
+        padding-left: var(--space-md);
+        padding-right: 0;
+      }
+      .timeline-dot { grid-column: 1; justify-content: flex-start; padding-left: 17px; }
+      .timeline-item:nth-child(odd) .timeline-spacer,
+      .timeline-item:nth-child(even) .timeline-spacer { display: none; }
+      .values-grid    { grid-template-columns: 1fr; }
+      .team-leadership { grid-template-columns: 1fr 1fr; }
+      .team-members   { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .team-leadership { grid-template-columns: 1fr; }
+      .team-members    { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body class="our-story-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ══════════════════════════════
+       NAVIGATION
+  ══════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html" class="active">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta">Join Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════
+       MARQUEE
+  ══════════════════════════════ -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>IoTeams IIUM</span><span class="dot">◆</span>
+      <span>Our Story</span><span class="dot">◆</span>
+      <span>Founded 2022</span><span class="dot">◆</span>
+      <span>120+ Members</span><span class="dot">◆</span>
+      <span>Building the Future</span><span class="dot">◆</span>
+      <span>IoTeams IIUM</span><span class="dot">◆</span>
+      <span>Our Story</span><span class="dot">◆</span>
+      <span>Founded 2022</span><span class="dot">◆</span>
+      <span>120+ Members</span><span class="dot">◆</span>
+      <span>Building the Future</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ══════════════════════════════
+         PAGE HERO
+    ══════════════════════════════ -->
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-glow"></div>
+      <div class="page-hero-content">
+        <span class="section-tag animate-fade-up">◆ Our Story</span>
+        <h1 class="animate-fade-up delay-1">
+          From a Spark of<br>
+          <span class="gold">Curiosity</span> to a<br>
+          Community
+        </h1>
+        <p class="animate-fade-up delay-2">
+          IoTeams began with a small group of IIUM students who believed
+          that IoT could change the world — and that students should be
+          the ones building that change.
+        </p>
+        <nav class="breadcrumbs animate-fade-up delay-3">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current">Our Story</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         FOUNDING STORY
+    ══════════════════════════════ -->
+    <section id="founding" style="background:var(--black); padding: var(--space-3xl) var(--space-2xl);">
+      <div style="max-width:var(--container-max); margin: 0 auto;">
+        <div class="row align-items-center g-5">
+
+          <div class="col-lg-6" data-aos="fade-right">
+            <span class="section-tag">◆ How It Started</span>
+            <h2 class="section-title">A Late-Night Idea That Became a Movement</h2>
+            <hr class="divider-gold">
+            <p style="font-size:var(--fs-md); color:var(--white-dim); line-height:1.8; margin-bottom:var(--space-md);">
+              In 2022, a group of five engineering students at IIUM Gombak stayed up late
+              in the computer lab — not studying for exams, but figuring out how to make
+              a sensor talk to the internet. That night, IoTeams was born.
+            </p>
+            <p style="color:var(--white-dim); line-height:1.75; margin-bottom:var(--space-md);">
+              What started as an informal study group quickly grew as more students
+              discovered the joy of building connected devices. Within months, the group
+              had a name, a committee, and official recognition from IIUM Student Affairs.
+            </p>
+            <p style="color:var(--white-dim); line-height:1.75; margin-bottom:0;">
+              Today, IoTeams is one of IIUM's most active technical societies — running
+              workshops, hackathons, industry talks, and collaborative projects that bridge
+              the gap between academic learning and real-world IoT applications.
+            </p>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left">
+            <!-- Image or placeholder -->
+            <div style="position:relative;">
+              <div style="background:var(--black-3); border:1px solid var(--border-gold); border-radius:var(--radius-md); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem;">
+                <i class="bi bi-image" style="font-size:3rem; color:var(--white-muted);"></i>
+                <span style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">founding-photo.jpg</span>
+              </div>
+              <!-- Gold accent tag -->
+              <div style="position:absolute; bottom:-1px; left:-1px; background:var(--gold); color:var(--black); font-family:var(--font-mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:0.1em; padding:0.5rem 1rem; border-radius:0 var(--radius-md) 0 var(--radius-md);">
+                IIUM GOMBAK, 2022
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         TIMELINE
+    ══════════════════════════════ -->
+    <section id="timeline">
+      <div class="timeline-inner">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Milestones</span>
+          <h2 class="section-title">Our Journey So Far</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <div class="timeline">
+
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-content">
+              <span class="timeline-year">2022 — Q1</span>
+              <h3>Founded by 5 Students</h3>
+              <p>IoTeams officially formed in IIUM Gombak with 5 founding members and a shared passion for connected devices.</p>
+            </div>
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-spacer"></div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-spacer"></div>
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2022 — Q3</span>
+              <h3>Official IIUM Recognition</h3>
+              <p>Received official recognition from IIUM Student Affairs Division, enabling us to host official events and access university resources.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-content">
+              <span class="timeline-year">2022 — Q4</span>
+              <h3>First Workshop — 40 Attendees</h3>
+              <p>Hosted our first public workshop on Arduino basics. 40 students attended — far more than we expected. The demand was real.</p>
+            </div>
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-spacer"></div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-spacer"></div>
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2023 — Q2</span>
+              <h3>First Hackathon — 12 Teams</h3>
+              <p>Organised IoTeams' first internal hackathon. 12 teams competed over 48 hours to build IoT solutions for campus problems.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-content">
+              <span class="timeline-year">2023 — Q4</span>
+              <h3>100 Members Milestone</h3>
+              <p>Crossed 100 registered members — students from Engineering, IT, Science, and even Business who wanted to learn IoT.</p>
+            </div>
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-spacer"></div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-spacer"></div>
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2024 — Q2</span>
+              <h3>Industry Partnership with Local Tech Firms</h3>
+              <p>Established partnerships with Malaysian IoT companies for mentorship, project sponsorship, and internship opportunities for members.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-content">
+              <span class="timeline-year">2025 — Now</span>
+              <h3>120+ Members & Growing</h3>
+              <p>Today IoTeams runs 3 programme tracks, hosts regular events, and continues to grow as the go-to IoT community at IIUM.</p>
+            </div>
+            <div class="timeline-dot"><div class="timeline-dot-inner" style="background:var(--teal); box-shadow: 0 0 0 1px var(--teal);"></div></div>
+            <div class="timeline-spacer"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         VALUES
+    ══════════════════════════════ -->
+    <section id="values">
+      <div class="values-inner">
+        <div class="section-header centered" data-aos="fade-up">
+          <span class="section-tag">◆ What We Stand For</span>
+          <h2 class="section-title" style="margin:0 auto;">Our Core Values</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <div class="values-grid">
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="value-icon">🔧</span>
+            <h3>Build First</h3>
+            <p>We believe in learning by doing. Every concept is better understood when you build it with your own hands — even if it breaks the first time.</p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="value-icon">🤝</span>
+            <h3>Community Over Competition</h3>
+            <p>We lift each other up. Whether you're a beginner or advanced, everyone has something to teach and something to learn.</p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+            <span class="value-icon">🌍</span>
+            <h3>Real Impact</h3>
+            <p>We build for the real world. Our projects tackle actual problems — smart campus, sustainable living, accessible technology.</p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+            <span class="value-icon">📖</span>
+            <h3>Open Knowledge</h3>
+            <p>Everything we learn, we share. Our workshops, documentation, and project guides are open to all IIUM students.</p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+            <span class="value-icon">⚡</span>
+            <h3>Move Fast</h3>
+            <p>Ideas are worthless without execution. We prototype quickly, iterate fast, and ship projects that actually work.</p>
+          </div>
+
+          <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+            <span class="value-icon">🕌</span>
+            <h3>IIUM Spirit</h3>
+            <p>We carry the values of IIUM — integrity, innovation, and excellence — into everything we build and every collaboration we form.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         TEAM — LEADERSHIP
+    ══════════════════════════════ -->
+    <section id="team">
+      <div class="team-inner">
+
+        <!-- Leadership -->
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ The People</span>
+          <h2 class="section-title">Meet the Team</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <span class="member-label" data-aos="fade-up">Leadership</span>
+        <div class="team-leadership">
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="team-card-img">
+              <div class="team-avatar-placeholder">
+                <i class="bi bi-person-fill"></i>
+              </div>
+            </div>
+            <div class="team-card-body">
+              <h4>Ahmad Faris</h4>
+              <span class="role">President</span>
+              <p>Final year ECE student. Led IoTeams from 20 to 120+ members. Specialises in embedded systems and RTOS.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-card-img">
+              <div class="team-avatar-placeholder">
+                <i class="bi bi-person-fill"></i>
+              </div>
+            </div>
+            <div class="team-card-body">
+              <h4>Nurul Izzati</h4>
+              <span class="role">Vice President</span>
+              <p>IT student passionate about cloud computing and IoT integration. Manages partnerships and industry relations.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-card-img">
+              <div class="team-avatar-placeholder">
+                <i class="bi bi-person-fill"></i>
+              </div>
+            </div>
+            <div class="team-card-body">
+              <h4>Muhammad Syafiq</h4>
+              <span class="role">Technical Director</span>
+              <p>Hardware wizard and PCB designer. Runs our weekly lab sessions and mentors junior members on embedded systems.</p>
+              <div class="team-social">
+                <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- General Members -->
+        <span class="member-label" data-aos="fade-up" style="margin-top:var(--space-xl); display:block;">
+          Committee Members
+        </span>
+        <div class="team-members">
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="team-card-img" style="aspect-ratio:1;">
+              <div class="team-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+            </div>
+            <div class="team-card-body">
+              <h4>Amirah Zahra</h4>
+              <span class="role">Events Director</span>
+            </div>
+          </div>
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="50">
+            <div class="team-card-img" style="aspect-ratio:1;">
+              <div class="team-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+            </div>
+            <div class="team-card-body">
+              <h4>Haris Danial</h4>
+              <span class="role">Secretary</span>
+            </div>
+          </div>
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-card-img" style="aspect-ratio:1;">
+              <div class="team-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+            </div>
+            <div class="team-card-body">
+              <h4>Siti Hajar</h4>
+              <span class="role">Treasurer</span>
+            </div>
+          </div>
+
+          <div class="team-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="team-card-img" style="aspect-ratio:1;">
+              <div class="team-avatar-placeholder"><i class="bi bi-person-fill"></i></div>
+            </div>
+            <div class="team-card-body">
+              <h4>Irfan Hakimi</h4>
+              <span class="role">Media & Design</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         CTA
+    ══════════════════════════════ -->
+    <section id="cta" style="background:var(--black-2); padding:var(--space-3xl) var(--space-2xl); border-top:1px solid var(--border-gold); text-align:center; position:relative; overflow:hidden;">
+      <div class="hero-glow" style="top:-200px; right:-200px; opacity:0.5;"></div>
+      <div style="position:relative; z-index:1; max-width:600px; margin:0 auto;">
+        <span class="section-tag" style="display:block; text-align:center; margin-bottom:var(--space-sm);" data-aos="fade-up">
+          ◆ Be Part of It
+        </span>
+        <h2 style="font-size:clamp(1.8rem,4vw,3rem); font-weight:900; margin-bottom:var(--space-sm);" data-aos="fade-up" data-aos-delay="100">
+          Your Story Starts <span style="color:var(--gold);">Here</span>
+        </h2>
+        <p style="font-size:var(--fs-md); color:var(--white-dim); margin-bottom:var(--space-xl);" data-aos="fade-up" data-aos-delay="200">
+          Open to all IIUM students. No experience required — just passion and curiosity.
+        </p>
+        <div style="display:flex; gap:var(--space-sm); justify-content:center; flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="300">
+          <a href="apply.html" class="btn-gold">
+            <i class="bi bi-person-plus"></i> Join IoTeams
+          </a>
+          <a href="contact.html" class="btn-outline-gold">
+            <i class="bi bi-chat"></i> Ask Us Anything
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════
+       FOOTER
+  ══════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

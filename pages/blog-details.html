@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Blog Details / Single Post
+  pages/blog-details.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Post Hero — title, meta, cover image
+  4. Post Content — article body with code blocks
+  5. Post Footer — tags, share, author bio
+  6. Related Posts
+  7. Sidebar — TOC, recent, tags
+  8. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with MQTT Protocol — IoTeams Blog</title>
+  <meta name="description" content="A complete beginner's guide to MQTT — setting up a broker, publishing and subscribing, and connecting ESP32 to the cloud.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Getting Started with MQTT Protocol — IoTeams Blog">
+  <meta property="og:description" content="A complete beginner guide to MQTT — setting up a broker, publishing and subscribing, and connecting your ESP32 to the cloud.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/blog-details.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Getting Started with MQTT Protocol — IoTeams Blog">
+  <meta name="twitter:description" content="A complete beginner guide to MQTT — setting up a broker, publishing and subscribing, and connecting your ESP32 to the cloud.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/blog-details.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       POST HERO
+    ══════════════════════════════════════ */
+    #post-hero {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl) 0;
+    }
+
+    .post-hero-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .post-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .post-hero-date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .post-hero-read {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .post-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: var(--space-md);
+      max-width: 800px;
+    }
+
+    .post-excerpt {
+      font-size: var(--fs-lg);
+      color: var(--white-dim);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-bottom: var(--space-xl);
+      font-weight: 300;
+    }
+
+    /* Author row */
+    .post-author-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) 0;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .author-avatar-lg {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 2px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .author-avatar-lg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-avatar-lg i {
+      color: var(--white-muted);
+      font-size: 1.2rem;
+    }
+
+    .author-details h6 {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 0.15rem;
+    }
+
+    .author-details span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .post-share {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .post-share span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .share-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white-dim);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all var(--transition-base);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Cover image */
+    .post-cover {
+      aspect-ratio: 21/9;
+      background: var(--black-3);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-3xl);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-xs);
+      border: 1px solid var(--border-dark);
+    }
+
+    .post-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-cover i {
+      font-size: 3rem;
+      color: var(--white-muted);
+    }
+
+    .post-cover span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+    }
+
+    /* ══════════════════════════════════════
+       POST BODY LAYOUT — Content + Sidebar
+    ══════════════════════════════════════ */
+    #post-body {
+      background: var(--black);
+      padding: 0 var(--space-2xl) var(--space-3xl);
+    }
+
+    .post-layout {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════
+       POST CONTENT / ARTICLE STYLES
+    ══════════════════════════════════════ */
+    .post-content {
+      font-size: var(--fs-md);
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    .post-content h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-sm);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .post-content h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-xs);
+    }
+
+    .post-content p {
+      margin-bottom: var(--space-md);
+      color: var(--white-dim);
+    }
+
+    /* Highlighted lead paragraph */
+    .post-content p.lead {
+      font-size: var(--fs-lg);
+      color: var(--white);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* Inline code */
+    .post-content code {
+      font-family: var(--font-mono);
+      font-size: 0.875em;
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      border-radius: 3px;
+      padding: 0.15em 0.45em;
+      color: var(--teal);
+    }
+
+    /* Code blocks */
+    .post-content pre {
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin: var(--space-md) 0 var(--space-lg);
+      position: relative;
+    }
+
+    .post-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--white-dim);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+    }
+
+    /* Code language label */
+    .code-label {
+      position: absolute;
+      top: var(--space-xs);
+      right: var(--space-xs);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--white-muted);
+      background: var(--black-4);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+    }
+
+    /* Copy button on code blocks */
+    .copy-btn {
+      position: absolute;
+      top: var(--space-xs);
+      right: calc(var(--space-xs) + 52px);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--white-muted);
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .copy-btn.copied {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* Blockquote */
+    .post-content blockquote {
+      border-left: 3px solid var(--gold);
+      background: rgba(201,168,76,0.05);
+      margin: var(--space-lg) 0;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    .post-content blockquote p {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: var(--fs-lg);
+      color: var(--white);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Lists */
+    .post-content ul,
+    .post-content ol {
+      padding-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .post-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .post-content ul li::marker { color: var(--gold); }
+    .post-content ol li::marker {
+      color: var(--teal);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+    }
+
+    /* Info box */
+    .info-box {
+      background: rgba(26,188,176,0.06);
+      border: 1px solid rgba(26,188,176,0.25);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      display: flex;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+
+    .info-box i {
+      color: var(--teal);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .info-box p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Warning box */
+    .warn-box {
+      background: rgba(245,197,24,0.06);
+      border: 1px solid rgba(245,197,24,0.25);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      display: flex;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+
+    .warn-box i {
+      color: var(--yellow);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .warn-box p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Images in content */
+    .post-content figure {
+      margin: var(--space-lg) 0;
+    }
+
+    .post-content figure img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-dark);
+    }
+
+    .post-content figcaption {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      text-align: center;
+      margin-top: var(--space-xs);
+      letter-spacing: 0.06em;
+    }
+
+    /* Divider */
+    .post-content hr {
+      border: none;
+      border-top: 1px solid var(--border-dark);
+      margin: var(--space-xl) 0;
+    }
+
+    /* ── Post Footer (tags + share + author bio) ── */
+    .post-footer {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-xl);
+    }
+
+    .author-bio-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      display: flex;
+      gap: var(--space-lg);
+      align-items: flex-start;
+      margin-bottom: var(--space-xl);
+    }
+
+    .author-bio-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 2px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .author-bio-avatar i { font-size: 2rem; color: var(--white-muted); }
+
+    .author-bio-info h4 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .author-bio-info .role {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .author-bio-info p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin-bottom: var(--space-sm);
+      line-height: 1.65;
+    }
+
+    .author-bio-social {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .author-bio-social a {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .author-bio-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Related Posts ── */
+    .related-posts {
+      margin-top: var(--space-xl);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .related-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      text-decoration: none;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+      display: block;
+    }
+
+    .related-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-3px);
+    }
+
+    .related-card-img {
+      aspect-ratio: 16/9;
+      background: var(--black-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .related-card-img i { font-size: 2rem; color: var(--white-muted); }
+
+    .related-card-body {
+      padding: var(--space-md);
+    }
+
+    .related-card-body h5 {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .related-card-body span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .post-sidebar {
+      position: sticky;
+      top: calc(72px + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .sidebar-widget {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .sidebar-widget h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    /* Table of Contents */
+    .toc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .toc-item {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      text-decoration: none;
+      padding: 0.3rem var(--space-xs);
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: all var(--transition-base);
+      display: block;
+      line-height: 1.4;
+    }
+
+    .toc-item:hover,
+    .toc-item.active {
+      color: var(--gold);
+      border-left-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      padding-left: var(--space-sm);
+    }
+
+    .toc-item.h3 {
+      padding-left: var(--space-md);
+      font-size: var(--fs-xs);
+    }
+
+    /* Progress bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--gold);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Tags in sidebar */
+    .tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-link {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--white-dim);
+      border: 1px solid var(--border-dark);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .tag-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      .post-layout    { grid-template-columns: 1fr; }
+      .post-sidebar   { position: static; }
+      .related-grid   { grid-template-columns: 1fr; }
+      .author-bio-card { flex-direction: column; }
+    }
+
+    @media (max-width: 576px) {
+      .post-author-row { flex-direction: column; align-items: flex-start; }
+      .post-title      { font-size: 2rem; }
+    }
+  </style>
+</head>
+
+<body class="blog-details-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta">Join Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>IoTeams Blog</span><span class="dot">◆</span>
+      <span>MQTT Protocol</span><span class="dot">◆</span>
+      <span>Tutorial</span><span class="dot">◆</span>
+      <span>ESP32</span><span class="dot">◆</span>
+      <span>8 Min Read</span><span class="dot">◆</span>
+      <span>IoTeams Blog</span><span class="dot">◆</span>
+      <span>MQTT Protocol</span><span class="dot">◆</span>
+      <span>Tutorial</span><span class="dot">◆</span>
+      <span>ESP32</span><span class="dot">◆</span>
+      <span>8 Min Read</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- POST HERO -->
+    <section id="post-hero">
+      <div class="post-hero-inner">
+
+        <!-- Breadcrumb + meta -->
+        <div class="post-hero-meta" data-aos="fade-up">
+          <a href="blog.html" style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--teal); text-decoration:none; display:flex; align-items:center; gap:0.3rem; letter-spacing:0.06em;">
+            <i class="bi bi-arrow-left"></i> Back to Blog
+          </a>
+          <span style="color:var(--border-dark);">|</span>
+          <span class="badge badge-teal">Tutorial</span>
+          <span class="badge badge-gold">Beginner</span>
+          <span class="post-hero-date"><i class="bi bi-calendar3"></i> 12 May 2025</span>
+          <span class="post-hero-read"><i class="bi bi-clock"></i> 8 min read</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="post-title" data-aos="fade-up" data-aos-delay="50">
+          Getting Started with MQTT Protocol for IoT Devices — A Complete Guide
+        </h1>
+
+        <!-- Excerpt -->
+        <p class="post-excerpt" data-aos="fade-up" data-aos-delay="100">
+          MQTT is the backbone of most IoT communication systems. In this guide,
+          we walk you through setting up a broker, publishing and subscribing to topics,
+          and connecting your ESP32 to the cloud — step by step with code examples.
+        </p>
+
+        <!-- Author + Share -->
+        <div class="post-author-row" data-aos="fade-up" data-aos-delay="150">
+          <div class="post-author">
+            <div class="author-avatar-lg">
+              <i class="bi bi-person-fill"></i>
+            </div>
+            <div class="author-details">
+              <h6>Ahmad Faris</h6>
+              <span>President · IoTeams IIUM</span>
+            </div>
+          </div>
+          <div class="post-share">
+            <span>Share:</span>
+            <a href="#" class="share-btn" title="Share on Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="share-btn" title="Share on LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="share-btn" title="Copy link" id="copyLinkBtn"><i class="bi bi-link-45deg"></i></a>
+          </div>
+        </div>
+
+        <!-- Cover image -->
+        <div class="post-cover" data-aos="fade-up" data-aos-delay="200">
+          <i class="bi bi-image"></i>
+          <span>blog-featured-cover.jpg</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- POST BODY -->
+    <section id="post-body">
+      <div class="post-layout">
+
+        <!-- ARTICLE CONTENT -->
+        <article class="post-content" data-aos="fade-up">
+
+          <p class="lead">
+            If you've been working with IoT devices, you've almost certainly heard of MQTT.
+            It's lightweight, efficient, and designed specifically for constrained networks
+            and devices — which makes it perfect for the ESP32, Arduino, and Raspberry Pi
+            projects we build at IoTeams.
+          </p>
+
+          <p>
+            In this tutorial, we'll cover everything from the basic concepts of MQTT
+            to a complete working example sending sensor data from your ESP32 to a cloud dashboard.
+            By the end, you'll have a broker running, devices publishing data, and a subscriber
+            reading it all in real time.
+          </p>
+
+          <div class="info-box">
+            <i class="bi bi-info-circle"></i>
+            <p>
+              <strong style="color:var(--white);">Prerequisites:</strong>
+              Basic Arduino/ESP32 programming knowledge. You should be comfortable
+              uploading a sketch and reading serial output. No cloud experience required.
+            </p>
+          </div>
+
+          <!-- Section 1 -->
+          <h2 id="what-is-mqtt">What is MQTT?</h2>
+
+          <p>
+            MQTT stands for Message Queuing Telemetry Transport. It's a publish-subscribe
+            messaging protocol originally designed by IBM in the late 1990s for monitoring
+            oil pipelines via satellite. Today it's the de facto standard for IoT communication.
+          </p>
+
+          <p>
+            The protocol has three key components — the <strong style="color:var(--white);">broker</strong>,
+            <strong style="color:var(--white);">publishers</strong>, and
+            <strong style="color:var(--white);">subscribers</strong>.
+          </p>
+
+          <ul>
+            <li>The <strong style="color:var(--white);">broker</strong> is a central server that receives all messages and routes them to the right subscribers.</li>
+            <li><strong style="color:var(--white);">Publishers</strong> are devices (like your ESP32) that send data to the broker.</li>
+            <li><strong style="color:var(--white);">Subscribers</strong> are clients that listen for messages on specific topics.</li>
+          </ul>
+
+          <blockquote>
+            <p>
+              "MQTT is to IoT what HTTP is to the web. Once you understand it,
+              you can build almost any connected system."
+            </p>
+          </blockquote>
+
+          <!-- Section 2 -->
+          <h2 id="setting-up-broker">Setting Up a Mosquitto Broker</h2>
+
+          <p>
+            The most popular open-source MQTT broker is <code>Mosquitto</code>.
+            We'll install it locally first, then discuss cloud options.
+          </p>
+
+          <h3 id="install-mosquitto">Installing Mosquitto</h3>
+
+          <p>On Ubuntu/Debian (including Raspberry Pi OS):</p>
+
+          <div style="position:relative;">
+            <button class="copy-btn" onclick="copyCode(this)">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+            <span class="code-label">bash</span>
+            <pre><code>sudo apt update
+sudo apt install -y mosquitto mosquitto-clients
+sudo systemctl enable mosquitto
+sudo systemctl start mosquitto</code></pre>
+          </div>
+
+          <p>Verify it's running:</p>
+
+          <div style="position:relative;">
+            <button class="copy-btn" onclick="copyCode(this)">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+            <span class="code-label">bash</span>
+            <pre><code>sudo systemctl status mosquitto
+# Should show: active (running)</code></pre>
+          </div>
+
+          <div class="warn-box">
+            <i class="bi bi-exclamation-triangle"></i>
+            <p>
+              By default, Mosquitto only accepts connections from localhost.
+              To allow external devices, you'll need to edit
+              <code>/etc/mosquitto/mosquitto.conf</code> and add
+              <code>listener 1883</code> and <code>allow_anonymous true</code>.
+              Don't do this on a public network without authentication.
+            </p>
+          </div>
+
+          <!-- Section 3 -->
+          <h2 id="topics">Understanding Topics</h2>
+
+          <p>
+            MQTT uses a topic-based routing system. Topics are hierarchical strings
+            separated by slashes, similar to file paths:
+          </p>
+
+          <div style="position:relative;">
+            <button class="copy-btn" onclick="copyCode(this)">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+            <span class="code-label">topics</span>
+            <pre><code>ioteams/sensors/temperature
+ioteams/sensors/humidity
+ioteams/lab/door/status
+ioteams/actuators/fan/speed</code></pre>
+          </div>
+
+          <p>
+            Subscribers can use wildcards: <code>+</code> matches a single level,
+            <code>#</code> matches all remaining levels.
+          </p>
+
+          <!-- Section 4 -->
+          <h2 id="esp32-code">Connecting ESP32 via MQTT</h2>
+
+          <p>
+            We'll use the <code>PubSubClient</code> library for Arduino.
+            Install it via the Arduino Library Manager.
+          </p>
+
+          <div style="position:relative;">
+            <button class="copy-btn" onclick="copyCode(this)">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+            <span class="code-label">C++ (Arduino)</span>
+            <pre><code>#include &lt;WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+#include &lt;DHT.h&gt;
+
+// WiFi credentials
+const char* ssid     = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+// MQTT broker (your Raspberry Pi or cloud IP)
+const char* mqtt_server = "192.168.1.100";
+const int   mqtt_port   = 1883;
+
+// Topics
+const char* topic_temp = "ioteams/sensors/temperature";
+const char* topic_hum  = "ioteams/sensors/humidity";
+
+// DHT22 sensor on pin 4
+DHT dht(4, DHT22);
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+void connectWiFi() {
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\n✓ WiFi connected: " + WiFi.localIP().toString());
+}
+
+void connectMQTT() {
+  while (!client.connected()) {
+    String clientId = "ESP32-" + String(random(0xffff), HEX);
+    if (client.connect(clientId.c_str())) {
+      Serial.println("✓ MQTT connected");
+    } else {
+      Serial.print("MQTT failed, rc=");
+      Serial.println(client.state());
+      delay(2000);
+    }
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+  connectWiFi();
+  client.setServer(mqtt_server, mqtt_port);
+  connectMQTT();
+}
+
+void loop() {
+  if (!client.connected()) connectMQTT();
+  client.loop();
+
+  float temp = dht.readTemperature();
+  float hum  = dht.readHumidity();
+
+  if (!isnan(temp) && !isnan(hum)) {
+    client.publish(topic_temp, String(temp).c_str());
+    client.publish(topic_hum,  String(hum).c_str());
+    Serial.printf("Published: temp=%.1f°C hum=%.1f%%\n", temp, hum);
+  }
+
+  delay(5000); // Publish every 5 seconds
+}</code></pre>
+          </div>
+
+          <div class="info-box">
+            <i class="bi bi-lightbulb"></i>
+            <p>
+              <strong style="color:var(--white);">Tip:</strong>
+              In production, never hardcode credentials. Use
+              <code>EEPROM</code> or a config file approach, or flash
+              credentials separately using <code>WiFiManager</code>.
+            </p>
+          </div>
+
+          <!-- Section 5 -->
+          <h2 id="testing">Testing Your Setup</h2>
+
+          <p>
+            With Mosquitto installed and your ESP32 running, open two terminal windows.
+            In one, subscribe to the temperature topic:
+          </p>
+
+          <div style="position:relative;">
+            <button class="copy-btn" onclick="copyCode(this)">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+            <span class="code-label">bash</span>
+            <pre><code>mosquitto_sub -h localhost -t "ioteams/sensors/#" -v</code></pre>
+          </div>
+
+          <p>You should see output like:</p>
+
+          <div style="position:relative;">
+            <span class="code-label">output</span>
+            <pre><code>ioteams/sensors/temperature 27.3
+ioteams/sensors/humidity 65.2
+ioteams/sensors/temperature 27.4
+ioteams/sensors/humidity 65.1</code></pre>
+          </div>
+
+          <hr>
+
+          <h2 id="next-steps">Next Steps</h2>
+
+          <p>
+            Now that you have basic MQTT working, here's what to explore next:
+          </p>
+
+          <ol>
+            <li><strong style="color:var(--white);">Add authentication</strong> — configure Mosquitto with username/password</li>
+            <li><strong style="color:var(--white);">Enable TLS</strong> — encrypt your MQTT traffic with SSL certificates</li>
+            <li><strong style="color:var(--white);">Use Node-RED</strong> — visually wire your MQTT data to dashboards and alerts</li>
+            <li><strong style="color:var(--white);">Try AWS IoT Core</strong> — scale to thousands of devices with managed cloud MQTT</li>
+            <li><strong style="color:var(--white);">Implement QoS</strong> — understand Quality of Service levels 0, 1, and 2</li>
+          </ol>
+
+          <p>
+            We'll cover Node-RED integration in a follow-up post. If you build
+            something with this tutorial, share it in our WhatsApp group or
+            present it at our next project demo day!
+          </p>
+
+          <!-- Post footer -->
+          <div class="post-footer">
+
+            <!-- Tags -->
+            <div class="post-tags">
+              <a href="#" class="tag-link">MQTT</a>
+              <a href="#" class="tag-link">ESP32</a>
+              <a href="#" class="tag-link">Mosquitto</a>
+              <a href="#" class="tag-link">Tutorial</a>
+              <a href="#" class="tag-link">Beginner</a>
+              <a href="#" class="tag-link">IoT</a>
+              <a href="#" class="tag-link">Arduino</a>
+              <a href="#" class="tag-link">Cloud</a>
+            </div>
+
+            <!-- Author bio -->
+            <div class="author-bio-card">
+              <div class="author-bio-avatar">
+                <i class="bi bi-person-fill"></i>
+              </div>
+              <div class="author-bio-info">
+                <h4>Ahmad Faris</h4>
+                <span class="role">President · IoTeams IIUM</span>
+                <p>
+                  Final year Electrical & Computer Engineering student at IIUM.
+                  Specialises in embedded systems, RTOS, and IoT cloud integration.
+                  Led IoTeams from 20 to 120+ members and built the club's first
+                  smart campus monitoring system.
+                </p>
+                <div class="author-bio-social">
+                  <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                  <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="related-posts">
+              <h4 style="font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; margin-bottom:var(--space-md);">
+                Related Posts
+              </h4>
+              <div class="related-grid">
+                <a href="blog-details.html" class="related-card">
+                  <div class="related-card-img">
+                    <i class="bi bi-image"></i>
+                  </div>
+                  <div class="related-card-body">
+                    <span class="badge badge-teal" style="margin-bottom:0.4rem; display:inline-block;">Tutorial</span>
+                    <h5>Connecting ESP32 to AWS IoT Core — Step by Step</h5>
+                    <span>20 Apr 2025 · 12 min read</span>
+                  </div>
+                </a>
+                <a href="blog-details.html" class="related-card">
+                  <div class="related-card-img">
+                    <i class="bi bi-image"></i>
+                  </div>
+                  <div class="related-card-body">
+                    <span class="badge badge-gold" style="margin-bottom:0.4rem; display:inline-block;">Project</span>
+                    <h5>Smart Plant Monitor: Automated Watering with ESP32</h5>
+                    <span>5 May 2025 · 6 min read</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="post-sidebar">
+
+          <!-- Table of Contents -->
+          <div class="sidebar-widget">
+            <h5>Table of Contents</h5>
+            <div class="toc-list" id="toc">
+              <a href="#what-is-mqtt" class="toc-item active">What is MQTT?</a>
+              <a href="#setting-up-broker" class="toc-item">Setting Up a Broker</a>
+              <a href="#install-mosquitto" class="toc-item h3">Installing Mosquitto</a>
+              <a href="#topics" class="toc-item">Understanding Topics</a>
+              <a href="#esp32-code" class="toc-item">Connecting ESP32</a>
+              <a href="#testing" class="toc-item">Testing Your Setup</a>
+              <a href="#next-steps" class="toc-item">Next Steps</a>
+            </div>
+          </div>
+
+          <!-- Share widget -->
+          <div class="sidebar-widget">
+            <h5>Share This Post</h5>
+            <div style="display:flex; flex-direction:column; gap:var(--space-xs);">
+              <a href="#" style="display:flex; align-items:center; gap:var(--space-xs); padding:0.5rem var(--space-xs); border-radius:var(--radius-sm); text-decoration:none; font-size:var(--fs-sm); color:var(--white-dim); transition:background var(--transition-base);"
+                 onmouseover="this.style.background='var(--black-4)'"
+                 onmouseout="this.style.background='transparent'">
+                <i class="bi bi-twitter-x"></i> Share on X
+              </a>
+              <a href="#" style="display:flex; align-items:center; gap:var(--space-xs); padding:0.5rem var(--space-xs); border-radius:var(--radius-sm); text-decoration:none; font-size:var(--fs-sm); color:var(--white-dim); transition:background var(--transition-base);"
+                 onmouseover="this.style.background='var(--black-4)'"
+                 onmouseout="this.style.background='transparent'">
+                <i class="bi bi-linkedin"></i> Share on LinkedIn
+              </a>
+              <button onclick="navigator.clipboard.writeText(location.href); this.textContent='✓ Copied!'; setTimeout(()=>this.textContent='Copy Link',2000)"
+                style="display:flex; align-items:center; gap:var(--space-xs); padding:0.5rem var(--space-xs); border-radius:var(--radius-sm); font-size:var(--fs-sm); color:var(--white-dim); background:transparent; border:none; cursor:pointer; width:100%; text-align:left; font-family:var(--font-body); transition:background var(--transition-base);"
+                onmouseover="this.style.background='var(--black-4)'"
+                onmouseout="this.style.background='transparent'">
+                <i class="bi bi-link-45deg"></i> Copy Link
+              </button>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget">
+            <h5>Tags</h5>
+            <div class="tags-cloud">
+              <a href="#" class="tag-link">MQTT</a>
+              <a href="#" class="tag-link">ESP32</a>
+              <a href="#" class="tag-link">Mosquitto</a>
+              <a href="#" class="tag-link">IoT</a>
+              <a href="#" class="tag-link">Tutorial</a>
+              <a href="#" class="tag-link">Arduino</a>
+              <a href="#" class="tag-link">C++</a>
+              <a href="#" class="tag-link">Cloud</a>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="sidebar-widget" style="background:var(--black-3); border-color:var(--border-gold-md); text-align:center;">
+            <span style="font-size:2rem; display:block; margin-bottom:var(--space-xs);">🔧</span>
+            <h5 style="text-align:center; border:none; padding:0; margin-bottom:var(--space-xs);">Try It Yourself</h5>
+            <p style="font-size:var(--fs-xs); color:var(--white-dim); margin-bottom:var(--space-md); line-height:1.6;">
+              Join IoTeams and get access to our ESP32 kits, lab space, and mentorship.
+            </p>
+            <a href="apply.html" class="btn-gold btn-sm" style="width:100%; justify-content:center;">
+              <i class="bi bi-person-plus"></i> Join IoTeams
+            </a>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    /* ── Reading progress bar ── */
+    window.addEventListener('scroll', () => {
+      const article = document.querySelector('.post-content');
+      if (!article) return;
+      const articleTop  = article.offsetTop;
+      const articleH    = article.offsetHeight;
+      const scrolled    = window.scrollY - articleTop;
+      const progress    = Math.min(Math.max(scrolled / articleH * 100, 0), 100);
+      document.getElementById('readingProgress').style.width = progress + '%';
+    });
+
+    /* ── TOC active highlight on scroll ── */
+    const headings = document.querySelectorAll('.post-content h2, .post-content h3');
+    const tocLinks = document.querySelectorAll('.toc-item');
+
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.toc-item[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    headings.forEach(h => { if (h.id) tocObserver.observe(h); });
+
+    /* ── Copy code button ── */
+    function copyCode(btn) {
+      const code = btn.closest('[style*="position:relative"]').querySelector('code');
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy';
+        }, 2000);
+      });
+    }
+
+    /* ── Copy page link ── */
+    document.getElementById('copyLinkBtn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(location.href);
+      const btn = e.currentTarget;
+      btn.title = 'Copied!';
+      setTimeout(() => btn.title = 'Copy link', 2000);
+    });
+  </script>
+
+</body>
+</html>

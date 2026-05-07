@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Programmes Page
+  pages/programmes.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Page Hero
+  4. Programmes Overview — 3 tracks
+  5. Track Detail — Hardware & Embedded
+  6. Track Detail — Cloud & Connectivity
+  7. Track Detail — AI & Smart Systems
+  8. Learning Path — how to progress
+  9. Tools & Tech Stack
+  10. CTA — apply
+  11. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programmes — IoTeams IIUM</title>
+  <meta name="description" content="Explore IoTeams IIUM's three IoT learning tracks — Hardware & Embedded, Cloud & Connectivity, and AI & Smart Systems.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Programmes — IoTeams IIUM">
+  <meta property="og:description" content="Explore IoTeams IIUM's three IoT learning tracks — Hardware & Embedded, Cloud & Connectivity, and AI & Smart Systems.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/programmes.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Programmes — IoTeams IIUM">
+  <meta name="twitter:description" content="Explore IoTeams IIUM's three IoT learning tracks — Hardware & Embedded, Cloud & Connectivity, and AI & Smart Systems.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/programmes.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       OVERVIEW — 3 TRACK CARDS
+    ══════════════════════════════════════ */
+    #overview {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .overview-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    .track-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .track-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* Top colored bar */
+    .track-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .track-card.hardware::before  { background: var(--gold); }
+    .track-card.cloud::before     { background: var(--teal); }
+    .track-card.ai::before        { background: var(--turquoise); }
+
+    /* Background glow */
+    .track-card::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      top: -60px; right: -60px;
+      opacity: 0;
+      transition: opacity var(--transition-slow);
+      pointer-events: none;
+    }
+
+    .track-card.hardware::after  { background: radial-gradient(circle, rgba(201,168,76,0.12), transparent); }
+    .track-card.cloud::after     { background: radial-gradient(circle, rgba(26,188,176,0.12), transparent); }
+    .track-card.ai::after        { background: radial-gradient(circle, rgba(64,224,208,0.12), transparent); }
+    .track-card:hover::after     { opacity: 1; }
+
+    .track-number {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+
+    .track-card.hardware .track-number { color: var(--gold); }
+    .track-card.cloud .track-number    { color: var(--teal); }
+    .track-card.ai .track-number       { color: var(--turquoise); }
+
+    .track-icon {
+      font-size: 2.8rem;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .track-card h3 {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+
+    .track-card p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+    }
+
+    .track-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .skill-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+    }
+
+    .track-card.hardware .skill-tag { border-color: rgba(201,168,76,0.3); color: var(--gold); }
+    .track-card.cloud .skill-tag    { border-color: rgba(26,188,176,0.3);  color: var(--teal); }
+    .track-card.ai .skill-tag       { border-color: rgba(64,224,208,0.3);  color: var(--turquoise); }
+
+    .track-link {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap var(--transition-base);
+    }
+
+    .track-card.hardware .track-link { color: var(--gold); }
+    .track-card.cloud .track-link    { color: var(--teal); }
+    .track-card.ai .track-link       { color: var(--turquoise); }
+    .track-card:hover .track-link    { gap: 0.75rem; }
+
+    /* Difficulty badge */
+    .track-difficulty {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-dark);
+      color: var(--white-muted);
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════════
+       TRACK DETAIL SECTIONS
+    ══════════════════════════════════════ */
+    .track-detail {
+      padding: var(--space-3xl) var(--space-2xl);
+      position: relative;
+    }
+
+    .track-detail.hardware { background: var(--black-2); }
+    .track-detail.cloud    { background: var(--black); }
+    .track-detail.ai       { background: var(--black-2); }
+
+    .track-detail-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    /* Left column — text content */
+    .track-detail-text { width: 100%; }
+
+    .track-detail-tag {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .hardware .track-detail-tag  { color: var(--gold); }
+    .cloud .track-detail-tag     { color: var(--teal); }
+    .ai .track-detail-tag        { color: var(--turquoise); }
+
+    .track-detail h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: var(--space-sm);
+      line-height: 1.2;
+    }
+
+    .track-detail p {
+      font-size: var(--fs-base);
+      color: var(--white-dim);
+      line-height: 1.75;
+      margin-bottom: var(--space-md);
+    }
+
+    /* What you'll learn checklist */
+    .learn-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-md) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .learn-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-xs);
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.5;
+    }
+
+    .learn-list li i {
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 0.85rem;
+    }
+
+    .hardware .learn-list li i { color: var(--gold); }
+    .cloud .learn-list li i    { color: var(--teal); }
+    .ai .learn-list li i       { color: var(--turquoise); }
+
+    /* Right column — module cards */
+    .track-modules {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .module-card {
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+      transition: border-color var(--transition-base);
+    }
+
+    .module-card:hover { border-color: var(--border-gold); }
+
+    .module-num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .hardware .module-num { color: var(--gold); }
+    .cloud .module-num    { color: var(--teal); }
+    .ai .module-num       { color: var(--turquoise); }
+
+    .module-info h5 {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .module-info p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .module-meta {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .module-meta span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════════════
+       LEARNING PATH
+    ══════════════════════════════════════ */
+    #learning-path {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .path-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .path-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: var(--space-xl);
+      position: relative;
+    }
+
+    /* Connecting line */
+    .path-steps::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: var(--border-gold);
+      z-index: 0;
+    }
+
+    .path-step {
+      text-align: center;
+      padding: 0 var(--space-md);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      border: 1px solid var(--border-gold);
+      background: var(--black);
+    }
+
+    .path-step:nth-child(1) .step-circle { background: var(--gold); color: var(--black); border-color: var(--gold); }
+    .path-step:nth-child(2) .step-circle { color: var(--gold); }
+    .path-step:nth-child(3) .step-circle { color: var(--gold); }
+    .path-step:nth-child(4) .step-circle { background: var(--teal); color: var(--black); border-color: var(--teal); }
+
+    .path-step h4 {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .path-step p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ══════════════════════════════════════
+       TECH STACK
+    ══════════════════════════════════════ */
+    #tech-stack {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+      border-top: 1px solid var(--border-gold);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .tech-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .tech-categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    .tech-category h4 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .tech-items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .tech-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      padding: 0.4rem var(--space-xs);
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-base), color var(--transition-base);
+    }
+
+    .tech-item:hover {
+      background: var(--black-4);
+      color: var(--white);
+    }
+
+    .tech-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tech-dot.gold  { background: var(--gold); }
+    .tech-dot.teal  { background: var(--teal); }
+    .tech-dot.turq  { background: var(--turquoise); }
+    .tech-dot.white { background: var(--white-muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      .tracks-grid        { grid-template-columns: 1fr; }
+      .track-detail-inner { grid-template-columns: 1fr; }
+      .path-steps         { grid-template-columns: 1fr 1fr; }
+      .path-steps::before { display: none; }
+      .tech-categories    { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .path-steps      { grid-template-columns: 1fr; }
+      .tech-categories { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body class="programmes-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html" class="active">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta">Join Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Hardware & Embedded</span><span class="dot">◆</span>
+      <span>Cloud & Connectivity</span><span class="dot">◆</span>
+      <span>AI & Smart Systems</span><span class="dot">◆</span>
+      <span>ESP32</span><span class="dot">◆</span>
+      <span>MQTT</span><span class="dot">◆</span>
+      <span>TinyML</span><span class="dot">◆</span>
+      <span>AWS IoT</span><span class="dot">◆</span>
+      <span>Hardware & Embedded</span><span class="dot">◆</span>
+      <span>Cloud & Connectivity</span><span class="dot">◆</span>
+      <span>AI & Smart Systems</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-glow"></div>
+      <div class="page-hero-content">
+        <span class="section-tag animate-fade-up">◆ Programmes</span>
+        <h1 class="animate-fade-up delay-1">
+          Three Tracks.<br>
+          One <span class="gold">Goal</span> — Build<br>
+          Real IoT Systems.
+        </h1>
+        <p class="animate-fade-up delay-2">
+          Whether you're starting with hardware or jumping straight into
+          cloud and AI — there's a learning track designed for your level
+          and your goals.
+        </p>
+        <nav class="breadcrumbs animate-fade-up delay-3">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current">Programmes</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section id="overview">
+      <div class="overview-inner">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Our Tracks</span>
+          <h2 class="section-title">Choose Your Path</h2>
+          <hr class="divider-gold">
+          <p class="section-subtitle">
+            All three tracks run simultaneously. Members can join one or all three
+            depending on their interests. No prerequisites — just show up and learn.
+          </p>
+        </div>
+
+        <div class="tracks-grid">
+
+          <a href="#hardware" class="track-card hardware" data-aos="fade-up" data-aos-delay="0">
+            <span class="track-difficulty">Beginner Friendly</span>
+            <span class="track-number">01 /</span>
+            <span class="track-icon">⚡</span>
+            <h3>Hardware & Embedded</h3>
+            <p>Master microcontrollers, sensors, actuators, and PCB design. The foundation of every IoT system.</p>
+            <div class="track-skills">
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">ESP32</span>
+              <span class="skill-tag">Raspberry Pi</span>
+              <span class="skill-tag">Sensors</span>
+              <span class="skill-tag">PCB</span>
+            </div>
+            <span class="track-link">Explore Track <i class="bi bi-arrow-down"></i></span>
+          </a>
+
+          <a href="#cloud" class="track-card cloud" data-aos="fade-up" data-aos-delay="100">
+            <span class="track-difficulty">Intermediate</span>
+            <span class="track-number">02 /</span>
+            <span class="track-icon">☁️</span>
+            <h3>Cloud & Connectivity</h3>
+            <p>Connect devices to the internet using MQTT, REST APIs, and cloud platforms. Data pipelines and dashboards.</p>
+            <div class="track-skills">
+              <span class="skill-tag">MQTT</span>
+              <span class="skill-tag">AWS IoT</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">REST API</span>
+              <span class="skill-tag">Node-RED</span>
+            </div>
+            <span class="track-link">Explore Track <i class="bi bi-arrow-down"></i></span>
+          </a>
+
+          <a href="#ai" class="track-card ai" data-aos="fade-up" data-aos-delay="200">
+            <span class="track-difficulty">Advanced</span>
+            <span class="track-number">03 /</span>
+            <span class="track-icon">🤖</span>
+            <h3>AI & Smart Systems</h3>
+            <p>Edge AI, TinyML, and computer vision. Run neural networks on microcontrollers and build intelligent devices.</p>
+            <div class="track-skills">
+              <span class="skill-tag">TinyML</span>
+              <span class="skill-tag">TensorFlow Lite</span>
+              <span class="skill-tag">OpenCV</span>
+              <span class="skill-tag">Edge AI</span>
+            </div>
+            <span class="track-link">Explore Track <i class="bi bi-arrow-down"></i></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 1 — HARDWARE -->
+    <section id="hardware" class="track-detail hardware">
+      <div class="track-detail-inner">
+
+        <div class="track-detail-text" data-aos="fade-right">
+          <span class="track-detail-tag">◆ Track 01</span>
+          <h2>Hardware &<br>Embedded Systems</h2>
+          <hr class="divider-gold">
+          <p>
+            Every IoT system starts with hardware. In this track you'll go from
+            blinking an LED to building fully functional embedded systems that
+            read sensors, control actuators, and communicate wirelessly.
+          </p>
+          <p>
+            No prior experience needed. We start from scratch and build up
+            to advanced topics like RTOS, power management, and custom PCB design.
+          </p>
+
+          <h5 style="color:var(--white); margin-bottom:var(--space-sm);">What You'll Learn:</h5>
+          <ul class="learn-list">
+            <li><i class="bi bi-check2-circle"></i> Arduino & ESP32 programming in C/C++</li>
+            <li><i class="bi bi-check2-circle"></i> Digital & analog I/O, PWM, interrupts</li>
+            <li><i class="bi bi-check2-circle"></i> Sensor integration — temperature, humidity, motion, ultrasonic</li>
+            <li><i class="bi bi-check2-circle"></i> Wireless protocols — WiFi, Bluetooth, LoRa</li>
+            <li><i class="bi bi-check2-circle"></i> Real-Time Operating Systems (FreeRTOS)</li>
+            <li><i class="bi bi-check2-circle"></i> Power management & battery optimisation</li>
+            <li><i class="bi bi-check2-circle"></i> PCB schematic & layout with KiCad</li>
+          </ul>
+
+          <div style="margin-top:var(--space-lg);">
+            <a href="apply.html" class="btn-gold">
+              <i class="bi bi-person-plus"></i> Join This Track
+            </a>
+          </div>
+        </div>
+
+        <div class="track-modules" data-aos="fade-left">
+
+          <div class="module-card hardware">
+            <span class="module-num">M01</span>
+            <div class="module-info">
+              <h5>Introduction to Microcontrollers</h5>
+              <p>What is a microcontroller? Setting up Arduino IDE, first sketch, digital I/O.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 2 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Beginner</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card hardware">
+            <span class="module-num">M02</span>
+            <div class="module-info">
+              <h5>Sensors & Actuators</h5>
+              <p>Reading sensors (DHT22, HC-SR04, PIR), controlling servos, relays, and motors.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Beginner</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card hardware">
+            <span class="module-num">M03</span>
+            <div class="module-info">
+              <h5>ESP32 & Wireless Comms</h5>
+              <p>WiFi, Bluetooth, ESP-NOW, deep sleep, and connecting to the internet for the first time.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card hardware">
+            <span class="module-num">M04</span>
+            <div class="module-info">
+              <h5>RTOS & Advanced Firmware</h5>
+              <p>FreeRTOS tasks, queues, semaphores, and building production-grade embedded firmware.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 4 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Advanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card hardware">
+            <span class="module-num">M05</span>
+            <div class="module-info">
+              <h5>PCB Design with KiCad</h5>
+              <p>Schematic capture, PCB layout, design rules, and ordering your first custom PCB.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Advanced</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 2 — CLOUD -->
+    <section id="cloud" class="track-detail cloud">
+      <div class="track-detail-inner">
+
+        <div class="track-modules" data-aos="fade-right">
+
+          <div class="module-card cloud">
+            <span class="module-num">M01</span>
+            <div class="module-info">
+              <h5>Networking Fundamentals for IoT</h5>
+              <p>IP, TCP/UDP, HTTP, WebSockets — understanding the protocols that power IoT connectivity.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 2 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Beginner</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card cloud">
+            <span class="module-num">M02</span>
+            <div class="module-info">
+              <h5>MQTT Protocol & Brokers</h5>
+              <p>Publish/subscribe model, setting up Mosquitto broker, connecting ESP32 via MQTT.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card cloud">
+            <span class="module-num">M03</span>
+            <div class="module-info">
+              <h5>Cloud Platforms — AWS IoT & Firebase</h5>
+              <p>Provisioning devices, Thing Shadows, IoT Rules, and real-time Firestore integration.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 4 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card cloud">
+            <span class="module-num">M04</span>
+            <div class="module-info">
+              <h5>Real-Time Dashboards with Node-RED</h5>
+              <p>Visual programming for IoT flows — connecting sensors to live charts and alert systems.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 2 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card cloud">
+            <span class="module-num">M05</span>
+            <div class="module-info">
+              <h5>REST APIs & Serverless Functions</h5>
+              <p>Building APIs for your devices using AWS Lambda and triggering actions from the cloud.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Advanced</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="track-detail-text" data-aos="fade-left">
+          <span class="track-detail-tag">◆ Track 02</span>
+          <h2>Cloud &<br>Connectivity</h2>
+          <hr style="width:48px; height:2px; background:var(--teal); margin:var(--space-sm) 0; border:none;">
+          <p>
+            Hardware alone isn't enough. In this track you'll learn how to
+            get your devices talking to the internet, storing data in the cloud,
+            and building dashboards that display live sensor readings.
+          </p>
+          <p>
+            Recommended to take alongside or after the Hardware track,
+            though not strictly required. Python and basic networking
+            knowledge is helpful.
+          </p>
+
+          <h5 style="color:var(--white); margin-bottom:var(--space-sm);">What You'll Learn:</h5>
+          <ul class="learn-list">
+            <li><i class="bi bi-check2-circle"></i> IoT networking protocols — MQTT, HTTP, WebSocket</li>
+            <li><i class="bi bi-check2-circle"></i> Cloud platforms — AWS IoT Core, Firebase, Azure</li>
+            <li><i class="bi bi-check2-circle"></i> Building real-time dashboards with Node-RED</li>
+            <li><i class="bi bi-check2-circle"></i> REST API design and consumption</li>
+            <li><i class="bi bi-check2-circle"></i> Serverless functions with AWS Lambda</li>
+            <li><i class="bi bi-check2-circle"></i> Data storage — InfluxDB, DynamoDB, Firestore</li>
+            <li><i class="bi bi-check2-circle"></i> OTA firmware updates and device management</li>
+          </ul>
+
+          <div style="margin-top:var(--space-lg);">
+            <a href="apply.html" class="btn-teal">
+              <i class="bi bi-person-plus"></i> Join This Track
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRACK 3 — AI -->
+    <section id="ai" class="track-detail ai">
+      <div class="track-detail-inner">
+
+        <div class="track-detail-text" data-aos="fade-right">
+          <span class="track-detail-tag">◆ Track 03</span>
+          <h2>AI &<br>Smart Systems</h2>
+          <hr style="width:48px; height:2px; background:var(--turquoise); margin:var(--space-sm) 0; border:none;">
+          <p>
+            The most exciting frontier in IoT — making devices intelligent.
+            This track covers Edge AI, TinyML, and computer vision, enabling
+            you to run machine learning models directly on microcontrollers.
+          </p>
+          <p>
+            This is an advanced track. Basic Python and some hardware experience
+            is recommended. We'll guide you from model training to deployment.
+          </p>
+
+          <h5 style="color:var(--white); margin-bottom:var(--space-sm);">What You'll Learn:</h5>
+          <ul class="learn-list">
+            <li><i class="bi bi-check2-circle"></i> Machine learning fundamentals for IoT</li>
+            <li><i class="bi bi-check2-circle"></i> TensorFlow Lite & Edge Impulse</li>
+            <li><i class="bi bi-check2-circle"></i> TinyML — running ML on Arduino Nano 33 BLE</li>
+            <li><i class="bi bi-check2-circle"></i> Computer vision with OpenCV on Raspberry Pi</li>
+            <li><i class="bi bi-check2-circle"></i> Anomaly detection in sensor data streams</li>
+            <li><i class="bi bi-check2-circle"></i> Keyword spotting and gesture recognition</li>
+            <li><i class="bi bi-check2-circle"></i> Optimising models for constrained devices</li>
+          </ul>
+
+          <div style="margin-top:var(--space-lg);">
+            <a href="apply.html" class="btn-outline-gold">
+              <i class="bi bi-person-plus"></i> Join This Track
+            </a>
+          </div>
+        </div>
+
+        <div class="track-modules" data-aos="fade-left">
+
+          <div class="module-card ai">
+            <span class="module-num">M01</span>
+            <div class="module-info">
+              <h5>ML Fundamentals for IoT Engineers</h5>
+              <p>Classification, regression, neural networks — explained for hardware people, not data scientists.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 2 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card ai">
+            <span class="module-num">M02</span>
+            <div class="module-info">
+              <h5>Edge Impulse & TinyML Workflow</h5>
+              <p>Collect data, train a model, and deploy it to an Arduino in under 2 hours using Edge Impulse Studio.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card ai">
+            <span class="module-num">M03</span>
+            <div class="module-info">
+              <h5>Computer Vision on Raspberry Pi</h5>
+              <p>Object detection, face recognition, and image classification using OpenCV and TensorFlow Lite.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 4 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Advanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card ai">
+            <span class="module-num">M04</span>
+            <div class="module-info">
+              <h5>Anomaly Detection in Sensor Streams</h5>
+              <p>Detecting equipment failures and unusual patterns in real-time sensor data using lightweight models.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 3 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Advanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-card ai">
+            <span class="module-num">M05</span>
+            <div class="module-info">
+              <h5>Capstone — Build an AI-Powered Device</h5>
+              <p>End-to-end project: design, train, deploy, and demo a real AI IoT system of your own choice.</p>
+              <div class="module-meta">
+                <span><i class="bi bi-clock"></i> 4 Sessions</span>
+                <span><i class="bi bi-bar-chart"></i> Advanced</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LEARNING PATH -->
+    <section id="learning-path">
+      <div class="path-inner">
+        <div class="section-header centered" data-aos="fade-up">
+          <span class="section-tag">◆ Your Journey</span>
+          <h2 class="section-title" style="margin:0 auto;">How to Get Started</h2>
+          <hr class="divider-gold">
+          <p class="section-subtitle" style="margin:0 auto; text-align:center;">
+            Not sure where to begin? Follow this recommended path for new members.
+          </p>
+        </div>
+
+        <div class="path-steps" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="path-step">
+            <div class="step-circle">1</div>
+            <h4>Apply & Join</h4>
+            <p>Fill out the membership form. All IIUM students welcome regardless of faculty.</p>
+          </div>
+
+          <div class="path-step">
+            <div class="step-circle">2</div>
+            <h4>Attend Orientation</h4>
+            <p>Come to our onboarding session. Meet the team, choose your track, get your starter kit.</p>
+          </div>
+
+          <div class="path-step">
+            <div class="step-circle">3</div>
+            <h4>Learn & Build</h4>
+            <p>Join weekly sessions, follow the modules, and work on hands-on projects with your cohort.</p>
+          </div>
+
+          <div class="path-step">
+            <div class="step-circle">4</div>
+            <h4>Ship & Showcase</h4>
+            <p>Complete your track project and present it at our semester demo day. Build your portfolio.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="tech-stack">
+      <div class="tech-inner">
+        <div class="section-header centered" data-aos="fade-up">
+          <span class="section-tag">◆ Tools We Use</span>
+          <h2 class="section-title" style="margin:0 auto;">Our Tech Stack</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <div class="tech-categories" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="tech-category">
+            <h4>Hardware</h4>
+            <div class="tech-items">
+              <div class="tech-item"><span class="tech-dot gold"></span>Arduino Uno/Nano</div>
+              <div class="tech-item"><span class="tech-dot gold"></span>ESP32 / ESP8266</div>
+              <div class="tech-item"><span class="tech-dot gold"></span>Raspberry Pi 4</div>
+              <div class="tech-item"><span class="tech-dot gold"></span>Arduino Nano 33 BLE</div>
+              <div class="tech-item"><span class="tech-dot gold"></span>STM32 Blue Pill</div>
+              <div class="tech-item"><span class="tech-dot gold"></span>Sensors & Actuators</div>
+            </div>
+          </div>
+
+          <div class="tech-category">
+            <h4>Software & Firmware</h4>
+            <div class="tech-items">
+              <div class="tech-item"><span class="tech-dot teal"></span>Arduino IDE / PlatformIO</div>
+              <div class="tech-item"><span class="tech-dot teal"></span>FreeRTOS</div>
+              <div class="tech-item"><span class="tech-dot teal"></span>MicroPython</div>
+              <div class="tech-item"><span class="tech-dot teal"></span>Node-RED</div>
+              <div class="tech-item"><span class="tech-dot teal"></span>KiCad (PCB Design)</div>
+              <div class="tech-item"><span class="tech-dot teal"></span>VS Code + extensions</div>
+            </div>
+          </div>
+
+          <div class="tech-category">
+            <h4>Cloud & Connectivity</h4>
+            <div class="tech-items">
+              <div class="tech-item"><span class="tech-dot turq"></span>AWS IoT Core</div>
+              <div class="tech-item"><span class="tech-dot turq"></span>Firebase Realtime DB</div>
+              <div class="tech-item"><span class="tech-dot turq"></span>Mosquitto MQTT</div>
+              <div class="tech-item"><span class="tech-dot turq"></span>InfluxDB + Grafana</div>
+              <div class="tech-item"><span class="tech-dot turq"></span>Telegram Bot API</div>
+              <div class="tech-item"><span class="tech-dot turq"></span>REST & WebSockets</div>
+            </div>
+          </div>
+
+          <div class="tech-category">
+            <h4>AI & Data</h4>
+            <div class="tech-items">
+              <div class="tech-item"><span class="tech-dot white"></span>TensorFlow Lite Micro</div>
+              <div class="tech-item"><span class="tech-dot white"></span>Edge Impulse Studio</div>
+              <div class="tech-item"><span class="tech-dot white"></span>OpenCV</div>
+              <div class="tech-item"><span class="tech-dot white"></span>Python (NumPy, Pandas)</div>
+              <div class="tech-item"><span class="tech-dot white"></span>Jupyter Notebooks</div>
+              <div class="tech-item"><span class="tech-dot white"></span>Roboflow (Vision)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:var(--black); padding:var(--space-3xl) var(--space-2xl); border-top:1px solid var(--border-gold); text-align:center; position:relative; overflow:hidden;">
+      <div class="hero-glow" style="top:-200px; left:-200px; opacity:0.5;"></div>
+      <div class="hero-glow-teal" style="bottom:-150px; right:-150px;"></div>
+      <div style="position:relative; z-index:1; max-width:640px; margin:0 auto;">
+        <span class="section-tag" style="display:block; text-align:center; margin-bottom:var(--space-sm);" data-aos="fade-up">
+          ◆ Ready to Start?
+        </span>
+        <h2 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; margin-bottom:var(--space-sm);" data-aos="fade-up" data-aos-delay="100">
+          Pick a Track. <span style="color:var(--gold);">Start Building.</span>
+        </h2>
+        <p style="font-size:var(--fs-lg); color:var(--white-dim); margin-bottom:var(--space-xl); font-weight:300;" data-aos="fade-up" data-aos-delay="200">
+          All programmes are free for IIUM students. Equipment and components provided.
+          The only requirement is showing up.
+        </p>
+        <div style="display:flex; gap:var(--space-sm); justify-content:center; flex-wrap:wrap;" data-aos="fade-up" data-aos-delay="300">
+          <a href="apply.html" class="btn-gold">
+            <i class="bi bi-person-plus"></i> Apply Now — It's Free
+          </a>
+          <a href="contact.html" class="btn-outline-gold">
+            <i class="bi bi-question-circle"></i> Have Questions?
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

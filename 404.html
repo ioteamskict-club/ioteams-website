@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — 404 Not Found Page
+  404.html
+
+  GitHub Pages automatically serves this file when a URL
+  doesn't match any existing file in the repository.
+
+  No sections needed — just a clear, branded error page
+  with helpful navigation back to the site.
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found · IoTeams IIUM</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Return to IoTeams IIUM.">
+  <meta name="robots" content="noindex">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+
+  <style>
+    /* ── Variables ── */
+    :root {
+      --gold:       #C9A84C;
+      --gold-light: #E8C97A;
+      --teal:       #1ABCB0;
+      --black:      #0A0A0A;
+      --black-2:    #121212;
+      --black-3:    #1C1C1C;
+      --white:      #F9F7F2;
+      --white-dim:  rgba(249,247,242,0.65);
+      --white-muted:rgba(249,247,242,0.35);
+      --border-gold:rgba(201,168,76,0.18);
+      --font-heading:'Playfair Display', Georgia, serif;
+      --font-body:   'DM Sans', system-ui, sans-serif;
+      --font-mono:   'Space Mono', 'Courier New', monospace;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Animated grid background ── */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(201,168,76,0.12) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridPulse 8s ease-in-out infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.9; }
+    }
+
+    /* ── Glow effects ── */
+    .glow-gold {
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.1) 0%, transparent 65%);
+      top: -200px; right: -200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-teal {
+      position: fixed;
+      width: 400px; height: 400px;
+      background: radial-gradient(ellipse, rgba(26,188,176,0.07) 0%, transparent 65%);
+      bottom: -100px; left: -100px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Main content ── */
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 600px;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── 404 number ── */
+    .error-code {
+      font-family: var(--font-heading);
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 900;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(201,168,76,0.3);
+      position: relative;
+      margin-bottom: -1rem;
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+
+    /* Gold fill that glows */
+    .error-code span {
+      -webkit-text-stroke: 0;
+      color: var(--gold);
+      display: inline-block;
+      animation: digitPulse 3s ease-in-out infinite;
+    }
+
+    .error-code span:nth-child(2) { animation-delay: 0.15s; }
+    .error-code span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes digitPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.7; }
+    }
+
+    /* ── Label ── */
+    .error-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .error-label::before,
+    .error-label::after {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    /* ── Heading ── */
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    h1 .gold { color: var(--gold); }
+
+    /* ── Description ── */
+    p {
+      font-size: 1rem;
+      color: var(--white-dim);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Quick links ── */
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .quick-link {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      padding: 0.75rem 0.5rem;
+      text-decoration: none;
+      color: var(--white-dim);
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s, background 0.2s;
+    }
+
+    .quick-link i {
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+
+    .quick-link:hover {
+      border-color: var(--gold);
+      color: var(--white);
+      transform: translateY(-3px);
+      background: rgba(201,168,76,0.06);
+    }
+
+    /* ── Action buttons ── */
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold);
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s, transform 0.15s, background 0.2s;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer note ── */
+    .footer-note {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    .footer-note a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .footer-note a:hover { color: var(--gold); }
+
+    /* ── Divider ── */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+      border: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .quick-links { grid-template-columns: repeat(2, 1fr); }
+      .actions     { flex-direction: column; align-items: center; }
+      .btn-primary,
+      .btn-outline { width: 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background decorations -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="glow-gold" aria-hidden="true"></div>
+  <div class="glow-teal" aria-hidden="true"></div>
+
+  <!-- Main content -->
+  <main class="container" role="main">
+
+    <!-- 404 number -->
+    <div class="error-code" aria-hidden="true">
+      <span>4</span><span>0</span><span>4</span>
+    </div>
+
+    <!-- Label -->
+    <p class="error-label">Page Not Found</p>
+
+    <!-- Heading -->
+    <h1>
+      This Page Doesn't<br>
+      <span class="gold">Exist</span> — Yet.
+    </h1>
+
+    <hr class="divider">
+
+    <!-- Description -->
+    <p>
+      The URL you followed might be broken, the page may have been moved,
+      or perhaps the IoT sensor reading your request sent a bad packet.
+      Either way — let's get you back on track.
+    </p>
+
+    <!-- Quick navigation -->
+    <nav class="quick-links" aria-label="Quick links">
+      <a href="index.html" class="quick-link">
+        <i class="bi bi-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="pages/events.html" class="quick-link">
+        <i class="bi bi-calendar-event"></i>
+        <span>Events</span>
+      </a>
+      <a href="pages/blog.html" class="quick-link">
+        <i class="bi bi-journal-text"></i>
+        <span>Blog</span>
+      </a>
+      <a href="pages/programmes.html" class="quick-link">
+        <i class="bi bi-cpu"></i>
+        <span>Programmes</span>
+      </a>
+      <a href="pages/gallery.html" class="quick-link">
+        <i class="bi bi-images"></i>
+        <span>Gallery</span>
+      </a>
+      <a href="pages/contact.html" class="quick-link">
+        <i class="bi bi-envelope"></i>
+        <span>Contact</span>
+      </a>
+    </nav>
+
+    <!-- Action buttons -->
+    <div class="actions">
+      <a href="index.html" class="btn-primary">
+        <i class="bi bi-house"></i> Back to Home
+      </a>
+      <button class="btn-outline" onclick="history.back()">
+        <i class="bi bi-arrow-left"></i> Go Back
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer note -->
+  <p class="footer-note" aria-hidden="true">
+    <a href="index.html">[IoTeams] IIUM</a>
+    &nbsp;◆&nbsp; Error 404 &nbsp;◆&nbsp; ioteams@iium.edu.my
+  </p>
+
+</body>
+</html>

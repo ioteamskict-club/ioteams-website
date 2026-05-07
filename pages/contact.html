@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Contact Page
+  pages/contact.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Page Hero
+  4. Contact Info — address, email, social
+  5. Contact Form — EmailJS powered
+  6. Map — IIUM Gombak location
+  7. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — IoTeams IIUM</title>
+  <meta name="description" content="Get in touch with IoTeams IIUM. Find us at IIUM Gombak Campus or reach out via email and social media.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Contact — IoTeams IIUM">
+  <meta property="og:description" content="Get in touch with IoTeams IIUM. Find us at IIUM Gombak or reach out via email, WhatsApp and social media.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/contact.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Contact — IoTeams IIUM">
+  <meta name="twitter:description" content="Get in touch with IoTeams IIUM. Find us at IIUM Gombak or reach out via email, WhatsApp and social media.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/contact.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       CONTACT MAIN LAYOUT
+    ══════════════════════════════════════ */
+    #contact-main {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .contact-layout {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════
+       CONTACT INFO SIDE
+    ══════════════════════════════════════ */
+    .contact-info {
+      position: sticky;
+      top: calc(72px + var(--space-md));
+    }
+
+    /* Info cards */
+    .info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-xl);
+    }
+
+    .contact-info-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      transition: border-color var(--transition-base), transform var(--transition-base);
+    }
+
+    .contact-info-card:hover {
+      border-color: var(--border-gold);
+      transform: translateX(4px);
+    }
+
+    .contact-info-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info-card.teal .contact-info-icon {
+      background: rgba(26,188,176,0.1);
+      border-color: rgba(26,188,176,0.3);
+      color: var(--teal);
+    }
+
+    .contact-info-body h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-info-card.teal .contact-info-body h5 { color: var(--teal); }
+
+    .contact-info-body p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .contact-info-body a {
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    .contact-info-body a:hover { color: var(--gold); }
+
+    /* Social links row */
+    .contact-social {
+      margin-top: var(--space-xl);
+    }
+
+    .contact-social h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--white-muted);
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .social-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xs);
+    }
+
+    .social-link-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .social-link-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-2px);
+    }
+
+    .social-link-card i {
+      font-size: 1.2rem;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .social-link-card.instagram i { color: #E1306C; background: rgba(225,48,108,0.1); }
+    .social-link-card.linkedin i  { color: #0A66C2; background: rgba(10,102,194,0.1); }
+    .social-link-card.github i    { color: var(--white); background: rgba(255,255,255,0.08); }
+    .social-link-card.twitter i   { color: var(--white); background: rgba(255,255,255,0.08); }
+
+    .social-link-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .social-link-info span:first-child {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .social-link-info span:last-child {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Office hours */
+    .office-hours {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin-top: var(--space-md);
+    }
+
+    .office-hours h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--white-muted);
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-day {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+    }
+
+    .hours-time {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--teal);
+      letter-spacing: 0.06em;
+    }
+
+    .hours-time.closed { color: var(--white-muted); }
+
+    /* ══════════════════════════════════════
+       CONTACT FORM SIDE
+    ══════════════════════════════════════ */
+    .contact-form-wrap { width: 100%; }
+
+    .form-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+    }
+
+    .form-card h3 {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-card > p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin-bottom: var(--space-xl);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-md);
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-label span { color: var(--teal); }
+
+    .form-control {
+      width: 100%;
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem var(--space-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: var(--fs-sm);
+      outline: none;
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .form-control::placeholder { color: var(--white-muted); }
+
+    .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A84C' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-sm) center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    select.form-control option {
+      background: var(--black-3);
+      color: var(--white);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Submit button area */
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-top: var(--space-lg);
+    }
+
+    .form-note {
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    /* Status messages */
+    .form-status {
+      margin-top: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      display: none;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .form-status.success {
+      display: flex;
+      background: rgba(25,135,84,0.1);
+      border: 1px solid rgba(25,135,84,0.3);
+      color: #75b798;
+    }
+
+    .form-status.error {
+      display: flex;
+      background: rgba(220,53,69,0.1);
+      border: 1px solid rgba(220,53,69,0.3);
+      color: #ea868f;
+    }
+
+    .form-status.loading {
+      display: flex;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid var(--border-gold);
+      color: var(--gold);
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(201,168,76,0.3);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ══════════════════════════════════════
+       MAP SECTION
+    ══════════════════════════════════════ */
+    #map-section {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .map-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: var(--space-xl);
+      margin-top: var(--space-xl);
+      align-items: start;
+    }
+
+    .map-embed {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-gold);
+      height: 400px;
+    }
+
+    .map-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(90%) hue-rotate(180deg);
+    }
+
+    /* Location details */
+    .map-details {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .location-card {
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .location-card h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
+    }
+
+    .location-card p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .location-card a {
+      color: var(--teal);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: var(--space-xs);
+      transition: color var(--transition-base);
+    }
+
+    .location-card a:hover { color: var(--gold); }
+
+    /* How to find us steps */
+    .directions-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+
+    .direction-step {
+      display: flex;
+      gap: var(--space-xs);
+      align-items: flex-start;
+    }
+
+    .direction-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--gold);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .direction-step p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-info   { position: static; }
+      .map-layout     { grid-template-columns: 1fr; }
+      .map-embed      { height: 300px; }
+    }
+
+    @media (max-width: 576px) {
+      .form-row             { grid-template-columns: 1fr; }
+      .social-links-grid    { grid-template-columns: 1fr; }
+      .form-submit-row      { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body class="contact-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta">Join Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Get in Touch</span><span class="dot">◆</span>
+      <span>ioteams@iium.edu.my</span><span class="dot">◆</span>
+      <span>IIUM Gombak Campus</span><span class="dot">◆</span>
+      <span>Block E, Level 2</span><span class="dot">◆</span>
+      <span>We Reply Within 48 Hours</span><span class="dot">◆</span>
+      <span>Get in Touch</span><span class="dot">◆</span>
+      <span>ioteams@iium.edu.my</span><span class="dot">◆</span>
+      <span>IIUM Gombak Campus</span><span class="dot">◆</span>
+      <span>Block E, Level 2</span><span class="dot">◆</span>
+      <span>We Reply Within 48 Hours</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-glow"></div>
+      <div class="page-hero-content">
+        <span class="section-tag animate-fade-up">◆ Contact</span>
+        <h1 class="animate-fade-up delay-1">
+          Let's <span class="gold">Talk</span>
+        </h1>
+        <p class="animate-fade-up delay-2">
+          Have a question about membership, events, or collaboration?
+          We'd love to hear from you. We typically reply within 48 hours.
+        </p>
+        <nav class="breadcrumbs animate-fade-up delay-3">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current">Contact</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- CONTACT MAIN -->
+    <section id="contact-main">
+      <div class="contact-layout">
+
+        <!-- LEFT: Info -->
+        <div class="contact-info" data-aos="fade-right">
+
+          <span class="section-tag">◆ Find Us</span>
+          <h2 class="section-title">Contact Information</h2>
+          <hr class="divider-gold">
+          <p style="font-size:var(--fs-sm); color:var(--white-dim); line-height:1.75; margin-bottom:0;">
+            Whether you want to ask about joining, propose a collaboration,
+            or just say hello — reach out through any of these channels.
+          </p>
+
+          <div class="info-cards">
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon">
+                <i class="bi bi-geo-alt"></i>
+              </div>
+              <div class="contact-info-body">
+                <h5>Location</h5>
+                <p>
+                  Kulliyyah of Engineering (KOE), Block E, Level 2<br>
+                  IIUM Gombak Campus, 53100 Kuala Lumpur, Malaysia
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-info-card teal">
+              <div class="contact-info-icon">
+                <i class="bi bi-envelope"></i>
+              </div>
+              <div class="contact-info-body">
+                <h5>Email</h5>
+                <p>
+                  General: <a href="mailto:ioteams@iium.edu.my">ioteams@iium.edu.my</a><br>
+                  Events: <a href="mailto:events.ioteams@iium.edu.my">events.ioteams@iium.edu.my</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon">
+                <i class="bi bi-telephone"></i>
+              </div>
+              <div class="contact-info-body">
+                <h5>WhatsApp</h5>
+                <p>
+                  President (Ahmad Faris): <a href="https://wa.me/60123456789">+60 12-345 6789</a><br>
+                  <span style="font-size:0.75rem; color:var(--white-muted);">
+                    For urgent matters only. WhatsApp preferred.
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-info-card teal">
+              <div class="contact-info-icon">
+                <i class="bi bi-clock"></i>
+              </div>
+              <div class="contact-info-body">
+                <h5>Response Time</h5>
+                <p>
+                  Email — within 48 hours<br>
+                  WhatsApp — within 24 hours<br>
+                  Social Media DMs — within 72 hours
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Office Hours -->
+          <div class="office-hours">
+            <h5>Lab / Meeting Hours</h5>
+            <div class="hours-row">
+              <span class="hours-day">Monday</span>
+              <span class="hours-time">3:00 PM — 6:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Wednesday</span>
+              <span class="hours-time">3:00 PM — 6:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Saturday</span>
+              <span class="hours-time">9:00 AM — 1:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Sunday</span>
+              <span class="hours-time closed">Closed</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Public Holidays</span>
+              <span class="hours-time closed">Closed</span>
+            </div>
+          </div>
+
+          <!-- Social -->
+          <div class="contact-social">
+            <h5>Follow Us</h5>
+            <div class="social-links-grid">
+              <a href="#" class="social-link-card instagram">
+                <i class="bi bi-instagram"></i>
+                <div class="social-link-info">
+                  <span>Instagram</span>
+                  <span>@ioteams_iium</span>
+                </div>
+              </a>
+              <a href="#" class="social-link-card linkedin">
+                <i class="bi bi-linkedin"></i>
+                <div class="social-link-info">
+                  <span>LinkedIn</span>
+                  <span>IoTeams IIUM</span>
+                </div>
+              </a>
+              <a href="#" class="social-link-card github">
+                <i class="bi bi-github"></i>
+                <div class="social-link-info">
+                  <span>GitHub</span>
+                  <span>ioteams-iium</span>
+                </div>
+              </a>
+              <a href="#" class="social-link-card twitter">
+                <i class="bi bi-twitter-x"></i>
+                <div class="social-link-info">
+                  <span>Twitter / X</span>
+                  <span>@ioteams_iium</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="contact-form-wrap" data-aos="fade-left">
+
+          <div class="form-card" id="contactFormEl">
+            <h3>Send Us a Message</h3>
+            <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First Name <span>*</span></label>
+                <input type="text" class="form-control" id="firstName" placeholder="Ahmad" required aria-required="true">
+                <span class="form-error" id="firstNameError"></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last Name <span>*</span></label>
+                <input type="text" class="form-control" id="lastName" placeholder="Faris" required aria-required="true">
+                <span class="form-error" id="lastNameError"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactEmail">Email Address <span>*</span></label>
+              <input type="email" class="form-control" id="contactEmail" placeholder="you@email.com" required aria-required="true">
+              <span class="form-error" id="contactEmailError"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject <span>*</span></label>
+              <select class="form-control" id="subject" required aria-required="true">
+                <option value="" disabled selected>What is this about?</option>
+                <option>Membership Enquiry</option>
+                <option>Event Collaboration</option>
+                <option>Industry Partnership</option>
+                <option>Media / Press</option>
+                <option>Project Sponsorship</option>
+                <option>General Question</option>
+                <option>Other</option>
+              </select>
+              <span class="form-error" id="subjectError"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message <span>*</span></label>
+              <textarea class="form-control" id="message" rows="6"
+                placeholder="Tell us what you'd like to discuss... (min. 20 characters)"
+                required aria-required="true"></textarea>
+              <span class="form-error" id="messageError"></span>
+            </div>
+
+            <!-- Honeypot — hidden spam trap, must stay empty -->
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+            <div class="form-submit-row">
+              <span class="form-note">
+                <i class="bi bi-shield-check"></i> We never share your info.
+              </span>
+              <button class="btn-gold" id="sendBtn" type="button">
+                <i class="bi bi-send"></i> Send Message
+              </button>
+            </div>
+
+            <!-- Status messages — data-status used by forms.js -->
+            <div class="form-status loading" data-status="loading" style="display:none;">
+              <div class="spinner"></div>
+              Sending your message...
+            </div>
+
+            <div class="form-status success" data-status="success" style="display:none;">
+              <i class="bi bi-check-circle-fill"></i>
+              Message sent! We'll reply within 48 hours.
+            </div>
+
+            <div class="form-status error" data-status="error" style="display:none;">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              Something went wrong. Please email us directly at ioteams@iium.edu.my
+            </div>
+
+          </div>
+
+          <!-- Quick links below form -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-sm); margin-top:var(--space-md);">
+
+            <a href="apply.html" style="background:var(--black-2); border:1px solid var(--border-dark); border-radius:var(--radius-md); padding:var(--space-md); text-decoration:none; transition:border-color var(--transition-base), transform var(--transition-base); display:flex; gap:var(--space-sm); align-items:center;"
+               onmouseover="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-2px)'"
+               onmouseout="this.style.borderColor='var(--border-dark)'; this.style.transform='none'">
+              <i class="bi bi-person-plus" style="font-size:1.5rem; color:var(--gold);"></i>
+              <div>
+                <div style="font-size:var(--fs-sm); font-weight:700; color:var(--white);">Join IoTeams</div>
+                <div style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">Apply now — it's free</div>
+              </div>
+            </a>
+
+            <a href="programmes.html" style="background:var(--black-2); border:1px solid var(--border-dark); border-radius:var(--radius-md); padding:var(--space-md); text-decoration:none; transition:border-color var(--transition-base), transform var(--transition-base); display:flex; gap:var(--space-sm); align-items:center;"
+               onmouseover="this.style.borderColor='var(--border-gold)'; this.style.transform='translateY(-2px)'"
+               onmouseout="this.style.borderColor='var(--border-dark)'; this.style.transform='none'">
+              <i class="bi bi-book" style="font-size:1.5rem; color:var(--teal);"></i>
+              <div>
+                <div style="font-size:var(--fs-sm); font-weight:700; color:var(--white);">Our Programmes</div>
+                <div style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">Explore 3 tracks</div>
+              </div>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="map-section">
+      <div class="map-inner">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Find Us</span>
+          <h2 class="section-title">Where We Are</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <div class="map-layout">
+
+          <!-- Google Maps embed — IIUM Gombak -->
+          <div class="map-embed" data-aos="fade-right">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.4847576388154!2d101.7272!3d3.2543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37c5e5c99b8b%3A0x8b9f5a6b8c9d7e5f!2sInternational%20Islamic%20University%20Malaysia!5e0!3m2!1sen!2smy!4v1234567890"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="IoTeams IIUM Location — IIUM Gombak Campus">
+            </iframe>
+          </div>
+
+          <!-- Location details -->
+          <div class="map-details" data-aos="fade-left">
+
+            <div class="location-card">
+              <h5>Our Location</h5>
+              <p>
+                <strong style="color:var(--white);">Kulliyyah of Engineering (KOE)</strong><br>
+                Block E, Level 2, IoT Lab<br>
+                International Islamic University Malaysia<br>
+                Jalan Gombak, 53100<br>
+                Kuala Lumpur, Malaysia
+              </p>
+              <a href="https://maps.google.com/?q=IIUM+Gombak" target="_blank" rel="noopener">
+                <i class="bi bi-arrow-up-right-square"></i> Open in Google Maps
+              </a>
+            </div>
+
+            <div class="location-card">
+              <h5>How to Get Here</h5>
+              <div class="directions-list">
+                <div class="direction-step">
+                  <span class="direction-num">1</span>
+                  <p>Take the KTM Komuter or bus to <strong style="color:var(--white);">Gombak Terminal</strong>.</p>
+                </div>
+                <div class="direction-step">
+                  <span class="direction-num">2</span>
+                  <p>Board the <strong style="color:var(--white);">IIUM shuttle bus</strong> from Gombak Terminal (free for students).</p>
+                </div>
+                <div class="direction-step">
+                  <span class="direction-num">3</span>
+                  <p>Alight at the <strong style="color:var(--white);">Kulliyyah of Engineering</strong> stop.</p>
+                </div>
+                <div class="direction-step">
+                  <span class="direction-num">4</span>
+                  <p>Head to <strong style="color:var(--white);">Block E, Level 2</strong>. Look for the IoTeams sticker on the lab door.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-card" style="background:rgba(201,168,76,0.06); border-color:var(--border-gold-md);">
+              <h5>Parking</h5>
+              <p style="margin-bottom:var(--space-xs);">
+                Visitor parking is available at the main gate.
+                Inform the guard you are visiting the Kulliyyah of Engineering.
+                Parking is free for registered students.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <!--
+    EmailJS SDK — uncomment once you have your keys in forms.js
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  -->
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/forms.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Events Page
+  pages/events.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Page Hero
+  4. Filter Bar — filter by category
+  5. Upcoming Events — cards with date block
+  6. Past Events — muted cards grid
+  7. CTA — submit your event
+  8. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — IoTeams IIUM</title>
+  <meta name="description" content="Upcoming and past IoTeams IIUM events — workshops, hackathons, industry talks, and project showcases.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Events — IoTeams IIUM">
+  <meta property="og:description" content="Upcoming and past IoTeams IIUM events — workshops, hackathons, industry talks, and project showcases at IIUM Gombak.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/events.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Events — IoTeams IIUM">
+  <meta name="twitter:description" content="Upcoming and past IoTeams IIUM events — workshops, hackathons, industry talks, and project showcases at IIUM Gombak.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/events.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       FILTER BAR
+    ══════════════════════════════════════ */
+    #filter-bar {
+      background: var(--black-2);
+      border-bottom: 1px solid var(--border-gold);
+      padding: var(--space-md) var(--space-2xl);
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+    }
+
+    .filter-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      color: var(--white-dim);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-gold);
+      color: var(--gold);
+    }
+
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    /* ══════════════════════════════════════
+       UPCOMING EVENTS
+    ══════════════════════════════════════ */
+    #upcoming {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .upcoming-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    /* Featured event — large card */
+    .event-featured {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold-md);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      margin-bottom: var(--space-md);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .event-featured:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .event-featured-date {
+      background: var(--gold);
+      color: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl);
+      gap: 0.3rem;
+    }
+
+    .event-featured-date .day {
+      font-family: var(--font-heading);
+      font-size: 4.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .event-featured-date .month {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .event-featured-date .year {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      opacity: 0.6;
+      letter-spacing: 0.1em;
+    }
+
+    .event-featured-body {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .event-featured-body .event-type {
+      display: flex;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+    }
+
+    .event-featured-body h2 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+      line-height: 1.3;
+    }
+
+    .event-featured-body p {
+      font-size: var(--fs-base);
+      color: var(--white-dim);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+      max-width: 600px;
+    }
+
+    .event-meta-row {
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-md);
+    }
+
+    .event-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--teal);
+      letter-spacing: 0.06em;
+    }
+
+    .event-actions {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    /* Regular event list */
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-xl);
+    }
+
+    .event-list-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-xl);
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      align-items: center;
+      gap: var(--space-lg);
+      transition: border-color var(--transition-base), transform var(--transition-base);
+    }
+
+    .event-list-card:hover {
+      border-color: var(--border-gold);
+      transform: translateX(4px);
+    }
+
+    .event-list-card[data-category="workshop"]   { border-left: 3px solid var(--teal); }
+    .event-list-card[data-category="hackathon"]  { border-left: 3px solid var(--gold); }
+    .event-list-card[data-category="talk"]       { border-left: 3px solid var(--yellow); }
+    .event-list-card[data-category="showcase"]   { border-left: 3px solid var(--turquoise); }
+
+    .event-list-date {
+      text-align: center;
+    }
+
+    .event-list-date .day {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+
+    .event-list-date .month-year {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .event-list-info h4 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .event-list-meta {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .event-list-meta span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    .event-list-action {
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════
+       PAST EVENTS
+    ══════════════════════════════════════ */
+    #past {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .past-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    .past-card {
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      opacity: 0.8;
+      transition: opacity var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+    }
+
+    .past-card:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+      border-color: var(--border-gold);
+    }
+
+    .past-card-img {
+      aspect-ratio: 16/9;
+      background: var(--black-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .past-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(60%);
+      transition: filter var(--transition-slow);
+    }
+
+    .past-card:hover .past-card-img img { filter: grayscale(20%); }
+
+    .past-card-img .placeholder-icon {
+      font-size: 2rem;
+      color: var(--white-muted);
+    }
+
+    .past-card-img .placeholder-text {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+    }
+
+    /* "Past" watermark overlay */
+    .past-badge {
+      position: absolute;
+      top: var(--space-xs);
+      right: var(--space-xs);
+      background: rgba(0,0,0,0.7);
+      color: var(--white-muted);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+    }
+
+    .past-card-body {
+      padding: var(--space-md);
+    }
+
+    .past-card-body .past-date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .past-card-body h4 {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .past-card-body p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.6;
+      margin-bottom: var(--space-xs);
+    }
+
+    .past-stats {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .past-stat {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* ══════════════════════════════════════
+       SUBMIT EVENT CTA
+    ══════════════════════════════════════ */
+    #submit-event {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .submit-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      #filter-bar { top: 64px; padding: var(--space-sm) var(--space-md); }
+      .event-featured { grid-template-columns: 120px 1fr; }
+      .event-featured-date .day { font-size: 3rem; }
+      .event-list-card { grid-template-columns: 80px 1fr; }
+      .event-list-action { display: none; }
+      .past-grid { grid-template-columns: 1fr 1fr; }
+      .submit-inner { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .event-featured { grid-template-columns: 1fr; }
+      .event-featured-date { flex-direction: row; padding: var(--space-md); gap: var(--space-sm); }
+      .event-featured-date .day { font-size: 2.5rem; }
+      .event-list-card { grid-template-columns: 70px 1fr; gap: var(--space-md); padding: var(--space-md); }
+      .past-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body class="events-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta">Join Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Upcoming Events</span><span class="dot">◆</span>
+      <span>Workshops</span><span class="dot">◆</span>
+      <span>Hackathons</span><span class="dot">◆</span>
+      <span>Industry Talks</span><span class="dot">◆</span>
+      <span>Project Showcases</span><span class="dot">◆</span>
+      <span>Upcoming Events</span><span class="dot">◆</span>
+      <span>Workshops</span><span class="dot">◆</span>
+      <span>Hackathons</span><span class="dot">◆</span>
+      <span>Industry Talks</span><span class="dot">◆</span>
+      <span>Project Showcases</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-glow"></div>
+      <div class="page-hero-content">
+        <span class="section-tag animate-fade-up">◆ Events</span>
+        <h1 class="animate-fade-up delay-1">
+          Workshops, Talks<br>& <span class="gold">Hackathons</span>
+        </h1>
+        <p class="animate-fade-up delay-2">
+          From beginner workshops to intense hackathons — there's always
+          something happening at IoTeams. Join us, learn something new,
+          and build something great.
+        </p>
+        <nav class="breadcrumbs animate-fade-up delay-3">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current">Events</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div id="filter-bar">
+      <div class="filter-inner">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="workshop">Workshop</button>
+        <button class="filter-btn" data-filter="hackathon">Hackathon</button>
+        <button class="filter-btn" data-filter="talk">Industry Talk</button>
+        <button class="filter-btn" data-filter="showcase">Showcase</button>
+      </div>
+    </div>
+
+    <!-- UPCOMING EVENTS -->
+    <section id="upcoming">
+      <div class="upcoming-inner">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Coming Up</span>
+          <h2 class="section-title">Upcoming Events</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <!-- Featured Event -->
+        <div class="event-featured" data-aos="fade-up" data-aos-delay="100" data-category="workshop">
+          <div class="event-featured-date">
+            <span class="day">15</span>
+            <span class="month">June</span>
+            <span class="year">2025</span>
+          </div>
+          <div class="event-featured-body">
+            <div class="event-type">
+              <span class="badge badge-teal">Workshop</span>
+              <span class="badge badge-gold">Free Entry</span>
+            </div>
+            <h2>Getting Started with ESP32 & IoT Connectivity</h2>
+            <p>
+              A full-day hands-on workshop covering ESP32 setup, WiFi connectivity,
+              sensor integration, and sending data to the cloud using MQTT.
+              All components provided. Suitable for complete beginners.
+            </p>
+            <div class="event-meta-row">
+              <div class="event-meta-item">
+                <i class="bi bi-calendar3"></i> Saturday, 15 June 2025
+              </div>
+              <div class="event-meta-item">
+                <i class="bi bi-clock"></i> 9:00 AM — 5:00 PM
+              </div>
+              <div class="event-meta-item">
+                <i class="bi bi-geo-alt"></i> IIUM Gombak, Block E Lab 2
+              </div>
+              <div class="event-meta-item">
+                <i class="bi bi-people"></i> 40 Seats
+              </div>
+            </div>
+            <div class="event-actions">
+              <a href="apply.html" class="btn-gold btn-sm">
+                <i class="bi bi-ticket-perforated"></i> Register Now
+              </a>
+              <a href="#" class="btn-outline-gold btn-sm">
+                <i class="bi bi-share"></i> Share
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event List -->
+        <div class="events-list" id="eventsList">
+
+          <div class="event-list-card" data-aos="fade-up" data-category="hackathon">
+            <div class="event-list-date">
+              <span class="day">28</span>
+              <span class="month-year">Jun 2025</span>
+            </div>
+            <div class="event-list-info">
+              <h4>Smart Campus Hackathon 2025 — Briefing Session</h4>
+              <div class="event-list-meta">
+                <span><i class="bi bi-clock"></i> 3:00 PM — 5:00 PM</span>
+                <span><i class="bi bi-camera-video"></i> Online — Google Meet</span>
+                <span><i class="bi bi-people"></i> Teams of 2–4</span>
+              </div>
+            </div>
+            <div class="event-list-action">
+              <span class="badge badge-gold">Hackathon</span>
+            </div>
+          </div>
+
+          <div class="event-list-card" data-aos="fade-up" data-category="talk">
+            <div class="event-list-date">
+              <span class="day">10</span>
+              <span class="month-year">Jul 2025</span>
+            </div>
+            <div class="event-list-info">
+              <h4>Industry Talk: Real-World IoT in Malaysian Manufacturing</h4>
+              <div class="event-list-meta">
+                <span><i class="bi bi-clock"></i> 2:00 PM — 4:30 PM</span>
+                <span><i class="bi bi-geo-alt"></i> IIUM Main Auditorium</span>
+                <span><i class="bi bi-people"></i> Open to All</span>
+              </div>
+            </div>
+            <div class="event-list-action">
+              <span class="badge badge-yellow">Talk</span>
+            </div>
+          </div>
+
+          <div class="event-list-card" data-aos="fade-up" data-category="showcase">
+            <div class="event-list-date">
+              <span class="day">20</span>
+              <span class="month-year">Jul 2025</span>
+            </div>
+            <div class="event-list-info">
+              <h4>Project Showcase: Semester 1 Member Demos</h4>
+              <div class="event-list-meta">
+                <span><i class="bi bi-clock"></i> 10:00 AM — 1:00 PM</span>
+                <span><i class="bi bi-geo-alt"></i> Engineering Block, Lab 3</span>
+                <span><i class="bi bi-people"></i> Public Welcome</span>
+              </div>
+            </div>
+            <div class="event-list-action">
+              <span class="badge badge-turq">Showcase</span>
+            </div>
+          </div>
+
+          <div class="event-list-card" data-aos="fade-up" data-category="workshop">
+            <div class="event-list-date">
+              <span class="day">02</span>
+              <span class="month-year">Aug 2025</span>
+            </div>
+            <div class="event-list-info">
+              <h4>Workshop: Introduction to TinyML on Microcontrollers</h4>
+              <div class="event-list-meta">
+                <span><i class="bi bi-clock"></i> 9:00 AM — 1:00 PM</span>
+                <span><i class="bi bi-geo-alt"></i> IIUM Gombak, IT Lab</span>
+                <span><i class="bi bi-people"></i> 30 Seats</span>
+              </div>
+            </div>
+            <div class="event-list-action">
+              <span class="badge badge-teal">Workshop</span>
+            </div>
+          </div>
+
+          <div class="event-list-card" data-aos="fade-up" data-category="hackathon">
+            <div class="event-list-date">
+              <span class="day">15</span>
+              <span class="month-year">Aug 2025</span>
+            </div>
+            <div class="event-list-info">
+              <h4>Smart Campus Hackathon 2025 — 48-Hour Build</h4>
+              <div class="event-list-meta">
+                <span><i class="bi bi-clock"></i> Fri 8PM — Sun 8PM</span>
+                <span><i class="bi bi-geo-alt"></i> IIUM Engineering Block</span>
+                <span><i class="bi bi-trophy"></i> RM 3,000 Prize Pool</span>
+              </div>
+            </div>
+            <div class="event-list-action">
+              <span class="badge badge-gold">Hackathon</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PAST EVENTS -->
+    <section id="past">
+      <div class="past-inner">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Archive</span>
+          <h2 class="section-title">Past Events</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <div class="past-grid">
+
+          <div class="past-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="past-card-img">
+              <i class="bi bi-image placeholder-icon"></i>
+              <span class="placeholder-text">event-past-1.jpg</span>
+              <span class="past-badge">Past</span>
+            </div>
+            <div class="past-card-body">
+              <span class="past-date">March 2025</span>
+              <span class="badge badge-teal" style="margin-bottom:0.5rem; display:inline-block;">Workshop</span>
+              <h4>Arduino Basics — Zero to Blinking LED</h4>
+              <p>Beginner workshop on Arduino programming, digital/analog I/O, and building your first circuit.</p>
+              <div class="past-stats">
+                <span class="past-stat"><i class="bi bi-people"></i> 38 Attended</span>
+                <span class="past-stat"><i class="bi bi-star"></i> 4.8/5 Rating</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="past-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="past-card-img">
+              <i class="bi bi-image placeholder-icon"></i>
+              <span class="placeholder-text">event-past-2.jpg</span>
+              <span class="past-badge">Past</span>
+            </div>
+            <div class="past-card-body">
+              <span class="past-date">February 2025</span>
+              <span class="badge badge-yellow" style="margin-bottom:0.5rem; display:inline-block;">Talk</span>
+              <h4>IoT Security: Protecting Connected Devices</h4>
+              <p>Industry expert from CyberSecurity Malaysia shared best practices for securing IoT deployments.</p>
+              <div class="past-stats">
+                <span class="past-stat"><i class="bi bi-people"></i> 65 Attended</span>
+                <span class="past-stat"><i class="bi bi-star"></i> 4.9/5 Rating</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="past-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="past-card-img">
+              <i class="bi bi-image placeholder-icon"></i>
+              <span class="placeholder-text">event-past-3.jpg</span>
+              <span class="past-badge">Past</span>
+            </div>
+            <div class="past-card-body">
+              <span class="past-date">January 2025</span>
+              <span class="badge badge-gold" style="margin-bottom:0.5rem; display:inline-block;">Hackathon</span>
+              <h4>IoTeams Annual Hackathon 2025</h4>
+              <p>12 teams competed over 48 hours. Winner built a smart irrigation system using soil sensors and weather APIs.</p>
+              <div class="past-stats">
+                <span class="past-stat"><i class="bi bi-people"></i> 48 Participants</span>
+                <span class="past-stat"><i class="bi bi-trophy"></i> 12 Teams</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="past-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="past-card-img">
+              <i class="bi bi-image placeholder-icon"></i>
+              <span class="placeholder-text">event-past-4.jpg</span>
+              <span class="past-badge">Past</span>
+            </div>
+            <div class="past-card-body">
+              <span class="past-date">November 2024</span>
+              <span class="badge badge-turq" style="margin-bottom:0.5rem; display:inline-block;">Showcase</span>
+              <h4>Semester 2 Project Demo Day</h4>
+              <p>Members showcased 8 completed IoT projects including a smart parking system and an air quality monitor.</p>
+              <div class="past-stats">
+                <span class="past-stat"><i class="bi bi-people"></i> 80+ Visitors</span>
+                <span class="past-stat"><i class="bi bi-cpu"></i> 8 Projects</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="past-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="past-card-img">
+              <i class="bi bi-image placeholder-icon"></i>
+              <span class="placeholder-text">event-past-5.jpg</span>
+              <span class="past-badge">Past</span>
+            </div>
+            <div class="past-card-body">
+              <span class="past-date">October 2024</span>
+              <span class="badge badge-teal" style="margin-bottom:0.5rem; display:inline-block;">Workshop</span>
+              <h4>Cloud Integration: AWS IoT Core Basics</h4>
+              <p>Hands-on session connecting ESP32 devices to AWS IoT Core, setting up rules, and visualising live sensor data.</p>
+              <div class="past-stats">
+                <span class="past-stat"><i class="bi bi-people"></i> 25 Attended</span>
+                <span class="past-stat"><i class="bi bi-star"></i> 4.7/5 Rating</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="past-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="past-card-img">
+              <i class="bi bi-image placeholder-icon"></i>
+              <span class="placeholder-text">event-past-6.jpg</span>
+              <span class="past-badge">Past</span>
+            </div>
+            <div class="past-card-body">
+              <span class="past-date">September 2024</span>
+              <span class="badge badge-yellow" style="margin-bottom:0.5rem; display:inline-block;">Talk</span>
+              <h4>From University to Industry: IoT Career Paths</h4>
+              <p>Alumni panel sharing how their IoTeams experience helped them land roles in tech, engineering, and product companies.</p>
+              <div class="past-stats">
+                <span class="past-stat"><i class="bi bi-people"></i> 55 Attended</span>
+                <span class="past-stat"><i class="bi bi-people"></i> 4 Speakers</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBMIT AN EVENT CTA -->
+    <section id="submit-event">
+      <div class="submit-inner">
+
+        <div data-aos="fade-right">
+          <span class="section-tag">◆ Got an Idea?</span>
+          <h2 class="section-title">Propose an Event</h2>
+          <hr class="divider-gold">
+          <p class="section-subtitle">
+            IoTeams members can propose workshops, talks, or project sessions.
+            If your idea fits our mission, we'll help you make it happen —
+            venue, equipment, promotion, and support included.
+          </p>
+          <div style="margin-top:var(--space-xl); display:flex; gap:var(--space-sm); flex-wrap:wrap;">
+            <a href="contact.html" class="btn-gold">
+              <i class="bi bi-send"></i> Submit a Proposal
+            </a>
+            <a href="apply.html" class="btn-outline-gold">
+              <i class="bi bi-person-plus"></i> Become a Member First
+            </a>
+          </div>
+        </div>
+
+        <div data-aos="fade-left">
+          <!-- Info boxes -->
+          <div style="display:flex; flex-direction:column; gap:var(--space-sm);">
+
+            <div style="background:var(--black-2); border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:var(--space-md); display:flex; gap:var(--space-sm); align-items:flex-start;">
+              <div style="width:40px; height:40px; background:rgba(201,168,76,0.1); border:1px solid var(--border-gold); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0;">
+                <i class="bi bi-geo-alt"></i>
+              </div>
+              <div>
+                <h5 style="font-size:var(--fs-base); font-weight:700; color:var(--white); margin-bottom:0.2rem;">Venue Support</h5>
+                <p style="font-size:var(--fs-sm); color:var(--white-dim); margin:0;">We help book labs, lecture halls, and event spaces within IIUM.</p>
+              </div>
+            </div>
+
+            <div style="background:var(--black-2); border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:var(--space-md); display:flex; gap:var(--space-sm); align-items:flex-start;">
+              <div style="width:40px; height:40px; background:rgba(26,188,176,0.1); border:1px solid rgba(26,188,176,0.3); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; color:var(--teal); flex-shrink:0;">
+                <i class="bi bi-tools"></i>
+              </div>
+              <div>
+                <h5 style="font-size:var(--fs-base); font-weight:700; color:var(--white); margin-bottom:0.2rem;">Equipment Access</h5>
+                <p style="font-size:var(--fs-sm); color:var(--white-dim); margin:0;">Borrow microcontrollers, sensors, and tools from our equipment library.</p>
+              </div>
+            </div>
+
+            <div style="background:var(--black-2); border:1px solid var(--border-gold); border-radius:var(--radius-md); padding:var(--space-md); display:flex; gap:var(--space-sm); align-items:flex-start;">
+              <div style="width:40px; height:40px; background:rgba(201,168,76,0.1); border:1px solid var(--border-gold); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0;">
+                <i class="bi bi-megaphone"></i>
+              </div>
+              <div>
+                <h5 style="font-size:var(--fs-base); font-weight:700; color:var(--white); margin-bottom:0.2rem;">Promotion</h5>
+                <p style="font-size:var(--fs-sm); color:var(--white-dim); margin:0;">We promote your event across all IoTeams channels and IIUM networks.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <!-- Events page specific JS — filter functionality -->
+  <script>
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const eventCards = document.querySelectorAll('.event-list-card, .event-featured');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        // Show/hide event cards
+        eventCards.forEach(card => {
+          const category = card.dataset.category;
+          if (filter === 'all' || category === filter) {
+            card.style.display = '';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

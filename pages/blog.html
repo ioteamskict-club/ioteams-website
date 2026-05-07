@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Blog Page
+  pages/blog.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Page Hero
+  4. Featured Post — large hero card
+  5. Filter Bar — by category
+  6. Blog Grid — 6 post cards
+  7. Sidebar — search, categories, recent, tags
+  8. Pagination
+  9. Newsletter CTA
+  10. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — IoTeams IIUM</title>
+  <meta name="description" content="Tutorials, project write-ups, event recaps, and IoT insights from the IoTeams IIUM community.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Blog — IoTeams IIUM">
+  <meta property="og:description" content="Tutorials, project write-ups, event recaps, and IoT insights from the IoTeams IIUM community.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/blog.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Blog — IoTeams IIUM">
+  <meta name="twitter:description" content="Tutorials, project write-ups, event recaps, and IoT insights from the IoTeams IIUM community.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/blog.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       FEATURED POST
+    ══════════════════════════════════════ */
+    #featured-post {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl) 0;
+    }
+
+    .featured-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--black-2);
+      border: 1px solid var(--border-gold-md);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .featured-img {
+      aspect-ratio: 4/3;
+      background: var(--black-4);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: transform var(--transition-slow), filter var(--transition-slow);
+    }
+
+    .featured-card:hover .featured-img img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    .featured-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .featured-img-placeholder i {
+      font-size: 3rem;
+      color: var(--white-muted);
+    }
+
+    .featured-img-placeholder span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+    }
+
+    /* "Featured" ribbon */
+    .featured-ribbon {
+      position: absolute;
+      top: var(--space-sm);
+      left: var(--space-sm);
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+    }
+
+    .featured-body {
+      padding: var(--space-xl) var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .featured-date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .featured-body h2 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .featured-body h2 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    .featured-body h2 a:hover { color: var(--gold); }
+
+    .featured-body p {
+      font-size: var(--fs-base);
+      color: var(--white-dim);
+      line-height: 1.75;
+      margin-bottom: var(--space-lg);
+    }
+
+    .featured-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: auto;
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-avatar i { color: var(--white-muted); }
+
+    .author-info h6 {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .author-info span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .read-time {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* ══════════════════════════════════════
+       BLOG MAIN LAYOUT
+       Grid + Sidebar
+    ══════════════════════════════════════ */
+    #blog-main {
+      background: var(--black);
+      padding: var(--space-xl) var(--space-2xl) var(--space-3xl);
+    }
+
+    .blog-layout {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* ── Filter bar inside blog ── */
+    .blog-filter {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .blog-filter-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .filter-chip {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      color: var(--white-dim);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .filter-chip:hover {
+      border-color: var(--border-gold);
+      color: var(--gold);
+    }
+
+    .filter-chip.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    /* ── Blog Grid ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .blog-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+    }
+
+    .blog-card-img {
+      aspect-ratio: 16/9;
+      background: var(--black-4);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .blog-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: transform var(--transition-slow), filter var(--transition-slow);
+    }
+
+    .blog-card:hover .blog-card-img img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    .blog-card-img i {
+      font-size: 1.8rem;
+      color: var(--white-muted);
+    }
+
+    .blog-card-img span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+    }
+
+    .blog-card-body {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .blog-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-xs);
+    }
+
+    .blog-card-date {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .blog-card h4 {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+      line-height: 1.4;
+    }
+
+    .blog-card h4 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    .blog-card h4 a:hover { color: var(--gold); }
+
+    .blog-card p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.65;
+      margin-bottom: var(--space-sm);
+      flex: 1;
+    }
+
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-xs);
+      border-top: 1px solid var(--border-dark);
+      margin-top: auto;
+    }
+
+    .blog-card-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .blog-card-author .mini-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--white-muted);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .blog-card-author span {
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      font-family: var(--font-mono);
+    }
+
+    .blog-read-more {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: gap var(--transition-base), color var(--transition-base);
+    }
+
+    .blog-read-more:hover {
+      gap: 0.6rem;
+      color: var(--gold-light);
+    }
+
+    /* ── Pagination ── */
+    .pagination-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-xs);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .page-btn {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      color: var(--white-dim);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .page-btn:hover {
+      border-color: var(--border-gold);
+      color: var(--gold);
+    }
+
+    .page-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    .page-btn.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .blog-sidebar {
+      position: sticky;
+      top: calc(72px + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .sidebar-widget {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .sidebar-widget h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    /* Search */
+    .search-form {
+      display: flex;
+      gap: var(--space-xs);
+    }
+
+    .search-input {
+      flex: 1;
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem var(--space-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: var(--fs-sm);
+      outline: none;
+      transition: border-color var(--transition-base);
+    }
+
+    .search-input::placeholder { color: var(--white-muted); }
+    .search-input:focus { border-color: var(--border-gold); }
+
+    .search-btn {
+      background: var(--gold);
+      border: none;
+      border-radius: var(--radius-sm);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      cursor: pointer;
+      transition: background var(--transition-base);
+      flex-shrink: 0;
+    }
+
+    .search-btn:hover { background: var(--gold-light); }
+
+    /* Categories */
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .category-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem var(--space-xs);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--transition-base);
+      text-decoration: none;
+    }
+
+    .category-item:hover { background: var(--black-4); }
+
+    .category-item span:first-child {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-item span:first-child i { color: var(--teal); font-size: 0.8rem; }
+
+    .category-count {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      background: var(--black-4);
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-pill);
+    }
+
+    /* Recent posts */
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .recent-item {
+      display: flex;
+      gap: var(--space-sm);
+      text-decoration: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .recent-item:hover { opacity: 0.8; }
+
+    .recent-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-sm);
+      background: var(--black-4);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+    }
+
+    .recent-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recent-thumb i { color: var(--white-muted); font-size: 1.2rem; }
+
+    .recent-info h6 {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 0.2rem;
+    }
+
+    .recent-info span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* Tags */
+    .tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .tag-link {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--white-dim);
+      border: 1px solid var(--border-dark);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .tag-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+
+    /* ══════════════════════════════════════
+       NEWSLETTER CTA
+    ══════════════════════════════════════ */
+    #newsletter {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .newsletter-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: var(--space-xs);
+      margin-top: var(--space-lg);
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: var(--black-4);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem var(--space-md);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: var(--fs-sm);
+      outline: none;
+      transition: border-color var(--transition-base);
+    }
+
+    .newsletter-input::placeholder { color: var(--white-muted); }
+    .newsletter-input:focus { border-color: var(--gold); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1199px) {
+      .blog-layout { grid-template-columns: 1fr 280px; }
+    }
+
+    @media (max-width: 991px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-img { aspect-ratio: 16/9; }
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { position: static; }
+      .blog-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body class="blog-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta">Join Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>IoTeams Blog</span><span class="dot">◆</span>
+      <span>Tutorials</span><span class="dot">◆</span>
+      <span>Project Write-ups</span><span class="dot">◆</span>
+      <span>Event Recaps</span><span class="dot">◆</span>
+      <span>IoT Insights</span><span class="dot">◆</span>
+      <span>IoTeams Blog</span><span class="dot">◆</span>
+      <span>Tutorials</span><span class="dot">◆</span>
+      <span>Project Write-ups</span><span class="dot">◆</span>
+      <span>Event Recaps</span><span class="dot">◆</span>
+      <span>IoT Insights</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-glow"></div>
+      <div class="page-hero-content">
+        <span class="section-tag animate-fade-up">◆ Blog</span>
+        <h1 class="animate-fade-up delay-1">
+          Ideas, Tutorials<br>& <span class="gold">Stories</span>
+        </h1>
+        <p class="animate-fade-up delay-2">
+          Written by IoTeams members — tutorials, project breakdowns,
+          event recaps, and everything IoT. Real experience, shared openly.
+        </p>
+        <nav class="breadcrumbs animate-fade-up delay-3">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current">Blog</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- FEATURED POST -->
+    <section id="featured-post">
+      <div class="featured-inner">
+        <div class="section-header" data-aos="fade-up" style="margin-bottom:var(--space-md);">
+          <span class="section-tag">◆ Editor's Pick</span>
+        </div>
+
+        <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="featured-img">
+            <div class="featured-img-placeholder">
+              <i class="bi bi-image"></i>
+              <span>blog-featured.jpg</span>
+            </div>
+            <span class="featured-ribbon">⭐ Featured</span>
+          </div>
+          <div class="featured-body">
+            <div class="featured-meta">
+              <span class="badge badge-teal">Tutorial</span>
+              <span class="badge badge-gold">Beginner</span>
+              <span class="featured-date">12 May 2025</span>
+            </div>
+            <h2>
+              <a href="blog-details.html">
+                Getting Started with MQTT Protocol for IoT Devices — A Complete Guide
+              </a>
+            </h2>
+            <p>
+              MQTT is the backbone of most IoT communication systems. In this complete
+              guide, we walk you through setting up a broker, publishing and subscribing
+              to topics, and connecting your ESP32 to the cloud — step by step with code examples.
+            </p>
+            <div class="featured-author">
+              <div class="author-avatar">
+                <i class="bi bi-person-fill"></i>
+              </div>
+              <div class="author-info">
+                <h6>Ahmad Faris</h6>
+                <span>PRESIDENT · IOTEAMS</span>
+              </div>
+              <span class="read-time">
+                <i class="bi bi-clock"></i> 8 min read
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG MAIN — GRID + SIDEBAR -->
+    <section id="blog-main">
+      <div class="blog-layout">
+
+        <!-- LEFT: Blog Grid -->
+        <div class="blog-content">
+
+          <!-- Filter chips -->
+          <div class="blog-filter" data-aos="fade-up">
+            <span class="blog-filter-label">Filter:</span>
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="tutorial">Tutorial</button>
+            <button class="filter-chip" data-filter="project">Project</button>
+            <button class="filter-chip" data-filter="event">Event Recap</button>
+            <button class="filter-chip" data-filter="insight">Insight</button>
+          </div>
+
+          <!-- Blog cards grid -->
+          <div class="blog-grid" id="blogGrid">
+
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="0" data-category="project">
+              <div class="blog-card-img">
+                <i class="bi bi-image"></i>
+                <span>blog-1.jpg</span>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-top">
+                  <span class="badge badge-gold">Project</span>
+                  <span class="blog-card-date">5 May 2025</span>
+                </div>
+                <h4>
+                  <a href="blog-details.html">Smart Plant Monitor: Building an Automated Watering System with ESP32</a>
+                </h4>
+                <p>How 3 IoTeams members built a soil moisture sensor system with auto-watering and Telegram alerts in under a week.</p>
+                <div class="blog-card-footer">
+                  <div class="blog-card-author">
+                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                    <span>M. Syafiq</span>
+                  </div>
+                  <a href="blog-details.html" class="blog-read-more">
+                    Read <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="50" data-category="event">
+              <div class="blog-card-img">
+                <i class="bi bi-image"></i>
+                <span>blog-2.jpg</span>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-top">
+                  <span class="badge badge-yellow">Event Recap</span>
+                  <span class="blog-card-date">28 Apr 2025</span>
+                </div>
+                <h4>
+                  <a href="blog-details.html">Recap: IoTeams Annual Hackathon 2025 — Winners & Projects</a>
+                </h4>
+                <p>A full recap of our biggest event yet — 12 teams, 48 hours, and some incredible IoT solutions built from scratch.</p>
+                <div class="blog-card-footer">
+                  <div class="blog-card-author">
+                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                    <span>Amirah Z.</span>
+                  </div>
+                  <a href="blog-details.html" class="blog-read-more">
+                    Read <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="100" data-category="tutorial">
+              <div class="blog-card-img">
+                <i class="bi bi-image"></i>
+                <span>blog-3.jpg</span>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-top">
+                  <span class="badge badge-teal">Tutorial</span>
+                  <span class="blog-card-date">20 Apr 2025</span>
+                </div>
+                <h4>
+                  <a href="blog-details.html">Connecting ESP32 to AWS IoT Core — Step by Step</a>
+                </h4>
+                <p>Learn how to provision a device, set up certificates, and publish sensor data to AWS IoT Core using MQTT over TLS.</p>
+                <div class="blog-card-footer">
+                  <div class="blog-card-author">
+                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                    <span>Nurul I.</span>
+                  </div>
+                  <a href="blog-details.html" class="blog-read-more">
+                    Read <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="150" data-category="insight">
+              <div class="blog-card-img">
+                <i class="bi bi-image"></i>
+                <span>blog-4.jpg</span>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-top">
+                  <span class="badge badge-turq">Insight</span>
+                  <span class="blog-card-date">10 Apr 2025</span>
+                </div>
+                <h4>
+                  <a href="blog-details.html">Why Every Engineering Student Should Learn IoT in 2025</a>
+                </h4>
+                <p>IoT skills are now expected across electrical, mechanical, civil, and IT disciplines. Here's why you should start today.</p>
+                <div class="blog-card-footer">
+                  <div class="blog-card-author">
+                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                    <span>Ahmad F.</span>
+                  </div>
+                  <a href="blog-details.html" class="blog-read-more">
+                    Read <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="200" data-category="project">
+              <div class="blog-card-img">
+                <i class="bi bi-image"></i>
+                <span>blog-5.jpg</span>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-top">
+                  <span class="badge badge-gold">Project</span>
+                  <span class="blog-card-date">2 Apr 2025</span>
+                </div>
+                <h4>
+                  <a href="blog-details.html">Building a Smart Door Lock with RFID and Raspberry Pi</a>
+                </h4>
+                <p>A weekend project walkthrough — RFID reader, solenoid lock, and a simple web dashboard to manage access logs.</p>
+                <div class="blog-card-footer">
+                  <div class="blog-card-author">
+                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                    <span>Haris D.</span>
+                  </div>
+                  <a href="blog-details.html" class="blog-read-more">
+                    Read <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="250" data-category="tutorial">
+              <div class="blog-card-img">
+                <i class="bi bi-image"></i>
+                <span>blog-6.jpg</span>
+              </div>
+              <div class="blog-card-body">
+                <div class="blog-card-top">
+                  <span class="badge badge-teal">Tutorial</span>
+                  <span class="blog-card-date">25 Mar 2025</span>
+                </div>
+                <h4>
+                  <a href="blog-details.html">TinyML on Arduino: Running a Neural Network on 2KB of RAM</a>
+                </h4>
+                <p>TensorFlow Lite Micro lets you run ML inference on microcontrollers. Here's how to train, convert, and deploy a model.</p>
+                <div class="blog-card-footer">
+                  <div class="blog-card-author">
+                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                    <span>M. Syafiq</span>
+                  </div>
+                  <a href="blog-details.html" class="blog-read-more">
+                    Read <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-wrap" data-aos="fade-up">
+            <a href="#" class="page-btn disabled"><i class="bi bi-chevron-left"></i></a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <span style="color:var(--white-muted); font-family:var(--font-mono); font-size:var(--fs-xs);">...</span>
+            <a href="#" class="page-btn">8</a>
+            <a href="#" class="page-btn"><i class="bi bi-chevron-right"></i></a>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Sidebar -->
+        <aside class="blog-sidebar" data-aos="fade-left">
+
+          <!-- Search -->
+          <div class="sidebar-widget">
+            <h5>Search</h5>
+            <div class="search-form">
+              <input type="text" class="search-input" placeholder="Search posts...">
+              <button class="search-btn"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget">
+            <h5>Categories</h5>
+            <div class="category-list">
+              <a href="#" class="category-item">
+                <span><i class="bi bi-chevron-right"></i> Tutorial</span>
+                <span class="category-count">12</span>
+              </a>
+              <a href="#" class="category-item">
+                <span><i class="bi bi-chevron-right"></i> Project</span>
+                <span class="category-count">9</span>
+              </a>
+              <a href="#" class="category-item">
+                <span><i class="bi bi-chevron-right"></i> Event Recap</span>
+                <span class="category-count">6</span>
+              </a>
+              <a href="#" class="category-item">
+                <span><i class="bi bi-chevron-right"></i> Insight</span>
+                <span class="category-count">4</span>
+              </a>
+              <a href="#" class="category-item">
+                <span><i class="bi bi-chevron-right"></i> Announcement</span>
+                <span class="category-count">3</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget">
+            <h5>Recent Posts</h5>
+            <div class="recent-list">
+
+              <a href="blog-details.html" class="recent-item">
+                <div class="recent-thumb"><i class="bi bi-image"></i></div>
+                <div class="recent-info">
+                  <h6>Getting Started with MQTT Protocol</h6>
+                  <span>12 May 2025</span>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="recent-item">
+                <div class="recent-thumb"><i class="bi bi-image"></i></div>
+                <div class="recent-info">
+                  <h6>Smart Plant Monitor with ESP32</h6>
+                  <span>5 May 2025</span>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="recent-item">
+                <div class="recent-thumb"><i class="bi bi-image"></i></div>
+                <div class="recent-info">
+                  <h6>Hackathon 2025 Full Recap</h6>
+                  <span>28 Apr 2025</span>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="recent-item">
+                <div class="recent-thumb"><i class="bi bi-image"></i></div>
+                <div class="recent-info">
+                  <h6>ESP32 to AWS IoT Core Guide</h6>
+                  <span>20 Apr 2025</span>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget">
+            <h5>Tags</h5>
+            <div class="tags-cloud">
+              <a href="#" class="tag-link">ESP32</a>
+              <a href="#" class="tag-link">MQTT</a>
+              <a href="#" class="tag-link">Arduino</a>
+              <a href="#" class="tag-link">AWS IoT</a>
+              <a href="#" class="tag-link">Raspberry Pi</a>
+              <a href="#" class="tag-link">TinyML</a>
+              <a href="#" class="tag-link">Sensors</a>
+              <a href="#" class="tag-link">Cloud</a>
+              <a href="#" class="tag-link">RFID</a>
+              <a href="#" class="tag-link">Python</a>
+              <a href="#" class="tag-link">C++</a>
+              <a href="#" class="tag-link">Firebase</a>
+              <a href="#" class="tag-link">Hackathon</a>
+              <a href="#" class="tag-link">Beginner</a>
+            </div>
+          </div>
+
+          <!-- Join CTA in sidebar -->
+          <div class="sidebar-widget" style="background:var(--black-3); border-color:var(--border-gold-md); text-align:center;">
+            <span style="font-size:2rem; display:block; margin-bottom:var(--space-xs);">💡</span>
+            <h5 style="text-align:center; border:none; padding:0; margin-bottom:var(--space-xs);">Write for Us</h5>
+            <p style="font-size:var(--fs-xs); color:var(--white-dim); margin-bottom:var(--space-md); line-height:1.6;">
+              IoTeams members can publish tutorials, project write-ups, and insights on the blog.
+            </p>
+            <a href="contact.html" class="btn-gold btn-sm" style="width:100%; justify-content:center;">
+              <i class="bi bi-pencil"></i> Submit a Post
+            </a>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter">
+      <div class="newsletter-inner" data-aos="fade-up">
+        <span class="section-tag" style="display:block; text-align:center;">◆ Stay Updated</span>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.5rem); font-weight:900; margin-bottom:var(--space-xs);">
+          Get New Posts in Your Inbox
+        </h2>
+        <p style="color:var(--white-dim); margin-bottom:0;">
+          No spam. Only new tutorials, project showcases, and IoTeams updates.
+          Unsubscribe anytime.
+        </p>
+        <div class="newsletter-form" data-aos="fade-up" data-aos-delay="100">
+          <input type="email" class="newsletter-input" placeholder="your@email.com">
+          <button class="btn-gold">
+            <i class="bi bi-send"></i> Subscribe
+          </button>
+        </div>
+        <p style="font-size:var(--fs-xs); color:var(--white-muted); margin-top:var(--space-sm);">
+          📬 Join 200+ students already subscribed.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    /* ── Blog Filter ── */
+    const chips = document.querySelectorAll('.filter-chip');
+    const blogCards = document.querySelectorAll('.blog-card');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.dataset.filter;
+        blogCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    /* ── Newsletter form ── */
+    document.querySelector('.newsletter-form button')?.addEventListener('click', () => {
+      const input = document.querySelector('.newsletter-input');
+      if (input?.value && input.value.includes('@')) {
+        input.value = '';
+        input.placeholder = '✅ Subscribed! Check your inbox.';
+        input.style.borderColor = 'var(--teal)';
+      }
+    });
+  </script>
+
+</body>
+</html>

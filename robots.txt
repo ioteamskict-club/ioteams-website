@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block utility/dev files
+Disallow: /font-test.html
+Disallow: /_base-template.html
+Disallow: /forms/
+
+# Sitemap
+Sitemap: https://ioteams.iium.edu.my/sitemap.xml

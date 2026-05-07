@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Apply / Join Page
+  pages/apply.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Page Hero
+  4. Why Join — benefits
+  5. Application Form — multi-step
+  6. FAQ
+  7. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join IoTeams — Apply Now</title>
+  <meta name="description" content="Apply to join IoTeams IIUM — the Internet of Things Society at IIUM. Open to all students regardless of faculty.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Join IoTeams IIUM — Apply Now">
+  <meta property="og:description" content="Apply to join IoTeams IIUM — free for all IIUM students. No experience needed. Choose from 3 IoT programme tracks.">
+  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/apply.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Join IoTeams IIUM — Apply Now">
+  <meta name="twitter:description" content="Apply to join IoTeams IIUM — free for all IIUM students. No experience needed. Choose from 3 IoT programme tracks.">
+  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/apply.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       WHY JOIN
+    ══════════════════════════════════════ */
+    #why-join {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .why-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    .benefit-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      transition: border-color var(--transition-base), transform var(--transition-base);
+    }
+
+    .benefit-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-3px);
+    }
+
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .benefit-card h5 {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .benefit-card p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Stats row */
+    .join-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .join-stat {
+      text-align: center;
+    }
+
+    .join-stat-num {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .join-stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════════
+       APPLICATION FORM
+    ══════════════════════════════════════ */
+    #apply-form {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .form-outer {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    /* ── Step indicator ── */
+    .form-steps {
+      display: flex;
+      gap: 0;
+      margin-bottom: var(--space-xl);
+    }
+
+    .form-step-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Connector line */
+    .form-step-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      width: 100%;
+      height: 1px;
+      background: var(--border-dark);
+      z-index: 0;
+    }
+
+    .form-step-item.done:not(:last-child)::after,
+    .form-step-item.active:not(:last-child)::after {
+      background: var(--gold);
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-dark);
+      background: var(--black-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      position: relative;
+      z-index: 1;
+      transition: all var(--transition-base);
+    }
+
+    .form-step-item.active .step-dot {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    .form-step-item.done .step-dot {
+      border-color: var(--teal);
+      background: var(--teal);
+      color: var(--black);
+    }
+
+    .step-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--white-muted);
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .form-step-item.active .step-label { color: var(--gold); }
+    .form-step-item.done .step-label   { color: var(--teal); }
+
+    /* ── Form panels ── */
+    .form-panel {
+      display: none;
+    }
+
+    .form-panel.active {
+      display: block;
+      animation: fadeInUp 0.4s ease both;
+    }
+
+    /* ── Form fields ── */
+    .form-card {
+      background: var(--black-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+    }
+
+    .form-card h3 {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-card > p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin-bottom: var(--space-xl);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-md);
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-label span {
+      color: var(--teal);
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem var(--space-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: var(--fs-sm);
+      outline: none;
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .form-control::placeholder { color: var(--white-muted); }
+
+    .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+
+    .form-control.error {
+      border-color: var(--color-danger);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C9A84C' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-sm) center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    select.form-control option {
+      background: var(--black-3);
+      color: var(--white);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-hint {
+      font-size: 0.72rem;
+      color: var(--white-muted);
+      margin-top: 0.3rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    .form-error {
+      font-size: 0.72rem;
+      color: var(--color-danger);
+      margin-top: 0.3rem;
+      display: none;
+    }
+
+    .form-error.show { display: block; }
+
+    /* ── Track selection cards ── */
+    .track-select-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+
+    .track-option {
+      display: none;
+    }
+
+    .track-option-label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm) var(--space-md);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .track-option:checked + .track-option-label {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .track-option-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .track-option-info h6 {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 0.15rem;
+    }
+
+    .track-option-info span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .track-option-check {
+      margin-left: auto;
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--border-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition-base);
+    }
+
+    .track-option:checked + .track-option-label .track-option-check {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    .track-option:checked + .track-option-label .track-option-check::after {
+      content: '✓';
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    /* ── Form navigation buttons ── */
+    .form-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-xl);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .btn-prev {
+      background: transparent;
+      border: 1px solid var(--border-dark);
+      color: var(--white-dim);
+      padding: 0.75rem var(--space-md);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-prev:hover {
+      border-color: var(--border-gold);
+      color: var(--white);
+    }
+
+    .btn-next {
+      background: var(--gold);
+      border: none;
+      color: var(--black);
+      padding: 0.75rem var(--space-xl);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition-base), transform var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-next:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── Success state ── */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-xl);
+    }
+
+    .form-success.show { display: block; }
+
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-md);
+      display: block;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .form-success h3 {
+      font-size: var(--fs-2xl);
+      color: var(--gold);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-success p {
+      color: var(--white-dim);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* ── Right sidebar info ── */
+    .apply-sidebar {
+      position: sticky;
+      top: calc(72px + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .info-card {
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .info-card h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-xs);
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.5;
+    }
+
+    .info-item i {
+      color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 0.85rem;
+    }
+
+    /* Requirements checklist */
+    .req-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 0.5rem var(--space-xs);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+    }
+
+    .req-item i {
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════ */
+    #faq {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .faq-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-top: var(--space-xl);
+    }
+
+    .faq-item {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--transition-base);
+    }
+
+    .faq-item.open { border-color: var(--border-gold); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) var(--space-lg);
+      cursor: pointer;
+      gap: var(--space-md);
+    }
+
+    .faq-question h5 {
+      font-size: var(--fs-base);
+      font-weight: 600;
+      color: var(--white);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform var(--transition-base), background var(--transition-base);
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--gold);
+      color: var(--black);
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow), padding var(--transition-base);
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer p {
+      padding: 0 var(--space-lg) var(--space-md);
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      .why-inner   { grid-template-columns: 1fr; }
+      .form-outer  { grid-template-columns: 1fr; }
+      .apply-sidebar { position: static; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+      .join-stats    { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body class="apply-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
+        <span class="nav-logo-sub">IIUM</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="apply.html" class="nav-cta" style="background:var(--teal);">Apply Now</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Join IoTeams</span><span class="dot">◆</span>
+      <span>Free for All IIUM Students</span><span class="dot">◆</span>
+      <span>No Experience Needed</span><span class="dot">◆</span>
+      <span>3 Tracks Available</span><span class="dot">◆</span>
+      <span>Equipment Provided</span><span class="dot">◆</span>
+      <span>Join IoTeams</span><span class="dot">◆</span>
+      <span>Free for All IIUM Students</span><span class="dot">◆</span>
+      <span>No Experience Needed</span><span class="dot">◆</span>
+      <span>3 Tracks Available</span><span class="dot">◆</span>
+      <span>Equipment Provided</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-glow"></div>
+      <div class="page-hero-content">
+        <span class="section-tag animate-fade-up">◆ Membership</span>
+        <h1 class="animate-fade-up delay-1">
+          Join <span class="gold">IoTeams</span><br>
+          — It's Free.
+        </h1>
+        <p class="animate-fade-up delay-2">
+          Open to all IIUM students regardless of faculty or year.
+          No experience required. Just bring your curiosity.
+        </p>
+        <nav class="breadcrumbs animate-fade-up delay-3">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current">Apply</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- WHY JOIN -->
+    <section id="why-join">
+      <div class="why-inner">
+
+        <div data-aos="fade-right">
+          <span class="section-tag">◆ Why Join?</span>
+          <h2 class="section-title">What You Get as a Member</h2>
+          <hr class="divider-gold">
+          <p class="section-subtitle">
+            IoTeams membership is completely free. Here's everything
+            included when you become part of the community.
+          </p>
+
+          <div class="join-stats">
+            <div class="join-stat">
+              <span class="join-stat-num stat-number">120+</span>
+              <span class="join-stat-label">Members</span>
+            </div>
+            <div class="join-stat">
+              <span class="join-stat-num stat-number">30+</span>
+              <span class="join-stat-label">Projects</span>
+            </div>
+            <div class="join-stat">
+              <span class="join-stat-num stat-number">100%</span>
+              <span class="join-stat-label">Free</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-left">
+          <div class="benefits-grid">
+
+            <div class="benefit-card">
+              <div class="benefit-icon"><i class="bi bi-tools"></i></div>
+              <h5>Equipment Access</h5>
+              <p>Borrow microcontrollers, sensors, and tools from our lab library for free.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon"><i class="bi bi-mortarboard"></i></div>
+              <h5>Structured Learning</h5>
+              <p>Follow our 3 programme tracks with guided sessions every week.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon"><i class="bi bi-people"></i></div>
+              <h5>Community</h5>
+              <p>Join a network of 120+ students passionate about IoT and technology.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon"><i class="bi bi-trophy"></i></div>
+              <h5>Competitions</h5>
+              <p>Represent IIUM in hackathons, tech fairs, and national IoT competitions.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon"><i class="bi bi-briefcase"></i></div>
+              <h5>Industry Links</h5>
+              <p>Access mentorship and internship opportunities through our industry partners.</p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon"><i class="bi bi-journal-code"></i></div>
+              <h5>Portfolio Projects</h5>
+              <p>Build real IoT projects you can showcase on your CV and LinkedIn.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section id="apply-form">
+      <div style="max-width:var(--container-max); margin:0 auto; margin-bottom:var(--space-xl);">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Application</span>
+          <h2 class="section-title">Apply Now</h2>
+          <hr class="divider-gold">
+        </div>
+      </div>
+
+      <div class="form-outer">
+
+        <!-- FORM -->
+        <div data-aos="fade-right">
+
+          <!-- Step indicator -->
+          <div class="form-steps" id="formSteps">
+            <div class="form-step-item active" data-step="1">
+              <div class="step-dot">1</div>
+              <span class="step-label">Personal</span>
+            </div>
+            <div class="form-step-item" data-step="2">
+              <div class="step-dot">2</div>
+              <span class="step-label">Academic</span>
+            </div>
+            <div class="form-step-item" data-step="3">
+              <div class="step-dot">3</div>
+              <span class="step-label">Track</span>
+            </div>
+            <div class="form-step-item" data-step="4">
+              <div class="step-dot">4</div>
+              <span class="step-label">Submit</span>
+            </div>
+          </div>
+
+          <div class="form-card" id="applyFormEl">
+
+            <!-- Success message -->
+            <div class="form-success" id="formSuccess">
+              <span class="success-icon">🎉</span>
+              <h3>Application Submitted!</h3>
+              <p>
+                Thank you for applying to IoTeams IIUM. We'll review your application
+                and reach out to your email within 3–5 working days with next steps.
+              </p>
+              <a href="../index.html" class="btn-gold">
+                <i class="bi bi-house"></i> Back to Home
+              </a>
+            </div>
+
+            <!-- Step 1 — Personal Info -->
+            <div class="form-panel active" id="panel1">
+              <h3>Personal Information</h3>
+              <p>Tell us a bit about yourself. All fields marked with <span style="color:var(--teal);">*</span> are required.</p>
+
+              <div class="form-group">
+                <label class="form-label">Full Name <span>*</span></label>
+                <input type="text" class="form-control" id="fullName" placeholder="e.g. Ahmad Faris bin Abdullah" required>
+                <span class="form-error" id="fullNameError">Please enter your full name.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">IIUM Email Address <span>*</span></label>
+                <input type="email" class="form-control" id="email" placeholder="e.g. ahmadFaris@live.iium.edu.my" required>
+                <span class="form-hint">Must be your official IIUM email (@live.iium.edu.my or @iium.edu.my)</span>
+                <span class="form-error" id="emailError">Please enter a valid IIUM email address.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Phone Number <span>*</span></label>
+                <input type="tel" class="form-control" id="phone" placeholder="e.g. 012-3456789" required>
+                <span class="form-error" id="phoneError">Please enter your phone number.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Gender <span>*</span></label>
+                <select class="form-control" id="gender" required>
+                  <option value="" disabled selected>Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="prefer-not">Prefer not to say</option>
+                </select>
+                <span class="form-error" id="genderError">Please select your gender.</span>
+              </div>
+
+              <div class="form-nav">
+                <span></span>
+                <button class="btn-next" onclick="nextStep(1)">
+                  Next: Academic Info <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2 — Academic Info -->
+            <div class="form-panel" id="panel2">
+              <h3>Academic Information</h3>
+              <p>Help us understand your academic background at IIUM.</p>
+
+              <div class="form-group">
+                <label class="form-label">Student ID <span>*</span></label>
+                <input type="text" class="form-control" id="studentId" placeholder="e.g. 2110123" required>
+                <span class="form-error" id="studentIdError">Please enter your student ID.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Faculty / Kulliyyah <span>*</span></label>
+                <select class="form-control" id="faculty" required>
+                  <option value="" disabled selected>Select your faculty</option>
+                  <option>Kulliyyah of Engineering (KOE)</option>
+                  <option>Kulliyyah of Information & Communication Technology (KICT)</option>
+                  <option>Kulliyyah of Science (KOS)</option>
+                  <option>Kulliyyah of Architecture & Environmental Design (KAED)</option>
+                  <option>Kulliyyah of Economics & Management Sciences (KENMS)</option>
+                  <option>Kulliyyah of Islamic Revealed Knowledge (KIRKHS)</option>
+                  <option>Kulliyyah of Law (KOL)</option>
+                  <option>Kulliyyah of Medicine (KOM)</option>
+                  <option>Other</option>
+                </select>
+                <span class="form-error" id="facultyError">Please select your faculty.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Programme / Course <span>*</span></label>
+                <input type="text" class="form-control" id="programme" placeholder="e.g. B.Eng (Electrical & Computer)" required>
+                <span class="form-error" id="programmeError">Please enter your programme.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Year of Study <span>*</span></label>
+                <select class="form-control" id="year" required>
+                  <option value="" disabled selected>Select year</option>
+                  <option>Year 1</option>
+                  <option>Year 2</option>
+                  <option>Year 3</option>
+                  <option>Year 4</option>
+                  <option>Postgraduate</option>
+                </select>
+                <span class="form-error" id="yearError">Please select your year of study.</span>
+              </div>
+
+              <div class="form-nav">
+                <button class="btn-prev" onclick="prevStep(2)">
+                  <i class="bi bi-arrow-left"></i> Back
+                </button>
+                <button class="btn-next" onclick="nextStep(2)">
+                  Next: Choose Track <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3 — Track Selection -->
+            <div class="form-panel" id="panel3">
+              <h3>Choose Your Track</h3>
+              <p>Select the programme track you want to join. You can always switch later.</p>
+
+              <div class="form-group">
+                <label class="form-label">Preferred Track <span>*</span></label>
+                <div class="track-select-grid">
+
+                  <div>
+                    <input type="radio" name="track" id="trackHardware" value="hardware" class="track-option">
+                    <label for="trackHardware" class="track-option-label">
+                      <span class="track-option-icon">⚡</span>
+                      <div class="track-option-info">
+                        <h6>Hardware & Embedded</h6>
+                        <span>Arduino, ESP32, Sensors, PCB — Beginner Friendly</span>
+                      </div>
+                      <span class="track-option-check"></span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <input type="radio" name="track" id="trackCloud" value="cloud" class="track-option">
+                    <label for="trackCloud" class="track-option-label">
+                      <span class="track-option-icon">☁️</span>
+                      <div class="track-option-info">
+                        <h6>Cloud & Connectivity</h6>
+                        <span>MQTT, AWS IoT, Dashboards — Intermediate</span>
+                      </div>
+                      <span class="track-option-check"></span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <input type="radio" name="track" id="trackAI" value="ai" class="track-option">
+                    <label for="trackAI" class="track-option-label">
+                      <span class="track-option-icon">🤖</span>
+                      <div class="track-option-info">
+                        <h6>AI & Smart Systems</h6>
+                        <span>TinyML, Edge AI, OpenCV — Advanced</span>
+                      </div>
+                      <span class="track-option-check"></span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <input type="radio" name="track" id="trackAll" value="all" class="track-option">
+                    <label for="trackAll" class="track-option-label">
+                      <span class="track-option-icon">🔥</span>
+                      <div class="track-option-info">
+                        <h6>All Tracks</h6>
+                        <span>I want to join all three programmes</span>
+                      </div>
+                      <span class="track-option-check"></span>
+                    </label>
+                  </div>
+
+                </div>
+                <span class="form-error" id="trackError">Please select a track.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Experience Level</label>
+                <select class="form-control" id="experience">
+                  <option value="" disabled selected>Select your level</option>
+                  <option>Complete Beginner — Never touched hardware or code</option>
+                  <option>Some Experience — Basic coding or electronics</option>
+                  <option>Intermediate — Built projects before</option>
+                  <option>Advanced — Comfortable with embedded systems</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Why do you want to join IoTeams?</label>
+                <textarea class="form-control" id="motivation" placeholder="Tell us what excites you about IoT and what you hope to learn or build..." rows="4"></textarea>
+              </div>
+
+              <div class="form-nav">
+                <button class="btn-prev" onclick="prevStep(3)">
+                  <i class="bi bi-arrow-left"></i> Back
+                </button>
+                <button class="btn-next" onclick="nextStep(3)">
+                  Review & Submit <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 4 — Review & Submit -->
+            <div class="form-panel" id="panel4">
+              <h3>Review & Submit</h3>
+              <p>Almost done! Review your application below before submitting.</p>
+
+              <!-- Summary -->
+              <div id="reviewSummary" style="background:var(--black-4); border:1px solid var(--border-dark); border-radius:var(--radius-sm); padding:var(--space-md); margin-bottom:var(--space-lg);">
+                <div style="display:flex; flex-direction:column; gap:0.6rem;" id="summaryContent">
+                  <!-- Filled by JS -->
+                </div>
+              </div>
+
+              <!-- Agreement -->
+              <div class="form-group">
+                <label style="display:flex; align-items:flex-start; gap:var(--space-sm); cursor:pointer;">
+                  <input type="checkbox" id="agreeTerms" style="margin-top:3px; accent-color:var(--gold); width:16px; height:16px; flex-shrink:0;">
+                  <span style="font-size:var(--fs-sm); color:var(--white-dim); line-height:1.6;">
+                    I confirm that I am a current IIUM student and agree to IoTeams'
+                    <a href="#" style="color:var(--gold);">membership guidelines</a>.
+                    I understand that membership is subject to review and confirmation.
+                  </span>
+                </label>
+                <span class="form-error" id="agreeError">Please agree to the terms to continue.</span>
+              </div>
+
+              <div class="form-nav">
+                <button class="btn-prev" onclick="prevStep(4)">
+                  <i class="bi bi-arrow-left"></i> Back
+                </button>
+                <button class="btn-next" id="submitBtn" onclick="submitForm()" style="background:var(--teal);">
+                  <i class="bi bi-send"></i> Submit Application
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="apply-sidebar" data-aos="fade-left">
+
+          <div class="info-card">
+            <h5>Requirements</h5>
+            <div class="info-list">
+              <div class="req-item"><i class="bi bi-check2-circle"></i> Current IIUM student</div>
+              <div class="req-item"><i class="bi bi-check2-circle"></i> Valid IIUM email address</div>
+              <div class="req-item"><i class="bi bi-check2-circle"></i> Any faculty or year</div>
+              <div class="req-item"><i class="bi bi-check2-circle"></i> No prior experience needed</div>
+              <div class="req-item"><i class="bi bi-check2-circle"></i> Willingness to learn & build</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h5>What Happens Next</h5>
+            <div class="info-list">
+              <div class="info-item">
+                <i class="bi bi-1-circle"></i>
+                <span>Submit your application using this form.</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-2-circle"></i>
+                <span>We'll review within 3–5 working days.</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-3-circle"></i>
+                <span>You'll receive a confirmation email with your member ID.</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-4-circle"></i>
+                <span>Attend orientation and pick up your starter kit.</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-5-circle"></i>
+                <span>Start your first module and join the community!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="border-color:var(--border-gold-md); background:var(--black-4);">
+            <h5>Have Questions?</h5>
+            <p style="font-size:var(--fs-sm); color:var(--white-dim); margin-bottom:var(--space-md); line-height:1.6;">
+              Not sure which track to pick? Want to know more before applying?
+              Reach out to us directly.
+            </p>
+            <a href="contact.html" class="btn-outline-gold btn-sm" style="width:100%; justify-content:center;">
+              <i class="bi bi-chat"></i> Contact Us
+            </a>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="faq-inner">
+        <div class="section-header centered" data-aos="fade-up">
+          <span class="section-tag">◆ FAQ</span>
+          <h2 class="section-title" style="margin:0 auto;">Common Questions</h2>
+          <hr class="divider-gold">
+        </div>
+
+        <div class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Is membership really free?</h5>
+              <div class="faq-icon"><i class="bi bi-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes — completely free. IoTeams is a student society supported by IIUM Student Affairs. There are no membership fees, and all workshops and sessions are provided at no cost to members.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>I'm not from an engineering or IT faculty. Can I still join?</h5>
+              <div class="faq-icon"><i class="bi bi-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Absolutely. IoTeams is open to all IIUM students regardless of faculty. We have members from Business, Medicine, Law, and Architecture. IoT is interdisciplinary — every perspective brings value.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Do I need to know how to code before joining?</h5>
+              <div class="faq-icon"><i class="bi bi-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>No coding experience is required for the Hardware & Embedded track. We start from the very basics. The Cloud and AI tracks benefit from some Python knowledge, but we provide resources to catch up.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>Can I join more than one track?</h5>
+              <div class="faq-icon"><i class="bi bi-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Yes! Many members participate in multiple tracks. We recommend starting with one and adding more once you're comfortable. You can also select "All Tracks" in the application form.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>How many hours per week does membership require?</h5>
+              <div class="faq-icon"><i class="bi bi-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>Sessions are typically 2–3 hours once or twice a week per track. Beyond that, project work is self-paced. We understand academic commitments come first — there's no strict attendance requirement.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h5>What equipment will I need to buy?</h5>
+              <div class="faq-icon"><i class="bi bi-plus"></i></div>
+            </div>
+            <div class="faq-answer">
+              <p>IoTeams provides all components and equipment needed for sessions through our equipment library. For personal projects, we can advise on affordable starter kits, typically RM50–RM150 for an ESP32 or Arduino setup.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <a href="../index.html" class="footer-logo">
+        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
+      </a>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmBA8tJrRhQb5ffA4ZNS+46Yfq2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    /* ══════════════════════════════
+       MULTI-STEP FORM
+    ══════════════════════════════ */
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    function updateStepUI(step) {
+      document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel' + step).classList.add('active');
+
+      document.querySelectorAll('.form-step-item').forEach((item, i) => {
+        item.classList.remove('active', 'done');
+        const s = i + 1;
+        if (s < step) item.classList.add('done');
+        if (s === step) item.classList.add('active');
+      });
+
+      // Scroll form into view smoothly
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Step validation — delegates to forms.js IoTeamsValidateStep ── */
+    function validateStep(step) {
+      // Step 3 track selection — handled inline
+      if (step === 3) {
+        const track = document.querySelector('input[name="track"]:checked');
+        const err   = document.getElementById('trackError');
+        if (!track) {
+          if (err) err.classList.add('show');
+          return false;
+        }
+        if (err) err.classList.remove('show');
+      }
+
+      // Steps 1 & 2 — delegate to forms.js validator (loaded after this script)
+      if (typeof window.IoTeamsValidateStep === 'function') {
+        return window.IoTeamsValidateStep(step);
+      }
+
+      // Fallback basic check if forms.js not yet loaded
+      return true;
+    }
+
+    function nextStep(step) {
+      if (!validateStep(step)) return;
+      if (step === 3) buildSummary();
+      currentStep = step + 1;
+      updateStepUI(currentStep);
+    }
+
+    function prevStep(step) {
+      currentStep = step - 1;
+      updateStepUI(currentStep);
+    }
+
+    function buildSummary() {
+      const track = document.querySelector('input[name="track"]:checked');
+      const trackNames = {
+        hardware: '⚡ Hardware & Embedded',
+        cloud:    '☁️ Cloud & Connectivity',
+        ai:       '🤖 AI & Smart Systems',
+        all:      '🔥 All Tracks'
+      };
+      const rows = [
+        ['Name',       document.getElementById('fullName')?.value   || ''],
+        ['Email',      document.getElementById('email')?.value      || ''],
+        ['Student ID', document.getElementById('studentId')?.value  || ''],
+        ['Faculty',    document.getElementById('faculty')?.value    || ''],
+        ['Year',       document.getElementById('year')?.value       || ''],
+        ['Track',      track ? trackNames[track.value] : '—'],
+        ['Experience', document.getElementById('experience')?.value || 'Not specified'],
+      ];
+      document.getElementById('summaryContent').innerHTML = rows.map(([label, val]) => `
+        <div style="display:flex;gap:var(--space-sm);align-items:flex-start;">
+          <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--gold);
+            letter-spacing:0.08em;min-width:90px;flex-shrink:0;text-transform:uppercase;">${label}</span>
+          <span style="font-size:var(--fs-sm);color:var(--white);">${val || '—'}</span>
+        </div>`).join('');
+    }
+
+    function submitForm() {
+      // Delegate to forms.js Web3Forms handler
+      if (typeof window.IoTeamsSubmitApply === 'function') {
+        window.IoTeamsSubmitApply();
+      }
+    }
+
+    /* ── FAQ Accordion ── */
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item   = q.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    /* ── Keyboard: open FAQ with Enter/Space ── */
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.setAttribute('tabindex', '0');
+      q.setAttribute('role', 'button');
+      q.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); q.click(); }
+      });
+    });
+  </script>
+
+  <!--
+    Web3Forms — uncomment once you have your access key in forms.js
+    No additional script tag needed — forms.js calls the API directly.
+  -->
+  <script src="../assets/js/forms.js"></script>
+
+</body>
+</html>
