@@ -835,10 +835,10 @@
 
         <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
           <div class="featured-img">
-            <div class="featured-img-placeholder">
-              <i class="bi bi-image"></i>
-              <span>blog-featured.jpg</span>
-            </div>
+            <img src="../assets/img/blog/blog-mqtt.png"
+                 alt="Getting Started with MQTT Protocol for IoT Devices"
+                 loading="lazy"
+                 style="width:100%; height:100%; object-fit:cover;">
             <span class="featured-ribbon">⭐ Featured</span>
           </div>
           <div class="featured-body">
@@ -896,8 +896,10 @@
 
             <div class="blog-card" data-aos="fade-up" data-aos-delay="0" data-category="project">
               <div class="blog-card-img">
-                <i class="bi bi-image"></i>
-                <span>blog-1.jpg</span>
+                <img src="../assets/img/blog/blog-mqtt.png"
+                     alt="Smart Plant Monitor blog post"
+                     loading="lazy"
+                     style="width:100%; height:100%; object-fit:cover;">
               </div>
               <div class="blog-card-body">
                 <div class="blog-card-top">
@@ -1255,8 +1257,9 @@
   <script src="../assets/js/main.js"></script>
 
   <script>
+  (function () {
     /* ── Blog Filter ── */
-    const chips = document.querySelectorAll('.filter-chip');
+    const chips     = document.querySelectorAll('.filter-chip');
     const blogCards = document.querySelectorAll('.blog-card');
 
     chips.forEach(chip => {
@@ -1265,24 +1268,25 @@
         chip.classList.add('active');
         const filter = chip.dataset.filter;
         blogCards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+          card.style.display =
+            (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
         });
       });
     });
 
     /* ── Newsletter form ── */
-    document.querySelector('.newsletter-form button')?.addEventListener('click', () => {
-      const input = document.querySelector('.newsletter-input');
-      if (input?.value && input.value.includes('@')) {
-        input.value = '';
-        input.placeholder = '✅ Subscribed! Check your inbox.';
-        input.style.borderColor = 'var(--teal)';
-      }
-    });
+    const newsletterBtn   = document.querySelector('.newsletter-form button');
+    const newsletterInput = document.querySelector('.newsletter-input');
+    if (newsletterBtn && newsletterInput) {
+      newsletterBtn.addEventListener('click', () => {
+        if (newsletterInput.value && newsletterInput.value.includes('@')) {
+          newsletterInput.value = '';
+          newsletterInput.placeholder = '✅ Subscribed! Check your inbox.';
+          newsletterInput.style.borderColor = 'var(--teal)';
+        }
+      });
+    }
+  })();
   </script>
 
 </body>

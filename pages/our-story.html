@@ -516,17 +516,17 @@
           </div>
 
           <div class="col-lg-6" data-aos="fade-left">
-            <!-- Image or placeholder -->
-            <div style="position:relative;">
-              <div style="background:var(--black-3); border:1px solid var(--border-gold); border-radius:var(--radius-md); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem;">
-                <i class="bi bi-image" style="font-size:3rem; color:var(--white-muted);"></i>
-                <span style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">founding-photo.jpg</span>
+            <!-- Real founding/team photo -->
+              <div style="position:relative; border-radius:var(--radius-md); overflow:hidden;">
+                <img src="../assets/img/team/founding-photo.png"
+                     alt="IoTeams IIUM founding team at IIUM Gombak"
+                     loading="lazy"
+                     style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius-md); filter:grayscale(10%);">
+                <!-- Gold accent tag -->
+                <div style="position:absolute; bottom:-1px; left:-1px; background:var(--gold); color:var(--black); font-family:var(--font-mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:0.1em; padding:0.5rem 1rem; border-radius:0 var(--radius-md) 0 var(--radius-md);">
+                  IIUM GOMBAK, 2022
+                </div>
               </div>
-              <!-- Gold accent tag -->
-              <div style="position:absolute; bottom:-1px; left:-1px; background:var(--gold); color:var(--black); font-family:var(--font-mono); font-size:var(--fs-xs); font-weight:700; letter-spacing:0.1em; padding:0.5rem 1rem; border-radius:0 var(--radius-md) 0 var(--radius-md);">
-                IIUM GOMBAK, 2022
-              </div>
-            </div>
           </div>
 
         </div>
@@ -727,9 +727,10 @@
 
           <div class="team-card" data-aos="fade-up" data-aos-delay="200">
             <div class="team-card-img">
-              <div class="team-avatar-placeholder">
-                <i class="bi bi-person-fill"></i>
-              </div>
+              <img src="../assets/img/team/member-3.jpg"
+                   alt="Muhammad Syafiq — Technical Director"
+                   loading="lazy"
+                   style="width:100%; height:100%; object-fit:cover; filter:grayscale(15%); transition:filter 0.4s;">
             </div>
             <div class="team-card-body">
               <h4>Muhammad Syafiq</h4>

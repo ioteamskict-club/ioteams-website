@@ -664,19 +664,18 @@
 
         <div class="gallery-masonry" id="galleryGrid">
 
-          <!-- Workshop photos -->
-          <a href="../assets/img/gallery/gallery-1.jpg"
+          <!-- Team photo — real IoTeams group photo -->
+          <a href="../assets/img/gallery/gallery-team.jpg"
              class="gallery-item glightbox"
              data-gallery="ioteams"
-             data-category="workshop"
-             data-title="ESP32 Workshop — Getting Started"
-             data-description="Students learning ESP32 basics at our June 2025 workshop.">
-            <div class="gallery-placeholder-img">
-              <i class="bi bi-image"></i>
-              <span>gallery-1.jpg</span>
-            </div>
+             data-category="team"
+             data-title="IoTeams IIUM — Committee & Members 2025"
+             data-description="The IoTeams IIUM team at IIUM Gombak Campus, 2025.">
+            <img src="../assets/img/gallery/gallery-team.jpg"
+                 alt="IoTeams IIUM team photo 2025"
+                 loading="lazy">
             <div class="gallery-category">
-              <span class="badge badge-teal">Workshop</span>
+              <span class="badge badge-white">Team</span>
             </div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
@@ -1012,26 +1011,28 @@
 
         <div class="videos-grid">
 
-          <!-- Featured video -->
+          <!-- Featured video — real IoTeams video -->
           <div class="video-card video-featured" data-aos="fade-up">
-            <div class="video-thumb">
-              <div class="video-thumb-placeholder">
-                <i class="bi bi-film"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">hackathon-recap.mp4</span>
-              </div>
-              <div class="video-play">
+            <div class="video-thumb" style="position:relative; overflow:hidden;">
+              <video
+                src="../assets/img/gallery/highlight-main.mp4"
+                style="width:100%; height:100%; object-fit:cover; display:block;"
+                poster="../assets/img/gallery/gallery-team.jpg"
+                preload="metadata"
+                id="featuredVideo">
+              </video>
+              <div class="video-play" id="featuredPlayBtn" onclick="playFeaturedVideo()" style="cursor:pointer;">
                 <div class="video-play-btn">
                   <i class="bi bi-play-fill"></i>
                 </div>
               </div>
-              <span class="video-duration">5:42</span>
+              <span class="video-duration">IoTeams 2025</span>
             </div>
             <div class="video-info">
-              <h4>IoTeams Hackathon 2025 — Full Recap</h4>
+              <h4>IoTeams IIUM — Official Highlights 2025</h4>
               <div class="video-meta">
-                <span><i class="bi bi-calendar3"></i> January 2025</span>
-                <span><i class="bi bi-eye"></i> 1.2k views</span>
-                <span><i class="bi bi-clock"></i> 5 min 42 sec</span>
+                <span><i class="bi bi-calendar3"></i> May 2025</span>
+                <span><i class="bi bi-camera-video"></i> Official Video</span>
               </div>
             </div>
           </div>
@@ -1134,6 +1135,24 @@
   <script src="../assets/js/main.js"></script>
 
   <script>
+    /* ── Featured video play ── */
+    function playFeaturedVideo() {
+      const video = document.getElementById('featuredVideo');
+      const btn   = document.getElementById('featuredPlayBtn');
+      if (!video) return;
+      if (video.paused) {
+        video.play();
+        btn.style.opacity = '0';
+        video.addEventListener('click', () => {
+          video.pause();
+          btn.style.opacity = '1';
+        }, { once: true });
+      } else {
+        video.pause();
+        btn.style.opacity = '1';
+      }
+    }
+
     /* ── Gallery Filter ── */
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
