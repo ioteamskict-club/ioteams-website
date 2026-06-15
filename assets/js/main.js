@@ -14,6 +14,7 @@
    9.  Smooth scroll — anchor links
    10. Stats counter animation
    11. Reduced motion — respects prefers-reduced-motion
+   12. Lazy image loading
    ============================================================ */
 
 (function () {
@@ -294,5 +295,17 @@
 
     statEls.forEach((el) => statsObserver.observe(el));
   }
+
+// Lazy image fade-in
+const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+const imgObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('loaded');
+      imgObserver.unobserve(entry.target);
+    }
+  });
+});
+lazyImages.forEach(img => imgObserver.observe(img));
 
 })();
