@@ -1268,6 +1268,10 @@ html.reduced-motion body {
 /* ══════════════════════════════════════
    ORGANIZATION STRUCTURE (our-story.html)
 ══════════════════════════════════════ */
+/* ==========================================================================
+   ORGANIZATION STRUCTURE SECTION
+   ========================================================================== */
+
 #org-structure {
   background: var(--black);
   padding: var(--space-3xl) var(--space-2xl);
@@ -1278,6 +1282,7 @@ html.reduced-motion body {
   margin: 0 auto;
 }
 
+/* --- Category Layout & Section Headers --- */
 .org-category {
   margin-bottom: var(--space-2xl);
 }
@@ -1308,12 +1313,14 @@ html.reduced-motion body {
   background: var(--border-gold);
 }
 
+/* --- Core Card Grid System --- */
 .org-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--space-sm);
 }
 
+/* --- Component Block: Individual Card --- */
 .org-card {
   background: var(--black-2);
   border: 1px solid var(--border-dark);
@@ -1321,6 +1328,8 @@ html.reduced-motion body {
   overflow: hidden;
   transition: border-color var(--transition-base), transform var(--transition-base);
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .org-card:hover {
@@ -1328,6 +1337,7 @@ html.reduced-motion body {
   transform: translateY(-3px);
 }
 
+/* --- Card Media Containers --- */
 .org-card-img {
   aspect-ratio: 1;
   background: var(--black-4);
@@ -1335,6 +1345,8 @@ html.reduced-motion body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  width: 100%;
 }
 
 .org-card-img img {
@@ -1349,8 +1361,13 @@ html.reduced-motion body {
   color: var(--white-muted);
 }
 
+/* --- Card Typography Details --- */
 .org-card-body {
   padding: var(--space-sm) var(--space-xs);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .org-card-body h6 {
@@ -1367,29 +1384,54 @@ html.reduced-motion body {
   letter-spacing: 0.06em;
   color: var(--teal);
   text-transform: uppercase;
+  margin-top: auto; /* Pushes the role cleanly to the baseline */
 }
 
-/* Presidential cards — bigger, left-aligned */
+/* ==========================================================================
+   MODIFIER STYLES: Presidential Cards (Bigger & Left Aligned Option)
+   ========================================================================== */
+
 .org-grid.org-grid-leads {
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
   max-width: 480px;
-  margin: 0;
+  margin: 0; /* Keep left-aligned as per design spec */
 }
 
-.org-grid.org-grid-leads .org-card-body h6 { font-size: var(--fs-sm); }
-.org-grid.org-grid-leads .org-card-body span { font-size: 0.68rem; }
+.org-grid.org-grid-leads .org-card-body h6 { 
+  font-size: var(--fs-sm); 
+}
 
-/* ── Responsive ── */
+.org-grid.org-grid-leads .org-card-body span { 
+  font-size: 0.68rem; 
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (Fluid Adaptations)
+   ========================================================================== */
+
 @media (max-width: 1199px) {
-  .org-grid { grid-template-columns: repeat(4, 1fr); }
+  .org-grid { 
+    grid-template-columns: repeat(4, 1fr); 
+  }
 }
 
 @media (max-width: 768px) {
-  .org-grid { grid-template-columns: repeat(3, 1fr); }
-  .org-grid.org-grid-leads { grid-template-columns: repeat(2, 1fr); max-width: 320px; }
+  .org-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+  .org-grid.org-grid-leads { 
+    grid-template-columns: repeat(2, 1fr); 
+    max-width: 320px; 
+    margin: 0 auto; /* Centers the presidential block beautifully on tablet */
+  }
 }
 
 @media (max-width: 480px) {
-  .org-grid { grid-template-columns: repeat(2, 1fr); }
+  .org-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: var(--space-xs); /* Tighter spacing for small mobile screens */
+  }
+  .org-grid.org-grid-leads {
+    max-width: 100%;
+  }
 }
