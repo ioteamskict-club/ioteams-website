@@ -1369,11 +1369,12 @@ html.reduced-motion body {
   text-transform: uppercase;
 }
 
-/* Presidential cards — bigger, centered */
+/* Presidential cards — bigger, left-aligned */
 .org-grid.org-grid-leads {
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
   max-width: 480px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .org-grid.org-grid-leads .org-card-body h6 { font-size: var(--fs-sm); }
