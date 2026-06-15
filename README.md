@@ -17,6 +17,12 @@
 
 ---
 
+## 🌐 Supabase Storage
+Project: ioteamskict-club
+Database password: IoTeamsCLUBkict
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -363,5 +369,6 @@ External use or reproduction requires permission from the committee.
 <div align="center">
   <sub>Built with ❤️ by IoTeams IIUM · Kulliyyah of Engineering · IIUM Gombak</sub>
 </div>
-#   I O T E A M S - W E B S I T E  
+#   I O T E A M S - W E B S I T E 
+ 
  
