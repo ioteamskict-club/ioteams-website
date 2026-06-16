@@ -183,6 +183,27 @@
     });
   });
 
+  function playFeaturedVideo() {
+  playVideo('featuredVideo', document.getElementById('featuredPlayBtn'));
+}
+
+function playVideo(videoId, btn) {
+  const video = document.getElementById(videoId);
+  if (!video) return;
+  if (video.paused) {
+    video.play();
+    btn.style.opacity = '0';
+    video.addEventListener('click', () => {
+      video.pause();
+      btn.style.opacity = '1';
+    }, { once: true });
+  } else {
+    video.pause();
+    btn.style.opacity = '1';
+  }
+}
+  
+
   /* ============================================================
      7. SWIPER
   ============================================================ */
