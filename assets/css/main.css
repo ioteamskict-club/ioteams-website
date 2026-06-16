@@ -110,7 +110,7 @@
   --transition-slow:   0.4s ease;
 
   /* ── Layout ── */
-  --nav-height:     72px;   /* height of fixed navbar */
+  --nav-height:     80px;   /* height of fixed navbar */
   --container-max:  1200px; /* max content width */
   --section-pad:    var(--space-3xl) var(--space-2xl); /* 6rem 4rem */
 }

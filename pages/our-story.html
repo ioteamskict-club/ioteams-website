@@ -419,10 +419,11 @@
   ══════════════════════════════ -->
   <nav id="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="nav-logo">
-        <span class="bracket">[</span>IoTeams<span class="bracket">]</span>
-        <span class="nav-logo-sub">IIUM</span>
-      </a>
+<a href="index.html" class="nav-logo">
+  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
+       alt="IoTeams KICT Logo"
+       style="height: 48px; width: auto; object-fit: contain; background: transparent;">
+</a>
       <ul class="nav-links" id="navLinks">
         <li><a href="../index.html">Home</a></li>
         <li><a href="our-story.html" class="active">Our Story</a></li>
@@ -1118,36 +1119,74 @@
   <!-- ══════════════════════════════
        FOOTER
   ══════════════════════════════ -->
-  <footer id="footer">
+<footer id="footer">
     <div class="footer-inner">
-      <a href="../index.html" class="footer-logo">
-        <span class="bracket">[</span>IoTeams<span class="bracket">]</span> IIUM
-      </a>
-      <ul class="footer-nav">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="our-story.html">Our Story</a></li>
-        <li><a href="programmes.html">Programmes</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="blog.html">Blog</a></li>
-      </ul>
-      <div class="footer-social">
-        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
-        <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+
+      <!-- Brand + tagline -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
+          alt="IoTeams KICT Logo"
+          style="height:72px; width:auto; object-fit:contain; background: transparent;">
+        </a>
+
+        <p class="footer-tagline">Building the Future of IoT Together.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+        </div>
       </div>
+
+      <!-- Nav links -->
+      <div class="footer-links">
+        <h6>Pages</h6>
+        <ul class="footer-nav">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="programmes.html">Programmes</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact info -->
+      <div class="footer-contact">
+        <h6>Got questions? We don't bite.</h6>
+        <p>Reach out anytime — whether you want to join, collaborate, or just say hello. We reply within 48 hours.</p>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="bi bi-geo-alt"></i>
+            <span>Kulliyyah of ICT (KICT), IIUM Gombak, Kuala Lumpur</span>
+          </li>
+          <li>
+            <i class="bi bi-envelope"></i>
+            <a href="mailto:ioteams@iium.edu.my">ioteams@iium.edu.my</a>
+          </li>
+          <li>
+            <i class="bi bi-whatsapp"></i>
+            <a href="https://wa.me/60123456789">+60 12-345 6789</a>
+          </li>
+        </ul>
+      </div>
+
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
-      <a href="mailto:ioteams@iium.edu.my" class="footer-email">ioteams@iium.edu.my</a>
+      <p style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">
+        IIUM Gombak · Kuala Lumpur · Malaysia
+      </p>
     </div>
   </footer>
 
+  <!-- Scroll to top -->
   <a href="#" id="scroll-top" aria-label="Scroll to top">
     <i class="bi bi-arrow-up-short"></i>
   </a>
 
+  <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <span class="bracket">[</span>
@@ -1158,10 +1197,19 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script src="../assets/js/main.js"></script>
+  <!-- AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- GLightbox -->
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="assets/js/main.js"></script>
 
 </body>
 </html>
