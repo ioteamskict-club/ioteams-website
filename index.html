@@ -296,49 +296,73 @@
       align-items: center;
     }
 
-    .about-image-wrap {
-      position: relative;
-    }
+.about-image-wrap {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
 
-    .about-image-wrap img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-      filter: grayscale(20%);
-    }
+/* The Gold Border - Locked inside the safe grid zone */
+.about-image-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border-gold-md);
+  border-radius: var(--radius-md);
+  z-index: 0;
+  pointer-events: none;
+}
 
-    /* Gold accent border on image */
-    .about-image-wrap::before {
-      content: '';
-      position: absolute;
-      top: -12px;
-      left: -12px;
-      right: 12px;
-      bottom: 12px;
-      border: 1px solid var(--border-gold-md);
-      border-radius: var(--radius-md);
-      z-index: 0;
-      pointer-events: none;
-    }
+/* The Image - Pushed down and right to reveal the gold background frame */
+.about-image-wrap img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;           /* removes fixed ratio, shows full image */
+  aspect-ratio: unset;    /* remove forced crop */
+  object-fit: contain;    /* no cropping */
+  border-radius: var(--radius-md);
+  filter: grayscale(20%);
+  display: block;
+  transform: translate(12px, 12px);
+}
 
-    .about-image-wrap img { position: relative; z-index: 1; }
+/* Corner tag - Placed perfectly over the shifted image's corner */
+.about-image-tag {
+  position: absolute;
+  /* Shifted down and right exactly with the image's new position */
+  bottom: -12px;
+  right: -12px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md) 0 var(--radius-md) 0; 
+  z-index: 2;
+}
 
-    /* Corner tag */
-    .about-image-tag {
-      position: absolute;
-      bottom: -1px;
-      right: -1px;
-      background: var(--gold);
-      color: var(--black);
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm) 0 var(--radius-md) 0;
-      z-index: 2;
-    }
+/* Corner tag - Placed precisely at the image's bottom-right corner */
+.about-image-tag {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  /* Syncs with the image's corner curves */
+  border-radius: var(--radius-md) 0 var(--radius-md) 0; 
+  z-index: 2;
+}
 
     .about-features {
       display: flex;
@@ -952,8 +976,7 @@
       <div class="about-inner">
 
         <div class="about-image-wrap" data-aos="fade-right">
-          <!-- Replace src with actual team photo -->
-          <img loading="lazy" src="assets/img/gallery/photo_2026-05-09_22-07-02.jpg"
+          <img loading="lazy" src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_img_2026.jpeg"
                alt="IoTeams members working on IoT projects"
                onerror="this.style.background='var(--black-3)';this.style.minHeight='300px'">
           <div class="about-image-tag">EST. 2022</div>
@@ -1162,40 +1185,40 @@
           <!-- Large featured image -->
 <!-- IMAGE 1 (large) — FILE: assets/img/gallery/dji_fly_20260204_122618_0287_1770182928202_photo.jpg -->
 <div class="gallery-item">
-  <a href="assets/img/gallery/dji_fly_20260204_122618_0287_1770182928202_photo.jpg" class="glightbox" data-gallery="homepage">
-    <img src="assets/img/gallery/dji_fly_20260204_122618_0287_1770182928202_photo.jpg" alt="IoTeams team" style="width:100%;height:100%;object-fit:cover;">
+  <a href="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/dji_fly_img3.jpg" class="glightbox" data-gallery="homepage">
+    <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/dji_fly_img3.jpg" alt="IoTeams team" style="width:100%;height:100%;object-fit:cover;">
     <div class="gallery-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
   </a>
 </div>
 
 <!-- IMAGE 2 — FILE: assets/img/gallery/IMG_20260107_105310.jpg -->
 <div class="gallery-item">
-  <a href="assets/img/gallery/IMG_20260107_105310.jpg" class="glightbox" data-gallery="homepage">
-    <img src="assets/img/gallery/IMG_20260107_105310.jpg" alt="IoTeams drone shot" style="width:100%;height:100%;object-fit:cover;">
+  <a href="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/kibot_img4.JPG" class="glightbox" data-gallery="homepage">
+    <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/kibot_img4.JPG" alt="IoTeams drone shot" style="width:100%;height:100%;object-fit:cover;">
     <div class="gallery-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
   </a>
 </div>
 
 <!-- IMAGE 3 — FILE: assets/img/gallery/gallery-heic-1.jpg -->
 <div class="gallery-item">
-  <a href="assets/img/gallery/gallery-heic-1.jpg" class="glightbox" data-gallery="homepage">
-    <img src="assets/img/gallery/gallery-heic-1.jpg" alt="IoTeams with lecturers" style="width:100%;height:100%;object-fit:cover;">
+  <a href="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/iot_img1.jpg" class="glightbox" data-gallery="homepage">
+    <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/iot_img1.jpg" alt="IoTeams with lecturers" style="width:100%;height:100%;object-fit:cover;">
     <div class="gallery-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
   </a>
 </div>
 
 <!-- IMAGE 4 — FILE: assets/img/gallery/gallery-heic-2.jpg -->
 <div class="gallery-item">
-  <a href="assets/img/gallery/gallery-heic-2.jpg" class="glightbox" data-gallery="homepage">
-    <img src="assets/img/gallery/gallery-heic-2.jpg" alt="IoTeams meeting" style="width:100%;height:100%;object-fit:cover;">
+  <a href="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/core_impact_img8.jpg" class="glightbox" data-gallery="homepage">
+    <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/core_impact_img8.jpg" alt="IoTeams meeting" style="width:100%;height:100%;object-fit:cover;">
     <div class="gallery-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
   </a>
 </div>
 
 <!-- IMAGE 5 — FILE: assets/img/gallery/IMG_20260204_122605.jpg -->
 <div class="gallery-item">
-  <a href="assets/img/gallery/IMG_20260204_122605.jpg" class="glightbox" data-gallery="homepage">
-    <img src="assets/img/gallery/IMG_20260204_122605.jpg" alt="IoTeams showcase" style="width:100%;height:100%;object-fit:cover;">
+  <a href="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/dji_fly_iftar_img13.jpg" class="glightbox" data-gallery="homepage">
+    <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/dji_fly_iftar_img13.jpg" alt="IoTeams showcase" style="width:100%;height:100%;object-fit:cover;">
     <div class="gallery-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
   </a>
 </div>
@@ -1224,7 +1247,7 @@
 
           <div class="blog-card" data-aos="fade-up" data-aos-delay="0">
 <div class="blog-card-img">
-  <img src="assets/img/blog/Aquasense AI - FYP POSTER .png"
+  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/IIIC_img1.jpg"
        alt="MQTT Tutorial"
        style="width:100%;height:180px;object-fit:cover;">
 </div>
@@ -1243,7 +1266,7 @@
 
           <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
 <div class="blog-card-img">
-  <img src="assets/img/blog/FYP POSTER - COBOTX AI.png"
+  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/cop_img1.jpg"
        alt="Smart Plant Monitor"
        style="width:100%;height:180px;object-fit:cover;">
 </div>
@@ -1262,7 +1285,7 @@
 
           <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
 <div class="blog-card-img">
-  <img src="assets/img/blog/AGRISENSE AI POSTER.png"
+  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/inno2526_img1.jpg"
        alt="Hackathon Recap"
        style="width:100%;height:180px;object-fit:cover;">
 </div>
@@ -1353,7 +1376,7 @@
           </li>
           <li>
             <i class="bi bi-envelope"></i>
-            <a href="mailto:ioteams@iium.edu.my">ioteams@iium.edu.my</a>
+            <a href="mailto:ioteamskict@gmail.com">ioteamskict@gmail.com</a>
           </li>
           <li>
             <i class="bi bi-whatsapp"></i>
