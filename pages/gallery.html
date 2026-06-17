@@ -568,6 +568,222 @@
     .video-info h4 { font-size: var(--fs-base); font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
     .video-meta { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--white-muted); letter-spacing: 0.06em; display: flex; gap: var(--space-sm); }
 
+    /* ══════════════════════════════════════
+       SONGS SECTION
+    ══════════════════════════════════════ */
+    #songs {
+      background: var(--black-2);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .songs-inner { max-width: var(--container-max); margin: 0 auto; }
+
+    .songs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-xl);
+    }
+
+    .song-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+      background: var(--black-3);
+      transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .song-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.12);
+    }
+
+    /* YouTube embed wrapper */
+    .song-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--black-4);
+      overflow: hidden;
+    }
+
+    /* The iframe is lazy-loaded — we show a clickable cover first */
+    .song-cover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: opacity var(--transition-base);
+    }
+
+    .song-cover img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) brightness(0.7);
+      transition: filter var(--transition-slow), transform var(--transition-slow);
+    }
+
+    .song-card:hover .song-cover img { filter: grayscale(0%) brightness(0.6); transform: scale(1.04); }
+
+    .song-cover-overlay {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .song-play-ring {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition-base), background var(--transition-base);
+      box-shadow: 0 0 0 0 rgba(201,168,76,0.5);
+      animation: pulse-ring 2.4s ease-out infinite;
+    }
+
+    .song-card:hover .song-play-ring {
+      transform: scale(1.12);
+      background: var(--gold-light);
+      animation: none;
+    }
+
+    .song-play-ring i { font-size: 1.4rem; color: var(--black); margin-left: 3px; }
+
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+      70%  { box-shadow: 0 0 0 14px rgba(201,168,76,0); }
+      100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+    }
+
+    .song-play-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(0,0,0,0.55);
+      padding: 0.2rem 0.7rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
+    /* When playing: cover fades, iframe takes over */
+    .song-cover.hidden { opacity: 0; pointer-events: none; z-index: 0; }
+
+    .song-iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 1;
+    }
+
+    /* Music note badge */
+    .song-badge {
+      position: absolute;
+      top: var(--space-xs);
+      left: var(--space-xs);
+      z-index: 3;
+      background: rgba(0,0,0,0.7);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(201,168,76,0.35);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Card info row */
+    .song-info {
+      padding: var(--space-md);
+      background: var(--black-2);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .song-title {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .song-artist {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+
+    .song-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 0.5rem;
+      gap: var(--space-sm);
+    }
+
+    .song-meta-left {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .song-yt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white-dim);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+      flex-shrink: 0;
+    }
+
+    .song-yt-btn:hover {
+      background: rgba(255,0,0,0.15);
+      border-color: rgba(255,80,80,0.5);
+      color: #ff6060;
+    }
+
+    .song-yt-btn i { font-size: 0.9rem; }
+
     /* ── Responsive ── */
     @media (max-width: 1199px) {
       .gallery-masonry { columns: 3; }
@@ -581,6 +797,7 @@
       .videos-grid { grid-template-columns: 1fr; }
       .video-featured { grid-column: span 1; }
       .album-modal-grid { grid-template-columns: repeat(2, 1fr); }
+      .songs-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 576px) {
@@ -589,6 +806,7 @@
       .photo-count { display: none; }
       .album-modal { padding: var(--space-md); }
       .album-modal-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-xs); }
+      .songs-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1007,6 +1225,141 @@
       </div>
     </section>
 
+    <!-- ══════════════════════════════════════════
+         SONGS — IoTeams Music
+         Each card: clickable cover → YouTube embed
+         + "Open in YouTube" link always visible
+    ══════════════════════════════════════════ -->
+    <section id="songs">
+      <div class="songs-inner">
+
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">◆ Listen</span>
+          <h2 class="section-title">Our Songs</h2>
+          <hr class="divider-gold">
+          <p class="section-desc" style="max-width:520px;margin:0.75rem auto 0;color:var(--white-muted);font-size:var(--fs-sm);line-height:1.7;">
+            Music made by the team, for the team. Hit play to listen right here — or jump straight to YouTube.
+          </p>
+        </div>
+
+        <div class="songs-grid">
+
+          <!-- ── Song 1 ── -->
+          <div class="song-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="song-thumb">
+              <span class="song-badge"><i class="bi bi-music-note-beamed"></i> Music</span>
+              <!-- Cover layer — click to load iframe -->
+              <div class="song-cover" id="songCover1" onclick="loadSong('songCover1','songFrame1','pa4tcybJzas')">
+                <img src="https://img.youtube.com/vi/pa4tcybJzas/hqdefault.jpg"
+                     alt="Song 1 thumbnail" loading="lazy">
+                <div class="song-cover-overlay">
+                  <div class="song-play-ring"><i class="bi bi-play-fill"></i></div>
+                  <span class="song-play-label">Play</span>
+                </div>
+              </div>
+              <!-- YouTube iframe — injected on click -->
+              <iframe id="songFrame1" class="song-iframe" src="" title="Song 1"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowfullscreen></iframe>
+            </div>
+            <div class="song-info">
+              <h4 class="song-title">IoTeams Song - Rise With IoTeams (Official)</h4>
+              <span class="song-artist">IoTeams IIUM · Official</span>
+              <div class="song-meta">
+                <span class="song-meta-left">
+                  <i class="bi bi-calendar3"></i> 2025
+                </span>
+                <a href="https://www.youtube.com/watch?v=pa4tcybJzas"
+                   target="_blank" rel="noopener noreferrer"
+                   class="song-yt-btn" title="Open in YouTube">
+                  <i class="bi bi-youtube"></i> YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Song 2 ── -->
+          <div class="song-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="song-thumb">
+              <span class="song-badge"><i class="bi bi-music-note-beamed"></i> Music</span>
+              <div class="song-cover" id="songCover2" onclick="loadSong('songCover2','songFrame2','3eqA4Ng4RIs')">
+                <img src="https://img.youtube.com/vi/3eqA4Ng4RIs/hqdefault.jpg"
+                     alt="Song 2 thumbnail" loading="lazy">
+                <div class="song-cover-overlay">
+                  <div class="song-play-ring"><i class="bi bi-play-fill"></i></div>
+                  <span class="song-play-label">Play</span>
+                </div>
+              </div>
+              <iframe id="songFrame2" class="song-iframe" src="" title="Song 2"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowfullscreen></iframe>
+            </div>
+            <div class="song-info">
+              <h4 class="song-title">IoTeams Remarkable Achievements</h4>
+              <span class="song-artist">IoTeams IIUM · 2024</span>
+              <div class="song-meta">
+                <span class="song-meta-left">
+                  <i class="bi bi-calendar3"></i> 2024
+                </span>
+                <a href="https://www.youtube.com/watch?v=3eqA4Ng4RIs"
+                   target="_blank" rel="noopener noreferrer"
+                   class="song-yt-btn" title="Open in YouTube">
+                  <i class="bi bi-youtube"></i> YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Song 3 ── -->
+          <div class="song-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="song-thumb">
+              <span class="song-badge"><i class="bi bi-music-note-beamed"></i> Music</span>
+              <div class="song-cover" id="songCover3" onclick="loadSong('songCover3','songFrame3','_y7MXGmagSU')">
+                <img src="https://img.youtube.com/vi/_y7MXGmagSU/hqdefault.jpg"
+                     alt="Song 3 thumbnail" loading="lazy">
+                <div class="song-cover-overlay">
+                  <div class="song-play-ring"><i class="bi bi-play-fill"></i></div>
+                  <span class="song-play-label">Play</span>
+                </div>
+              </div>
+              <iframe id="songFrame3" class="song-iframe" src="" title="Song 3"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowfullscreen></iframe>
+            </div>
+            <div class="song-info">
+              <h4 class="song-title">IoTeams - Proses Itu Jalan</h4>
+              <span class="song-artist">IoTeams IIUM · 2023</span>
+              <div class="song-meta">
+                <span class="song-meta-left">
+                  <i class="bi bi-calendar3"></i> 2023
+                </span>
+                <a href="https://www.youtube.com/watch?v=_y7MXGmagSU"
+                   target="_blank" rel="noopener noreferrer"
+                   class="song-yt-btn" title="Open in YouTube">
+                  <i class="bi bi-youtube"></i> YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.songs-grid -->
+
+        <!-- View all on YouTube CTA -->
+        <div style="text-align:center; margin-top:var(--space-xl);" data-aos="fade-up">
+          <a href="http://www.youtube.com/@IoTeamsKICT"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-outline-primary"
+             style="font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:0.1em;text-transform:uppercase;border-color:var(--border-gold);color:var(--gold);padding:0.75rem 2rem;border-radius:var(--radius-sm);display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;transition:background var(--transition-base),color var(--transition-base);"
+             onmouseover="this.style.background='var(--gold)';this.style.color='var(--black)';"
+             onmouseout="this.style.background='transparent';this.style.color='var(--gold)';">
+            <i class="bi bi-youtube" style="font-size:1rem;"></i>
+            View All on YouTube
+          </a>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -1101,7 +1454,7 @@
       },
       {
         id:    "workshop-esp32",
-        title: "ESP32 Workshop — June 2025",
+        title: "IIGI 2026",
         date:  "June 2025",
         photos: [
           { image: "",  caption: "Workshop intro" },
@@ -1112,7 +1465,7 @@
       },
       {
         id:    "showcase-sem1",
-        title: "Semester 1 Project Showcase",
+        title: "Kibot",
         date:  "July 2025",
         photos: [
           { image: "",  caption: "Smart plant monitor demo" },
@@ -1122,36 +1475,7 @@
           { image: "",  caption: "Team celebration" }
         ]
       },
-      {
-        id:    "industry-talk",
-        title: "Industry Talk — IoT Security",
-        date:  "February 2025",
-        photos: [
-          { image: "",  caption: "Speaker introduction" },
-          { image: "",  caption: "Live demo" },
-          { image: "",  caption: "Q&A session" }
-        ]
-      },
-      {
-        id:    "aws-workshop",
-        title: "AWS IoT Core Workshop",
-        date:  "October 2024",
-        photos: [
-          { image: "",  caption: "AWS console walkthrough" },
-          { image: "",  caption: "Device provisioning" },
-          { image: "",  caption: "Dashboard setup" }
-        ]
-      },
-      {
-        id:    "team-2025",
-        title: "Committee & Team 2025",
-        date:  "2025",
-        photos: [
-          { image: "",  caption: "Executive committee" },
-          { image: "",  caption: "Full team photo" },
-          { image: "",  caption: "Lab session" }
-        ]
-      }
+
     ];
 
     /* ── helpers ─────────────────────────────────────────── */
@@ -1310,6 +1634,16 @@
     renderAlbums();
 
   })();
+
+  /* ── song embed helpers ────────────────────────────────── */
+  function loadSong(coverId, frameId, videoId) {
+    const cover = document.getElementById(coverId);
+    const frame = document.getElementById(frameId);
+    if (!cover || !frame) return;
+    // Inject autoplay embed URL only on click (respects browser autoplay policy)
+    frame.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+    cover.classList.add("hidden");
+  }
 
   /* ── video play helpers ────────────────────────────────── */
   function playFeaturedVideo() {
