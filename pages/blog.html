@@ -12,11 +12,10 @@
   3. Page Hero
   4. Featured Post — large hero card
   5. Filter Bar — by category
-  6. Blog Grid — 6 post cards
-  7. Sidebar — search, categories, recent, tags
+  6. Blog Grid — driven by JS posts array
+  7. Sidebar — recent posts (auto-synced)
   8. Pagination
-  9. Newsletter CTA
-  10. Footer (shared)
+  9. Footer (shared)
   ============================================================
 -->
 
@@ -50,8 +49,8 @@
   <!-- SEO: Theme color (browser UI) -->
   <meta name="theme-color" content="#C9A84C">
 
-<!-- Bootstrap 5.3.3 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Bootstrap 5.3.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -700,43 +699,6 @@
       background: rgba(201,168,76,0.06);
     }
 
-    /* ══════════════════════════════════════
-       NEWSLETTER CTA
-    ══════════════════════════════════════ */
-    #newsletter {
-      background: var(--black-2);
-      padding: var(--space-3xl) var(--space-2xl);
-      border-top: 1px solid var(--border-gold);
-    }
-
-    .newsletter-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .newsletter-form {
-      display: flex;
-      gap: var(--space-xs);
-      margin-top: var(--space-lg);
-    }
-
-    .newsletter-input {
-      flex: 1;
-      background: var(--black-4);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-sm);
-      padding: 0.85rem var(--space-md);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: var(--fs-sm);
-      outline: none;
-      transition: border-color var(--transition-base);
-    }
-
-    .newsletter-input::placeholder { color: var(--white-muted); }
-    .newsletter-input:focus { border-color: var(--gold); }
-
     /* ── Responsive ── */
     @media (max-width: 1199px) {
       .blog-layout { grid-template-columns: 1fr 280px; }
@@ -752,7 +714,6 @@
 
     @media (max-width: 576px) {
       .blog-grid { grid-template-columns: 1fr; }
-      .newsletter-form { flex-direction: column; }
     }
   </style>
 </head>
@@ -765,11 +726,11 @@
   <!-- NAV -->
   <nav id="navbar">
     <div class="nav-container">
-<a href="index.html" class="nav-logo">
-  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
-       alt="IoTeams KICT Logo"
-       style="height: 48px; width: auto; object-fit: contain; background: transparent;">
-</a>
+      <a href="index.html" class="nav-logo">
+        <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
+             alt="IoTeams KICT Logo"
+             style="height: 48px; width: auto; object-fit: contain; background: transparent;">
+      </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="../index.html">Home</a></li>
         <li><a href="our-story.html">Our Story</a></li>
@@ -778,7 +739,6 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="blog.html" class="active">Blog</a></li>
       </ul>
-
     </div>
   </nav>
 
@@ -831,7 +791,7 @@
 
         <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
           <div class="featured-img">
-            <img src="../assets/img/blog/Aquasense AI - FYP POSTER .png"
+            <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/cop_img1.jpg"
                  alt="Getting Started with MQTT Protocol for IoT Devices"
                  loading="lazy"
                  style="width:100%; height:100%; object-fit:cover;">
@@ -844,13 +804,13 @@
             </div>
             <h2>
               <a href="blog-details.html">
-                Getting Started with MQTT Protocol for IoT Devices — A Complete Guide
+                Getting Started with KIBOT - A Complete Guide
               </a>
             </h2>
             <p>
-              MQTT is the backbone of most IoT communication systems. In this complete
+              KIBOT is a powerful IoT platform that simplifies the process of building and managing IoT applications. In this complete
               guide, we walk you through setting up a broker, publishing and subscribing
-              to topics, and connecting your ESP32 to the cloud — step by step with code examples.
+              to topics, and connecting your system to real live data — step by step with code examples.
             </p>
             <div class="featured-author">
               <div class="author-avatar">
@@ -858,10 +818,10 @@
               </div>
               <div class="author-info">
                 <h6>Ahmad Faris</h6>
-                <span>PRESIDENT · IOTEAMS</span>
+                <span>Club Member · IOTEAMS</span>
               </div>
               <span class="read-time">
-                <i class="bi bi-clock"></i> 8 min read
+                <i class="bi bi-clock"></i> 10 min read
               </span>
             </div>
           </div>
@@ -884,125 +844,12 @@
             <button class="filter-chip" data-filter="event">Event Recap</button>
           </div>
 
-          <!-- Blog cards grid -->
-          <div class="blog-grid" id="blogGrid">
+          <!-- Blog cards grid — populated by JS -->
+          <div class="blog-grid" id="blogGrid"></div>
 
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="0" data-category="project">
-              <div class="blog-card-img">
-                <img src="../assets/img/blog/Aquasense AI - FYP POSTER .png"
-                     alt="Smart Plant Monitor blog post"
-                     loading="lazy"
-                     style="width:100%; height:100%; object-fit:cover;">
-              </div>
-              <div class="blog-card-body">
-                <div class="blog-card-top">
-                  <span class="badge badge-gold">Project</span>
-                  <span class="blog-card-date">5 May 2025</span>
-                </div>
-                <h4>
-                  <a href="blog-details.html">Smart Plant Monitor: Building an Automated Watering System with ESP32</a>
-                </h4>
-                <p>How 3 IoTeams members built a soil moisture sensor system with auto-watering and Telegram alerts in under a week.</p>
-                <div class="blog-card-footer">
-                  <div class="blog-card-author">
-                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
-                    <span>M. Syafiq</span>
-                  </div>
-                  <a href="blog-details.html" class="blog-read-more">
-                    Read <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="50" data-category="event">
-              <div class="blog-card-img">
-                <img src="../assets/img/blog/AGRISENSE AI POSTER.png"
-                     alt="Hackathon Recap"
-                     loading="lazy"
-                     style="width:100%; height:100%; object-fit:cover;">
-              </div>
-              <div class="blog-card-body">
-                <div class="blog-card-top">
-                  <span class="badge badge-yellow">Event Recap</span>
-                  <span class="blog-card-date">28 Apr 2025</span>
-                </div>
-                <h4>
-                  <a href="blog-details.html">Recap: IoTeams Annual Hackathon 2025 — Winners & Projects</a>
-                </h4>
-                <p>A full recap of our biggest event yet — 12 teams, 48 hours, and some incredible IoT solutions built from scratch.</p>
-                <div class="blog-card-footer">
-                  <div class="blog-card-author">
-                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
-                    <span>Amirah Z.</span>
-                  </div>
-                  <a href="blog-details.html" class="blog-read-more">
-                    Read <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="100" data-category="event">
-<div class="blog-card-img">
-  <img src="../assets/img/blog/IMG_20260107_114232.jpg"
-       alt="Connecting ESP32 to AWS IoT Core"
-       loading="lazy"
-       style="width:100%;height:100%;object-fit:cover;">
-</div>
-              <div class="blog-card-body">
-                <div class="blog-card-top">
-                  <span class="badge badge-yellow">Event Recap</span>
-                  <span class="blog-card-date">20 Apr 2025</span>
-                </div>
-                <h4>
-                  <a href="blog-details.html">Connecting ESP32 to AWS IoT Core — Step by Step</a>
-                </h4>
-                <p>Learn how to provision a device, set up certificates, and publish sensor data to AWS IoT Core using MQTT over TLS.</p>
-                <div class="blog-card-footer">
-                  <div class="blog-card-author">
-                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
-                    <span>Nurul I.</span>
-                  </div>
-                  <a href="blog-details.html" class="blog-read-more">
-                    Read <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="200" data-category="project">
-<div class="blog-card-img">
-  <img src="../assets/img/blog/20260107_093108.jpg"
-       alt="Smart Door Lock with RFID"
-       loading="lazy"
-       style="width:100%;height:100%;object-fit:cover;">
-</div>
-              <div class="blog-card-body">
-                <div class="blog-card-top">
-                  <span class="badge badge-gold">Project</span>
-                  <span class="blog-card-date">2 Apr 2025</span>
-                </div>
-                <h4>
-                  <a href="blog-details.html">Building a Smart Door Lock with RFID and Raspberry Pi</a>
-                </h4>
-                <p>A weekend project walkthrough — RFID reader, solenoid lock, and a simple web dashboard to manage access logs.</p>
-                <div class="blog-card-footer">
-                  <div class="blog-card-author">
-                    <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
-                    <span>Haris D.</span>
-                  </div>
-                  <a href="blog-details.html" class="blog-read-more">
-                    Read <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Pagination -->
-          <!-- <div class="pagination-wrap" data-aos="fade-up">
+          <!-- Pagination (uncomment when needed) -->
+          <!--
+          <div class="pagination-wrap" data-aos="fade-up">
             <a href="#" class="page-btn disabled"><i class="bi bi-chevron-left"></i></a>
             <a href="#" class="page-btn active">1</a>
             <a href="#" class="page-btn">2</a>
@@ -1010,65 +857,37 @@
             <span style="color:var(--white-muted); font-family:var(--font-mono); font-size:var(--fs-xs);">...</span>
             <a href="#" class="page-btn">4</a>
             <a href="#" class="page-btn"><i class="bi bi-chevron-right"></i></a>
-          </div> -->
+          </div>
+          -->
 
         </div>
 
         <!-- RIGHT: Sidebar -->
         <aside class="blog-sidebar" data-aos="fade-left">
 
-          <!-- Search -->
-          <!-- <div class="sidebar-widget">
-            <h5>Search</h5>
-            <div class="search-form">
-              <input type="text" class="search-input" placeholder="Search posts...">
-              <button class="search-btn"><i class="bi bi-search"></i></button>
-            </div>
-          </div> -->
-
-
-          <!-- Recent Posts -->
+          <!-- Recent Posts — populated by JS, auto-synced with blog grid -->
           <div class="sidebar-widget">
             <h5>Recent Posts</h5>
-            <div class="recent-list">
-
-              <a href="blog-details.html" class="recent-item">
-                <div class="recent-thumb"><i class="bi bi-image"></i></div>
-                <div class="recent-info">
-                  <h6>Getting Started with MQTT Protocol</h6>
-                  <span>12 May 2025</span>
-                </div>
-              </a>
-
-              <a href="blog-details.html" class="recent-item">
-                <div class="recent-thumb"><i class="bi bi-image"></i></div>
-                <div class="recent-info">
-                  <h6>Smart Plant Monitor with ESP32</h6>
-                  <span>5 May 2025</span>
-                </div>
-              </a>
-            </div>
+            <div class="recent-list" id="recentList"></div>
           </div>
-
 
         </aside>
 
       </div>
     </section>
 
-
   </main>
 
   <!-- FOOTER -->
-<footer id="footer">
+  <footer id="footer">
     <div class="footer-inner">
 
       <!-- Brand + tagline -->
       <div class="footer-brand">
         <a href="index.html" class="footer-logo">
           <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
-          alt="IoTeams KICT Logo"
-          style="height:72px; width:auto; object-fit:contain; background: transparent;">
+               alt="IoTeams KICT Logo"
+               style="height:72px; width:auto; object-fit:contain; background: transparent;">
         </a>
         <p class="footer-tagline">Building the Future of IoT Together.</p>
         <div class="footer-social">
@@ -1132,40 +951,126 @@
   </div>
 
   <!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script src="../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
 
   <script>
   (function () {
-    /* ── Blog Filter ── */
-    const chips     = document.querySelectorAll('.filter-chip');
-    const blogCards = document.querySelectorAll('.blog-card');
 
+    /* ══════════════════════════════════════════════════════
+       BLOG POSTS — SINGLE SOURCE OF TRUTH
+       ▸ To add a post:    add a new object to this array
+       ▸ To update image:  paste the URL into image: "..."
+       ▸ Both the blog grid AND sidebar update automatically
+    ══════════════════════════════════════════════════════ */
+    const posts = [
+      {
+        title:    "International Innovation Invention Competition (IIIC) 2025",
+        excerpt:  "How 3 IoTeams members built a system in under a week.",
+        image:    "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/IIIC_img1.jpg",
+        imageAlt: "Smart Plant Monitor blog post",
+        badge:    { label: "Event Recap", cls: "badge-gold" },
+        date:     "5 May 2025",
+        author:   "M. Syafiq",
+        category: "project",
+        url:      "blog-details.html"
+      },
+      {
+        title:    "Recap: IoTeams FYP Journey 2025 — Winners & Projects",
+        excerpt:  "A full recap of our biggest fyp journey..",
+        image:    "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/inno2526_img1.jpg",   // ← paste Supabase URL here to show image
+        imageAlt: "FYP Journey Recap",
+        badge:    { label: "Event Recap", cls: "badge-yellow" },
+        date:     "28 Apr 2025",
+        author:   "Amirah Z.",
+        category: "event",
+        url:      "blog-details.html"
+      },
+      {
+        title:    "KIBOT",
+        excerpt:  "Learn how to create face recognition.",
+        image:    "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/kibot_img5.JPG",   // ← paste Supabase URL here to show image
+        imageAlt: "KIBOT Face Recognition",
+        badge:    { label: "Event Recap", cls: "badge-yellow" },
+        date:     "20 Apr 2025",
+        author:   "Nurul I.",
+        category: "event",
+        url:      "blog-details.html"
+      },
+
+    ];
+
+    /* ── helpers ───────────────────────────────────────── */
+    function imgOrIcon(src, alt, extraStyle) {
+      return src
+        ? `<img src="${src}" alt="${alt}" loading="eager" style="width:100%;height:100%;object-fit:cover;${extraStyle || ''}">`
+        : `<i class="bi bi-image"></i>`;
+    }
+
+    /* ── render blog grid ──────────────────────────────── */
+    function renderGrid(filter) {
+      const grid    = document.getElementById("blogGrid");
+      const visible = filter === "all"
+        ? posts
+        : posts.filter(p => p.category === filter);
+
+      grid.innerHTML = visible.map(p => `
+        <div class="blog-card" data-category="${p.category}">
+          <div class="blog-card-img">
+            ${imgOrIcon(p.image, p.imageAlt)}
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-top">
+              <span class="badge ${p.badge.cls}">${p.badge.label}</span>
+              <span class="blog-card-date">${p.date}</span>
+            </div>
+            <h4><a href="${p.url}">${p.title}</a></h4>
+            <p>${p.excerpt}</p>
+            <div class="blog-card-footer">
+              <div class="blog-card-author">
+                <div class="mini-avatar"><i class="bi bi-person-fill"></i></div>
+                <span>${p.author}</span>
+              </div>
+              <a href="${p.url}" class="blog-read-more">
+                Read <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>`).join("");
+    }
+
+    /* ── render sidebar recent posts (top 2) ───────────── */
+    function renderRecent() {
+      const list = document.getElementById("recentList");
+      list.innerHTML = posts.slice(0, 2).map(p => `
+        <a href="${p.url}" class="recent-item">
+          <div class="recent-thumb">
+            ${p.image
+              ? `<img src="${p.image}" alt="${p.imageAlt}" loading="eager" style="width:100%;height:100%;object-fit:cover;">`
+              : `<i class="bi bi-image"></i>`}
+          </div>
+          <div class="recent-info">
+            <h6>${p.title}</h6>
+            <span>${p.date}</span>
+          </div>
+        </a>`).join("");
+    }
+
+    /* ── filter chip interactions ──────────────────────── */
+    const chips = document.querySelectorAll(".filter-chip");
     chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const filter = chip.dataset.filter;
-        blogCards.forEach(card => {
-          card.style.display =
-            (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
-        });
+      chip.addEventListener("click", () => {
+        chips.forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        renderGrid(chip.dataset.filter);
       });
     });
 
-    /* ── Newsletter form ── */
-    const newsletterBtn   = document.querySelector('.newsletter-form button');
-    const newsletterInput = document.querySelector('.newsletter-input');
-    if (newsletterBtn && newsletterInput) {
-      newsletterBtn.addEventListener('click', () => {
-        if (newsletterInput.value && newsletterInput.value.includes('@')) {
-          newsletterInput.value = '';
-          newsletterInput.placeholder = '✅ Subscribed! Check your inbox.';
-          newsletterInput.style.borderColor = 'var(--teal)';
-        }
-      });
-    }
+    /* ── init on page load ─────────────────────────────── */
+    renderGrid("all");
+    renderRecent();
+
   })();
   </script>
 
