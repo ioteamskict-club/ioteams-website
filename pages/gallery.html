@@ -10,10 +10,11 @@
   1. Nav (shared)
   2. Marquee (shared)
   3. Page Hero
-  4. Filter Bar — filter by album/category
+  4. Filter Bar
   5. Masonry Gallery Grid — GLightbox powered
-  6. Video Highlights
-  7. Footer (shared)
+  6. Event Albums — JS-driven, cover = first image, click = modal
+  7. Video Highlights
+  8. Footer (shared)
   ============================================================
 -->
 
@@ -22,49 +23,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery — IoTeams IIUM</title>
   <meta name="description" content="Photos and videos from IoTeams IIUM events, workshops, hackathons, and project showcases.">
-  <!-- SEO: Open Graph -->
   <meta property="og:title" content="Gallery — IoTeams IIUM">
   <meta property="og:description" content="Photos and videos from IoTeams IIUM events, workshops, hackathons, and project showcases.">
   <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ioteams.iium.edu.my/pages/gallery.html">
   <meta property="og:site_name" content="IoTeams IIUM">
-
-  <!-- SEO: Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@ioteams_iium">
   <meta name="twitter:title" content="Gallery — IoTeams IIUM">
   <meta name="twitter:description" content="Photos and videos from IoTeams IIUM events, workshops, hackathons, and project showcases.">
   <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
-
-  <!-- SEO: Canonical -->
   <link rel="canonical" href="https://ioteams.iium.edu.my/pages/gallery.html">
-
-  <!-- SEO: Favicon -->
   <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
-
-  <!-- SEO: Theme color (browser UI) -->
   <meta name="theme-color" content="#C9A84C">
 
-<!-- Bootstrap 5.3.3 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-
-  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <!-- AOS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-
-  <!-- GLightbox -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
-
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/main.css">
 
   <style>
@@ -76,8 +57,7 @@
       background: var(--black-2);
       border-bottom: 1px solid var(--border-gold);
       padding: var(--space-md) var(--space-2xl);
-      position: static;  /* change from sticky */
-      top: unset;
+      position: static;
       z-index: 100;
     }
 
@@ -121,18 +101,9 @@
       text-transform: uppercase;
     }
 
-    .filter-btn:hover {
-      border-color: var(--border-gold);
-      color: var(--gold);
-    }
+    .filter-btn:hover { border-color: var(--border-gold); color: var(--gold); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--black); }
 
-    .filter-btn.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--black);
-    }
-
-    /* Photo count */
     .photo-count {
       font-family: var(--font-mono);
       font-size: var(--fs-xs);
@@ -141,24 +112,18 @@
       flex-shrink: 0;
     }
 
-    .photo-count span {
-      color: var(--gold);
-    }
+    .photo-count span { color: var(--gold); }
 
     /* ══════════════════════════════════════
-       GALLERY SECTION
+       GALLERY MASONRY
     ══════════════════════════════════════ */
     #gallery {
       background: var(--black);
       padding: var(--space-3xl) var(--space-2xl);
     }
 
-    .gallery-inner {
-      max-width: var(--container-max);
-      margin: 0 auto;
-    }
+    .gallery-inner { max-width: var(--container-max); margin: 0 auto; }
 
-    /* ── Masonry-style grid using CSS columns ── */
     .gallery-masonry {
       columns: 4;
       column-gap: var(--space-xs);
@@ -175,10 +140,7 @@
       display: block;
     }
 
-    /* Hide filtered items */
-    .gallery-item.hidden {
-      display: none;
-    }
+    .gallery-item.hidden { display: none; }
 
     .gallery-item img {
       width: 100%;
@@ -189,7 +151,6 @@
       transition: transform var(--transition-slow), filter var(--transition-slow);
     }
 
-    /* Placeholder when no real image */
     .gallery-placeholder-img {
       width: 100%;
       background: var(--black-3);
@@ -202,28 +163,17 @@
       border-radius: var(--radius-sm);
     }
 
-    /* Vary heights for masonry feel */
     .gallery-item:nth-child(3n+1) .gallery-placeholder-img { height: 220px; }
     .gallery-item:nth-child(3n+2) .gallery-placeholder-img { height: 280px; }
     .gallery-item:nth-child(3n+3) .gallery-placeholder-img { height: 180px; }
 
-    .gallery-placeholder-img i {
-      font-size: 1.5rem;
-      color: var(--white-muted);
-    }
+    .gallery-placeholder-img i { font-size: 1.5rem; color: var(--white-muted); }
+    .gallery-placeholder-img span { font-family: var(--font-mono); font-size: 0.65rem; color: var(--white-muted); letter-spacing: 0.08em; }
 
-    .gallery-placeholder-img span {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--white-muted);
-      letter-spacing: 0.08em;
-    }
-
-    /* Hover overlay */
     .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0,0,0,0.55);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -234,15 +184,9 @@
     }
 
     .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-item:hover img {
-      transform: scale(1.05);
-      filter: grayscale(0%);
-    }
+    .gallery-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
 
-    .gallery-overlay i {
-      color: var(--white);
-      font-size: 1.8rem;
-    }
+    .gallery-overlay i { color: var(--white); font-size: 1.8rem; }
 
     .gallery-overlay-label {
       font-family: var(--font-mono);
@@ -256,33 +200,19 @@
       border: 1px solid rgba(201,168,76,0.4);
     }
 
-    /* Category tag on image */
-    .gallery-category {
-      position: absolute;
-      top: var(--space-xs);
-      left: var(--space-xs);
-      z-index: 1;
-    }
+    .gallery-category { position: absolute; top: var(--space-xs); left: var(--space-xs); z-index: 1; }
 
-    /* Load more button */
-    .load-more-wrap {
-      text-align: center;
-      margin-top: var(--space-xl);
-    }
+    .load-more-wrap { text-align: center; margin-top: var(--space-xl); }
 
     /* ══════════════════════════════════════
        ALBUM SECTION
-       Groups photos by event album
     ══════════════════════════════════════ */
     #albums {
       background: var(--black-2);
       padding: var(--space-3xl) var(--space-2xl);
     }
 
-    .albums-inner {
-      max-width: var(--container-max);
-      margin: 0 auto;
-    }
+    .albums-inner { max-width: var(--container-max); margin: 0 auto; }
 
     .albums-grid {
       display: grid;
@@ -300,12 +230,8 @@
       transition: border-color var(--transition-base), transform var(--transition-base);
     }
 
-    .album-card:hover {
-      border-color: var(--border-gold);
-      transform: translateY(-4px);
-    }
+    .album-card:hover { border-color: var(--border-gold); transform: translateY(-4px); }
 
-    /* Album cover — 3 stacked images effect */
     .album-cover {
       aspect-ratio: 4/3;
       background: var(--black-3);
@@ -319,14 +245,11 @@
       object-fit: cover;
       filter: grayscale(20%);
       transition: filter var(--transition-slow), transform var(--transition-slow);
+      display: block;
     }
 
-    .album-card:hover .album-cover-main {
-      filter: grayscale(0%);
-      transform: scale(1.04);
-    }
+    .album-card:hover .album-cover-main { filter: grayscale(0%); transform: scale(1.04); }
 
-    /* Placeholder for album cover */
     .album-cover-placeholder {
       width: 100%;
       height: 100%;
@@ -338,23 +261,43 @@
       background: var(--black-4);
     }
 
-    .album-cover-placeholder i {
-      font-size: 2.5rem;
-      color: var(--white-muted);
-    }
+    .album-cover-placeholder i { font-size: 2.5rem; color: var(--white-muted); }
 
-    /* Dark overlay on album cover */
     .album-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 40%,
-        rgba(0,0,0,0.85) 100%
-      );
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85) 100%);
     }
 
-    /* Photo count badge */
+    /* Hover overlay with "View Album" */
+    .album-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      z-index: 2;
+    }
+
+    .album-card:hover .album-hover-overlay { opacity: 1; }
+
+    .album-hover-overlay span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
     .album-count {
       position: absolute;
       top: var(--space-xs);
@@ -366,30 +309,154 @@
       letter-spacing: 0.08em;
       padding: 0.25rem 0.6rem;
       border-radius: var(--radius-sm);
+      z-index: 3;
     }
 
     .album-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
       padding: var(--space-md);
-      z-index: 1;
+      background: var(--black-2);
     }
 
-    .album-info h4 {
-      font-size: var(--fs-base);
+    .album-info h4 { font-size: var(--fs-base); font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .album-info .album-date { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--gold); letter-spacing: 0.08em; }
+
+    /* ══════════════════════════════════════
+       ALBUM MODAL
+    ══════════════════════════════════════ */
+    .album-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 2000;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-md);
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-base), visibility var(--transition-base);
+    }
+
+    .album-modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .album-modal {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 960px;
+      padding: var(--space-xl);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform var(--transition-base);
+    }
+
+    .album-modal-backdrop.open .album-modal { transform: translateY(0); }
+
+    .album-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--space-lg);
+      gap: var(--space-md);
+    }
+
+    .album-modal-title {
+      font-family: var(--font-heading);
+      font-size: var(--fs-xl);
       font-weight: 700;
       color: var(--white);
-      margin-bottom: 0.3rem;
+      margin: 0 0 0.3rem;
     }
 
-    .album-info .album-date {
+    .album-modal-meta {
       font-family: var(--font-mono);
       font-size: var(--fs-xs);
       color: var(--gold);
       letter-spacing: 0.08em;
     }
+
+    .album-modal-close {
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      color: var(--white-dim);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      transition: background var(--transition-base), color var(--transition-base);
+    }
+
+    .album-modal-close:hover { background: var(--gold); color: var(--black); }
+
+    /* Modal image grid */
+    .album-modal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .album-modal-img-wrap {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-dark);
+      position: relative;
+      cursor: pointer;
+      background: var(--black-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .album-modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: transform var(--transition-slow), filter var(--transition-slow);
+    }
+
+    .album-modal-img-wrap:hover img { transform: scale(1.05); filter: grayscale(0%); }
+
+    /* Overlay on each modal image */
+    .album-modal-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .album-modal-img-overlay i { color: var(--white); font-size: 1.5rem; }
+    .album-modal-img-wrap:hover .album-modal-img-overlay { opacity: 1; }
+
+    /* Placeholder inside modal */
+    .album-modal-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .album-modal-placeholder i { font-size: 1.8rem; color: var(--white-muted); }
+    .album-modal-placeholder span { font-family: var(--font-mono); font-size: 0.6rem; color: var(--white-muted); }
 
     /* ══════════════════════════════════════
        VIDEO HIGHLIGHTS
@@ -399,10 +466,7 @@
       padding: var(--space-3xl) var(--space-2xl);
     }
 
-    .videos-inner {
-      max-width: var(--container-max);
-      margin: 0 auto;
-    }
+    .videos-inner { max-width: var(--container-max); margin: 0 auto; }
 
     .videos-grid {
       display: grid;
@@ -411,10 +475,7 @@
       margin-top: var(--space-xl);
     }
 
-    /* Featured video — larger */
-    .video-featured {
-      grid-column: span 2;
-    }
+    .video-featured { grid-column: span 2; }
 
     .video-card {
       position: relative;
@@ -437,6 +498,7 @@
       justify-content: center;
     }
 
+    .video-thumb video,
     .video-thumb img {
       width: 100%;
       height: 100%;
@@ -445,12 +507,9 @@
       transition: filter var(--transition-slow), transform var(--transition-slow);
     }
 
-    .video-card:hover .video-thumb img {
-      filter: grayscale(0%);
-      transform: scale(1.03);
-    }
+    .video-card:hover .video-thumb video,
+    .video-card:hover .video-thumb img { filter: grayscale(0%); transform: scale(1.03); }
 
-    /* Placeholder thumbnail */
     .video-thumb-placeholder {
       width: 100%;
       height: 100%;
@@ -462,12 +521,8 @@
       background: var(--black-4);
     }
 
-    .video-thumb-placeholder i {
-      font-size: 3rem;
-      color: var(--white-muted);
-    }
+    .video-thumb-placeholder i { font-size: 3rem; color: var(--white-muted); }
 
-    /* Play button */
     .video-play {
       position: absolute;
       inset: 0;
@@ -491,25 +546,11 @@
       transition: transform var(--transition-base), background var(--transition-base);
     }
 
-    .video-featured .video-play-btn {
-      width: 80px;
-      height: 80px;
-    }
-
-    .video-card:hover .video-play-btn {
-      transform: scale(1.1);
-      background: var(--gold-light);
-    }
-
-    .video-play-btn i {
-      font-size: 1.5rem;
-      color: var(--black);
-      margin-left: 4px;
-    }
-
+    .video-featured .video-play-btn { width: 80px; height: 80px; }
+    .video-card:hover .video-play-btn { transform: scale(1.1); background: var(--gold-light); }
+    .video-play-btn i { font-size: 1.5rem; color: var(--black); margin-left: 4px; }
     .video-featured .video-play-btn i { font-size: 2rem; }
 
-    /* Duration badge */
     .video-duration {
       position: absolute;
       bottom: var(--space-xs);
@@ -523,26 +564,9 @@
       border-radius: var(--radius-sm);
     }
 
-    .video-info {
-      padding: var(--space-md);
-      background: var(--black-2);
-    }
-
-    .video-info h4 {
-      font-size: var(--fs-base);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.3rem;
-    }
-
-    .video-meta {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--white-muted);
-      letter-spacing: 0.06em;
-      display: flex;
-      gap: var(--space-sm);
-    }
+    .video-info { padding: var(--space-md); background: var(--black-2); }
+    .video-info h4 { font-size: var(--fs-base); font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .video-meta { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--white-muted); letter-spacing: 0.06em; display: flex; gap: var(--space-sm); }
 
     /* ── Responsive ── */
     @media (max-width: 1199px) {
@@ -551,34 +575,36 @@
     }
 
     @media (max-width: 991px) {
-      #filter-bar { top: 64px; padding: var(--space-sm) var(--space-md); }
+      #filter-bar { padding: var(--space-sm) var(--space-md); }
       .gallery-masonry { columns: 2; }
       .albums-grid { grid-template-columns: 1fr; }
       .videos-grid { grid-template-columns: 1fr; }
       .video-featured { grid-column: span 1; }
+      .album-modal-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 576px) {
       .gallery-masonry { columns: 2; }
       .filter-inner { flex-direction: column; align-items: flex-start; }
       .photo-count { display: none; }
+      .album-modal { padding: var(--space-md); }
+      .album-modal-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-xs); }
     }
   </style>
 </head>
 
 <body class="gallery-page">
 
-  <!-- Skip to content — keyboard accessibility -->
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- NAV -->
   <nav id="navbar">
     <div class="nav-container">
-<a href="../index.html" class="nav-logo">
-  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
-       alt="IoTeams KICT Logo"
-       style="height: 48px; width: auto; object-fit: contain; background: transparent;">
-</a>
+      <a href="../index.html" class="nav-logo">
+        <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
+             alt="IoTeams KICT Logo"
+             style="height: 48px; width: auto; object-fit: contain; background: transparent;">
+      </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="../index.html">Home</a></li>
         <li><a href="our-story.html">Our Story</a></li>
@@ -587,7 +613,6 @@
         <li><a href="gallery.html" class="active">Gallery</a></li>
         <li><a href="blog.html">Blog</a></li>
       </ul>
-
     </div>
   </nav>
 
@@ -644,7 +669,7 @@
           <button class="filter-btn" data-filter="team">Team</button>
         </div>
         <span class="photo-count" id="photoCount">
-          Showing <span id="visibleCount">24</span> of <span>24</span> photos
+          Showing <span id="visibleCount">12</span> photos
         </span>
       </div>
     </div>
@@ -661,19 +686,15 @@
 
         <div class="gallery-masonry" id="galleryGrid">
 
-          <!-- Team photo — real IoTeams group photo -->
           <a href="../assets/img/gallery/gallery-team.jpg"
              class="gallery-item glightbox"
              data-gallery="ioteams"
              data-category="team"
-             data-title="IoTeams IIUM — Committee & Members 2025"
-             data-description="The IoTeams IIUM team at IIUM Gombak Campus, 2025.">
+             data-title="IoTeams IIUM — Committee & Members 2025">
             <img src="../assets/img/gallery/gallery-team.jpg"
                  alt="IoTeams IIUM team photo 2025"
                  loading="lazy">
-            <div class="gallery-category">
-              <span class="badge badge-white">Team</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-white">Team</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -689,16 +710,14 @@
               <i class="bi bi-image"></i>
               <span>gallery-2.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-gold">Hackathon</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-gold">Hackathon</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
             </div>
           </a>
 
-          <a href="../assets/img/gallery/.jpg"
+          <a href="../assets/img/gallery/gallery-3.jpg"
              class="gallery-item glightbox"
              data-gallery="ioteams"
              data-category="team"
@@ -707,9 +726,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-3.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-white">Team</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-white">Team</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -725,9 +742,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-4.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-turq">Showcase</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-turq">Showcase</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -743,9 +758,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-5.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-teal">Workshop</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-teal">Workshop</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -761,9 +774,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-6.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-gold">Hackathon</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-gold">Hackathon</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -779,9 +790,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-7.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-turq">Showcase</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-turq">Showcase</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -797,9 +806,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-8.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-white">Team</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-white">Team</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -815,9 +822,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-9.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-teal">Workshop</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-teal">Workshop</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -833,9 +838,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-10.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-gold">Hackathon</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-gold">Hackathon</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -851,9 +854,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-11.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-white">Team</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-white">Team</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -869,9 +870,7 @@
               <i class="bi bi-image"></i>
               <span>gallery-12.jpg</span>
             </div>
-            <div class="gallery-category">
-              <span class="badge badge-turq">Showcase</span>
-            </div>
+            <div class="gallery-category"><span class="badge badge-turq">Showcase</span></div>
             <div class="gallery-overlay">
               <i class="bi bi-arrows-angle-expand"></i>
               <span class="gallery-overlay-label">View</span>
@@ -880,7 +879,6 @@
 
         </div>
 
-        <!-- Load More -->
         <div class="load-more-wrap" data-aos="fade-up">
           <button class="btn-outline-gold" id="loadMore">
             <i class="bi bi-plus-circle"></i> Load More Photos
@@ -890,7 +888,7 @@
       </div>
     </section>
 
-    <!-- EVENT ALBUMS -->
+    <!-- EVENT ALBUMS — JS-driven -->
     <section id="albums">
       <div class="albums-inner">
 
@@ -900,101 +898,27 @@
           <hr class="divider-gold">
         </div>
 
-        <div class="albums-grid">
+        <!-- Album cards injected here by JS -->
+        <div class="albums-grid" id="albumsGrid"></div>
 
-          <div class="album-card" data-aos="fade-up" data-aos-delay="0">
-            <div class="album-cover">
-              <div class="album-cover-placeholder">
-                <i class="bi bi-images"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">hackathon-2025/</span>
-              </div>
-              <div class="album-overlay"></div>
-              <span class="album-count">18 Photos</span>
-            </div>
-            <div class="album-info">
-              <h4>Smart Campus Hackathon 2025</h4>
-              <span class="album-date">January 2025</span>
-            </div>
-          </div>
-
-          <div class="album-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="album-cover">
-              <div class="album-cover-placeholder">
-                <i class="bi bi-images"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">workshop-esp32/</span>
-              </div>
-              <div class="album-overlay"></div>
-              <span class="album-count">12 Photos</span>
-            </div>
-            <div class="album-info">
-              <h4>ESP32 Workshop — June 2025</h4>
-              <span class="album-date">June 2025</span>
-            </div>
-          </div>
-
-          <div class="album-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="album-cover">
-              <div class="album-cover-placeholder">
-                <i class="bi bi-images"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">showcase-sem1/</span>
-              </div>
-              <div class="album-overlay"></div>
-              <span class="album-count">24 Photos</span>
-            </div>
-            <div class="album-info">
-              <h4>Semester 1 Project Showcase</h4>
-              <span class="album-date">July 2025</span>
-            </div>
-          </div>
-
-          <div class="album-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="album-cover">
-              <div class="album-cover-placeholder">
-                <i class="bi bi-images"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">industry-talk/</span>
-              </div>
-              <div class="album-overlay"></div>
-              <span class="album-count">8 Photos</span>
-            </div>
-            <div class="album-info">
-              <h4>Industry Talk — IoT Security</h4>
-              <span class="album-date">February 2025</span>
-            </div>
-          </div>
-
-          <div class="album-card" data-aos="fade-up" data-aos-delay="400">
-            <div class="album-cover">
-              <div class="album-cover-placeholder">
-                <i class="bi bi-images"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">aws-workshop/</span>
-              </div>
-              <div class="album-overlay"></div>
-              <span class="album-count">10 Photos</span>
-            </div>
-            <div class="album-info">
-              <h4>AWS IoT Core Workshop</h4>
-              <span class="album-date">October 2024</span>
-            </div>
-          </div>
-
-          <div class="album-card" data-aos="fade-up" data-aos-delay="500">
-            <div class="album-cover">
-              <div class="album-cover-placeholder">
-                <i class="bi bi-images"></i>
-                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">team-2025/</span>
-              </div>
-              <div class="album-overlay"></div>
-              <span class="album-count">15 Photos</span>
-            </div>
-            <div class="album-info">
-              <h4>Committee & Team 2025</h4>
-              <span class="album-date">2025</span>
-            </div>
-          </div>
-
-        </div>
       </div>
     </section>
+
+    <!-- ALBUM MODAL — shared, content swapped by JS -->
+    <div class="album-modal-backdrop" id="albumModal" role="dialog" aria-modal="true" aria-labelledby="albumModalTitle">
+      <div class="album-modal">
+        <div class="album-modal-header">
+          <div>
+            <h3 class="album-modal-title" id="albumModalTitle"></h3>
+            <span class="album-modal-meta" id="albumModalMeta"></span>
+          </div>
+          <button class="album-modal-close" id="albumModalClose" aria-label="Close album">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="album-modal-grid" id="albumModalGrid"></div>
+      </div>
+    </div>
 
     <!-- VIDEO HIGHLIGHTS -->
     <section id="videos">
@@ -1008,7 +932,6 @@
 
         <div class="videos-grid">
 
-          <!-- Featured video — real IoTeams video -->
           <div class="video-card video-featured" data-aos="fade-up">
             <div class="video-thumb" style="position:relative; overflow:hidden;">
               <video
@@ -1034,57 +957,51 @@
             </div>
           </div>
 
-<!-- Regular video 1 -->
-<div class="video-card" data-aos="fade-up" data-aos-delay="100">
-  <div class="video-thumb" style="position:relative; overflow:hidden;">
-    <video
-      src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_vid_2026.mp4"
-      style="width:100%; height:100%; object-fit:cover; display:block;"
-      poster="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_img_2026.jpeg"
-      preload="metadata"
-      id="video2">
-    </video>
-    <div class="video-play" onclick="playVideo('video2', this)" style="cursor:pointer;">
-      <div class="video-play-btn">
-        <i class="bi bi-play-fill"></i>
-      </div>
-    </div>
-    <span class="video-duration">2:18</span>
-  </div>
-  <div class="video-info">
-    <h4>ESP32 Workshop Highlights</h4>
-    <div class="video-meta">
-      <span><i class="bi bi-calendar3"></i> June 2025</span>
-      <span><i class="bi bi-eye"></i> 480 views</span>
-    </div>
-  </div>
-</div>
+          <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="video-thumb" style="position:relative; overflow:hidden;">
+              <video
+                src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_vid_2026.mp4"
+                style="width:100%; height:100%; object-fit:cover; display:block;"
+                poster="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_img_2026.jpeg"
+                preload="metadata"
+                id="video2">
+              </video>
+              <div class="video-play" onclick="playVideo('video2', this)" style="cursor:pointer;">
+                <div class="video-play-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+              <span class="video-duration">2:18</span>
+            </div>
+            <div class="video-info">
+              <h4>ESP32 Workshop Highlights</h4>
+              <div class="video-meta">
+                <span><i class="bi bi-calendar3"></i> June 2025</span>
+                <span><i class="bi bi-eye"></i> 480 views</span>
+              </div>
+            </div>
+          </div>
 
-<!-- Regular video 2 -->
-<div class="video-card" data-aos="fade-up" data-aos-delay="200">
-  <div class="video-thumb" style="position:relative; overflow:hidden;">
-    <video
-      src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_vid_2026.mp4"
-      style="width:100%; height:100%; object-fit:cover; display:block;"
-      poster="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_img_2026.jpeg"
-      preload="metadata"
-      id="video3">
-    </video>
-    <div class="video-play" onclick="playVideo('video3', this)" style="cursor:pointer;">
-      <div class="video-play-btn">
-        <i class="bi bi-play-fill"></i>
-      </div>
-    </div>
-    <span class="video-duration">3:05</span>
-  </div>
-  <div class="video-info">
-    <h4>Project Showcase — Semester Demo Day</h4>
-    <div class="video-meta">
-      <span><i class="bi bi-calendar3"></i> November 2024</span>
-      <span><i class="bi bi-eye"></i> 720 views</span>
-    </div>
-  </div>
-</div>
+          <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="video-thumb" style="position:relative; overflow:hidden;">
+              <video
+                src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_vid_2026.mp4"
+                style="width:100%; height:100%; object-fit:cover; display:block;"
+                poster="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/gallery/IoTeams_img_2026.jpeg"
+                preload="metadata"
+                id="video3">
+              </video>
+              <div class="video-play" onclick="playVideo('video3', this)" style="cursor:pointer;">
+                <div class="video-play-btn"><i class="bi bi-play-fill"></i></div>
+              </div>
+              <span class="video-duration">3:05</span>
+            </div>
+            <div class="video-info">
+              <h4>Project Showcase — Semester Demo Day</h4>
+              <div class="video-meta">
+                <span><i class="bi bi-calendar3"></i> November 2024</span>
+                <span><i class="bi bi-eye"></i> 720 views</span>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -1093,15 +1010,13 @@
   </main>
 
   <!-- FOOTER -->
-<footer id="footer">
+  <footer id="footer">
     <div class="footer-inner">
-
-      <!-- Brand + tagline -->
       <div class="footer-brand">
         <a href="../index.html" class="footer-logo">
           <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
-          alt="IoTeams KICT Logo"
-          style="height:72px; width:auto; object-fit:contain; background: transparent;">
+               alt="IoTeams KICT Logo"
+               style="height:72px; width:auto; object-fit:contain; background: transparent;">
         </a>
         <p class="footer-tagline">Building the Future of IoT Together.</p>
         <div class="footer-social">
@@ -1111,12 +1026,10 @@
           <a href="http://www.youtube.com/@IoTeamsKICT" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
         </div>
       </div>
-
-      <!-- Nav links -->
       <div class="footer-links">
         <h6>Pages</h6>
         <ul class="footer-nav">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="our-story.html">Our Story</a></li>
           <li><a href="programmes.html">Programmes</a></li>
           <li><a href="events.html">Events</a></li>
@@ -1124,29 +1037,18 @@
           <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
-
-      <!-- Contact info -->
       <div class="footer-contact">
         <h6>Got questions? We don't bite.</h6>
         <p>Reach out anytime — whether you want to join, collaborate, or just say hello. We reply within 48 hours.</p>
         <ul class="footer-contact-list">
-          <li>
-            <i class="bi bi-geo-alt"></i>
-            <span>Kulliyyah of ICT (KICT), IIUM Gombak, Kuala Lumpur</span>
-          </li>
-          <li>
-            <i class="bi bi-envelope"></i>
-            <a href="mailto:ioteamskict@gmail.com">ioteamskict@gmail.com</a>
-          </li>
+          <li><i class="bi bi-geo-alt"></i><span>Kulliyyah of ICT (KICT), IIUM Gombak, Kuala Lumpur</span></li>
+          <li><i class="bi bi-envelope"></i><a href="mailto:ioteamskict@gmail.com">ioteamskict@gmail.com</a></li>
         </ul>
       </div>
-
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
-      <p style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">
-        IIUM Gombak · Kuala Lumpur · Malaysia
-      </p>
+      <p style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">IIUM Gombak · Kuala Lumpur · Malaysia</p>
     </div>
   </footer>
 
@@ -1164,67 +1066,278 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>  
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-<script src="../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script src="../assets/js/main.js"></script>
 
   <script>
-    /* ── Featured video play ── */
-    function playFeaturedVideo() {
-      const video = document.getElementById('featuredVideo');
-      const btn   = document.getElementById('featuredPlayBtn');
-      if (!video) return;
-      if (video.paused) {
-        video.play();
-        btn.style.opacity = '0';
-        video.addEventListener('click', () => {
-          video.pause();
-          btn.style.opacity = '1';
-        }, { once: true });
-      } else {
-        video.pause();
-        btn.style.opacity = '1';
+  (function () {
+
+    /* ══════════════════════════════════════════════════════════
+       EVENT ALBUMS — SINGLE SOURCE OF TRUTH
+       ─────────────────────────────────────────────────────────
+       HOW TO UPDATE:
+       • Add a new album object to the array below
+       • Each album has a `photos` array
+       • The FIRST photo in `photos` becomes the album cover
+       • Leave image: "" to show a placeholder
+       • Paste your Supabase URL into image: "https://..."
+    ══════════════════════════════════════════════════════════ */
+    const albums = [
+      {
+        id:    "FYP Showcase 2026",
+        title: "Innovatex 2026",
+        date:  "January 2026",
+        photos: [
+          { image: "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/events/innovatex%20sem%201%2025-26/IMG_7828.png",  caption: "Opening ceremony" },
+          { image: "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/events/innovatex%20sem%201%2025-26/IMG_7821.png",  caption: "Team brainstorming" },
+          { image: "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/events/innovatex%20sem%201%2025-26/IMG_7838.png",  caption: "Hardware setup" },
+          { image: "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/events/innovatex%20sem%201%2025-26/IMG_7847.png",  caption: "Judging panel" },
+          { image: "https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/events/innovatex%20sem%201%2025-26/IMG_7934.png",  caption: "Winners announcement" },
+          { image: "",  caption: "Group photo" }
+          // ↑ paste Supabase URLs into image: "" to show real photos
+        ]
+      },
+      {
+        id:    "workshop-esp32",
+        title: "ESP32 Workshop — June 2025",
+        date:  "June 2025",
+        photos: [
+          { image: "",  caption: "Workshop intro" },
+          { image: "",  caption: "Hands-on wiring" },
+          { image: "",  caption: "Code walkthrough" },
+          { image: "",  caption: "Testing sensors" }
+        ]
+      },
+      {
+        id:    "showcase-sem1",
+        title: "Semester 1 Project Showcase",
+        date:  "July 2025",
+        photos: [
+          { image: "",  caption: "Smart plant monitor demo" },
+          { image: "",  caption: "Air quality project" },
+          { image: "",  caption: "Audience Q&A" },
+          { image: "",  caption: "Best project award" },
+          { image: "",  caption: "Team celebration" }
+        ]
+      },
+      {
+        id:    "industry-talk",
+        title: "Industry Talk — IoT Security",
+        date:  "February 2025",
+        photos: [
+          { image: "",  caption: "Speaker introduction" },
+          { image: "",  caption: "Live demo" },
+          { image: "",  caption: "Q&A session" }
+        ]
+      },
+      {
+        id:    "aws-workshop",
+        title: "AWS IoT Core Workshop",
+        date:  "October 2024",
+        photos: [
+          { image: "",  caption: "AWS console walkthrough" },
+          { image: "",  caption: "Device provisioning" },
+          { image: "",  caption: "Dashboard setup" }
+        ]
+      },
+      {
+        id:    "team-2025",
+        title: "Committee & Team 2025",
+        date:  "2025",
+        photos: [
+          { image: "",  caption: "Executive committee" },
+          { image: "",  caption: "Full team photo" },
+          { image: "",  caption: "Lab session" }
+        ]
       }
+    ];
+
+    /* ── helpers ─────────────────────────────────────────── */
+    function coverImg(album) {
+      const first = album.photos[0];
+      if (first && first.image) {
+        return `<img src="${first.image}" alt="${album.title} cover"
+                     class="album-cover-main" loading="lazy">`;
+      }
+      return `<div class="album-cover-placeholder">
+                <i class="bi bi-images"></i>
+                <span style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--white-muted);">${album.id}/</span>
+              </div>`;
     }
 
-    /* ── Gallery Filter ── */
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const visibleCount = document.getElementById('visibleCount');
-    const totalCount = galleryItems.length;
+    /* ── render album cards ──────────────────────────────── */
+    function renderAlbums() {
+      const grid = document.getElementById("albumsGrid");
+      grid.innerHTML = albums.map((album, i) => `
+        <div class="album-card"
+             data-aos="fade-up"
+             data-aos-delay="${i * 100}"
+             data-album-id="${album.id}"
+             role="button"
+             tabindex="0"
+             aria-label="Open ${album.title} album">
+          <div class="album-cover">
+            ${coverImg(album)}
+            <div class="album-overlay"></div>
+            <div class="album-hover-overlay">
+              <span><i class="bi bi-images"></i> View Album</span>
+            </div>
+            <span class="album-count">${album.photos.length} Photos</span>
+          </div>
+          <div class="album-info">
+            <h4>${album.title}</h4>
+            <span class="album-date">${album.date}</span>
+          </div>
+        </div>`).join("");
+
+      // Attach click + keyboard listeners
+      grid.querySelectorAll(".album-card").forEach(card => {
+        card.addEventListener("click",   () => openAlbum(card.dataset.albumId));
+        card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openAlbum(card.dataset.albumId); });
+      });
+    }
+
+    /* ── open album modal ────────────────────────────────── */
+    let albumLightbox = null;
+
+    function openAlbum(id) {
+      const album = albums.find(a => a.id === id);
+      if (!album) return;
+
+      // Set modal header
+      document.getElementById("albumModalTitle").textContent = album.title;
+      document.getElementById("albumModalMeta").textContent  = album.date + " · " + album.photos.length + " photos";
+
+      // Build modal image grid
+      const modalGrid = document.getElementById("albumModalGrid");
+      modalGrid.innerHTML = album.photos.map((photo, idx) => {
+        const glClass = photo.image ? "album-glightbox" : "";
+        const href    = photo.image ? `href="${photo.image}"` : "";
+        const dataGal = `data-gallery="album-${id}"`;
+        const dataTitle = `data-title="${photo.caption || album.title}"`;
+
+        if (photo.image) {
+          return `
+            <a ${href} class="album-modal-img-wrap ${glClass}" ${dataGal} ${dataTitle}>
+              <img src="${photo.image}" alt="${photo.caption || ''}" loading="lazy">
+              <div class="album-modal-img-overlay">
+                <i class="bi bi-arrows-angle-expand"></i>
+              </div>
+            </a>`;
+        } else {
+          return `
+            <div class="album-modal-img-wrap">
+              <div class="album-modal-placeholder">
+                <i class="bi bi-image"></i>
+                <span>${photo.caption || 'Photo ' + (idx + 1)}</span>
+              </div>
+            </div>`;
+        }
+      }).join("");
+
+      // Init GLightbox for this album's images
+      if (albumLightbox) albumLightbox.destroy();
+      albumLightbox = GLightbox({
+        selector:       ".album-glightbox",
+        touchNavigation: true,
+        loop:           true,
+        openEffect:     "fade",
+        closeEffect:    "fade",
+        slideEffect:    "slide"
+      });
+
+      // Open modal
+      const modal = document.getElementById("albumModal");
+      modal.classList.add("open");
+      document.body.classList.add("nav-open"); // reuse body lock
+      modal.focus();
+    }
+
+    /* ── close album modal ───────────────────────────────── */
+    function closeAlbum() {
+      document.getElementById("albumModal").classList.remove("open");
+      document.body.classList.remove("nav-open");
+    }
+
+    document.getElementById("albumModalClose").addEventListener("click", closeAlbum);
+
+    // Close on backdrop click (outside modal box)
+    document.getElementById("albumModal").addEventListener("click", function (e) {
+      if (e.target === this) closeAlbum();
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && document.getElementById("albumModal").classList.contains("open")) {
+        closeAlbum();
+      }
+    });
+
+    /* ── gallery masonry filter ──────────────────────────── */
+    const filterBtns   = document.querySelectorAll(".filter-btn");
+    const galleryItems = document.querySelectorAll(".gallery-item");
+    const visibleCount = document.getElementById("visibleCount");
 
     function updateCount() {
-      const visible = document.querySelectorAll('.gallery-item:not(.hidden)').length;
-      if (visibleCount) visibleCount.textContent = visible;
+      const n = document.querySelectorAll(".gallery-item:not(.hidden)").length;
+      if (visibleCount) visibleCount.textContent = n;
     }
 
     filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
         const filter = btn.dataset.filter;
-
         galleryItems.forEach(item => {
-          if (filter === 'all' || item.dataset.category === filter) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
-          }
+          item.classList.toggle("hidden", filter !== "all" && item.dataset.category !== filter);
         });
-
         updateCount();
       });
     });
 
-    /* ── Load More (simulated) ── */
-    document.getElementById('loadMore')?.addEventListener('click', function () {
+    updateCount();
+
+    /* ── load more (simulated) ───────────────────────────── */
+    document.getElementById("loadMore")?.addEventListener("click", function () {
       this.innerHTML = '<i class="bi bi-check-circle"></i> All Photos Loaded';
-      this.disabled = true;
-      this.style.opacity = '0.5';
+      this.disabled  = true;
+      this.style.opacity = "0.5";
     });
+
+    /* ── init ────────────────────────────────────────────── */
+    renderAlbums();
+
+  })();
+
+  /* ── video play helpers ────────────────────────────────── */
+  function playFeaturedVideo() {
+    const video = document.getElementById("featuredVideo");
+    const btn   = document.getElementById("featuredPlayBtn");
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      btn.style.opacity = "0";
+      video.addEventListener("click", () => { video.pause(); btn.style.opacity = "1"; }, { once: true });
+    } else {
+      video.pause();
+      btn.style.opacity = "1";
+    }
+  }
+
+  function playVideo(videoId, btn) {
+    const video = document.getElementById(videoId);
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      btn.style.opacity = "0";
+      video.addEventListener("click", () => { video.pause(); btn.style.opacity = "1"; }, { once: true });
+    } else {
+      video.pause();
+      btn.style.opacity = "1";
+    }
+  }
   </script>
 
 </body>
