@@ -21,12 +21,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Getting Started with MQTT Protocol — IoTeams Blog</title>
-  <meta name="description" content="A complete beginner's guide to MQTT — setting up a broker, publishing and subscribing, and connecting ESP32 to the cloud.">
+  <title>DIGITEX 2026: Exploring the Future of Digital Innovation — IoTeams Blog</title>
+  <meta name="description" content="IoTeams IIUM heads to DIGITEX 2026 at UTM Johor Bahru — the team, the journey to approval, the schedule, and what's at stake at the Grand Finale pitching session.">
   <!-- SEO: Open Graph -->
-  <meta property="og:title" content="Getting Started with MQTT Protocol — IoTeams Blog">
-  <meta property="og:description" content="A complete beginner guide to MQTT — setting up a broker, publishing and subscribing, and connecting your ESP32 to the cloud.">
-  <meta property="og:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta property="og:title" content="DIGITEX 2026: Exploring the Future of Digital Innovation — IoTeams Blog">
+  <meta property="og:description" content="IoTeams IIUM heads to DIGITEX 2026 at UTM Johor Bahru — the team, the journey to approval, the schedule, and what's at stake at the Grand Finale pitching session.">
+  <meta property="og:image" content="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/blog_1/digitex_img1.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ioteams.iium.edu.my/pages/blog-details.html">
   <meta property="og:site_name" content="IoTeams IIUM">
@@ -34,9 +34,9 @@
   <!-- SEO: Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@ioteams_iium">
-  <meta name="twitter:title" content="Getting Started with MQTT Protocol — IoTeams Blog">
-  <meta name="twitter:description" content="A complete beginner guide to MQTT — setting up a broker, publishing and subscribing, and connecting your ESP32 to the cloud.">
-  <meta name="twitter:image" content="https://ioteams.iium.edu.my/assets/img/icons/og-image.png">
+  <meta name="twitter:title" content="DIGITEX 2026: Exploring the Future of Digital Innovation — IoTeams Blog">
+  <meta name="twitter:description" content="IoTeams IIUM heads to DIGITEX 2026 at UTM Johor Bahru — the team, the journey to approval, the schedule, and what's at stake at the Grand Finale pitching session.">
+  <meta name="twitter:image" content="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/blog_1/digitex_img1.jpg">
 
   <!-- SEO: Canonical -->
   <link rel="canonical" href="https://ioteams.iium.edu.my/pages/blog-details.html">
@@ -475,6 +475,87 @@
       line-height: 1.65;
     }
 
+    /* Tables */
+    .post-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0 var(--space-lg);
+      font-size: var(--fs-sm);
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .post-content th,
+    .post-content td {
+      padding: 0.65rem var(--space-sm);
+      border-bottom: 1px solid var(--border-dark);
+      text-align: left;
+      color: var(--white-dim);
+    }
+
+    .post-content thead th {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--black-4);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .post-content tbody tr:last-child td { border-bottom: none; }
+    .post-content tbody tr:hover { background: rgba(201,168,76,0.04); }
+
+    .post-content td strong { color: var(--white); }
+
+    /* Quick-facts strip */
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: var(--space-lg) 0;
+    }
+
+    .quick-fact {
+      background: var(--black-3);
+      padding: var(--space-md);
+      text-align: center;
+    }
+
+    .quick-fact i {
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .quick-fact .qf-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .quick-fact .qf-value {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 576px) {
+      .quick-facts { grid-template-columns: 1fr 1fr; }
+    }
+
     /* Images in content */
     .post-content figure {
       margin: var(--space-lg) 0;
@@ -788,15 +869,15 @@
   <div class="marquee-strip">
     <div class="marquee-inner">
       <span>IoTeams Blog</span><span class="dot">◆</span>
-      <span>MQTT Protocol</span><span class="dot">◆</span>
-      <span>Tutorial</span><span class="dot">◆</span>
-      <span>ESP32</span><span class="dot">◆</span>
-      <span>8 Min Read</span><span class="dot">◆</span>
+      <span>DIGITEX 2026</span><span class="dot">◆</span>
+      <span>UTM Johor Bahru</span><span class="dot">◆</span>
+      <span>Competition</span><span class="dot">◆</span>
+      <span>6 Min Read</span><span class="dot">◆</span>
       <span>IoTeams Blog</span><span class="dot">◆</span>
-      <span>MQTT Protocol</span><span class="dot">◆</span>
-      <span>Tutorial</span><span class="dot">◆</span>
-      <span>ESP32</span><span class="dot">◆</span>
-      <span>8 Min Read</span><span class="dot">◆</span>
+      <span>DIGITEX 2026</span><span class="dot">◆</span>
+      <span>UTM Johor Bahru</span><span class="dot">◆</span>
+      <span>Competition</span><span class="dot">◆</span>
+      <span>6 Min Read</span><span class="dot">◆</span>
     </div>
   </div>
 
@@ -812,10 +893,10 @@
             <i class="bi bi-arrow-left"></i> Back to Blog
           </a>
           <span style="color:var(--border-dark);">|</span>
-          <span class="badge badge-teal">Tutorial</span>
-          <span class="badge badge-gold">Beginner</span>
-          <span class="post-hero-date"><i class="bi bi-calendar3"></i> 12 May 2025</span>
-          <span class="post-hero-read"><i class="bi bi-clock"></i> 8 min read</span>
+          <span class="badge badge-teal">Competition</span>
+          <span class="badge badge-gold">KICT News</span>
+          <span class="post-hero-date"><i class="bi bi-calendar3"></i> 17 June 2026</span>
+          <span class="post-hero-read"><i class="bi bi-clock"></i> 6 min read</span>
         </div>
 
         <!-- Title -->
@@ -825,9 +906,10 @@
 
         <!-- Excerpt -->
         <p class="post-excerpt" data-aos="fade-up" data-aos-delay="100">
-          DIGITEX 2026 serves as a platform that brings together students, academics,
-          researchers, and industry professionals to explore advancements in digital
-          innovation, engineering, and emerging technologies. 
+          IoTeams IIUM secured Kulliyyah approval and headed to UTM Johor Bahru for the
+          Digital Innovation & Technology Exhibition (DIGITEX) 2026 — a platform bringing
+          together students, academics, researchers, and industry professionals to explore
+          advancements in digital innovation, engineering, and emerging technologies.
         </p>
 
         <!-- Author + Share -->
@@ -837,7 +919,7 @@
               <i class="bi bi-person-fill"></i>
             </div>
             <div class="author-details">
-              <h6>Wan Zul</h6>
+              <h6>Wan Zul 'Irfan</h6>
               <span>President · IoTeams IIUM</span>
             </div>
           </div>
@@ -870,262 +952,247 @@
         <article class="post-content" data-aos="fade-up">
 
           <p class="lead">
-            If you've been working with IoT devices, you've almost certainly heard of MQTT.
-            It's lightweight, efficient, and designed specifically for constrained networks
-            and devices — which makes it perfect for the ESP32, Arduino, and Raspberry Pi
-            projects we build at IoTeams.
+            Six members, one advisor, and a green light from the Kulliyyah — that's all
+            it took for IoTeams IIUM to earn a seat at DIGITEX 2026. Here's the story of
+            how we got there, what the competition actually involves, and what's coming
+            up next.
           </p>
 
           <p>
-            In this tutorial, we'll cover everything from the basic concepts of MQTT
-            to a complete working example sending sensor data from your ESP32 to a cloud dashboard.
-            By the end, you'll have a broker running, devices publishing data, and a subscriber
-            reading it all in real time.
+            The Digital Innovation & Technology Exhibition (DIGITEX) 2026, organised by
+            the Faculty of Computing at Universiti Teknologi Malaysia (UTM), brought
+            together students, academics, researchers, and industry professionals from
+            across the region to showcase ideas in web and mobile development, hardware
+            and software innovation, and IoT-based connected systems. IoTeams represented
+            the Kulliyyah of Information and Communication Technology (KICT), IIUM, at
+            the Grand Finale held in Johor Bahru.
           </p>
+
+          <div class="quick-facts" data-aos="fade-up">
+            <div class="quick-fact">
+              <i class="bi bi-buildings"></i>
+              <span class="qf-label">Organiser</span>
+              <span class="qf-value">Faculty of Computing, UTM</span>
+            </div>
+            <div class="quick-fact">
+              <i class="bi bi-calendar-event"></i>
+              <span class="qf-label">Grand Finale</span>
+              <span class="qf-value">16 June 2026</span>
+            </div>
+            <div class="quick-fact">
+              <i class="bi bi-geo-alt"></i>
+              <span class="qf-label">Venue</span>
+              <span class="qf-value">N28a, Faculty of Computing, UTM JB</span>
+            </div>
+            <div class="quick-fact">
+              <i class="bi bi-people"></i>
+              <span class="qf-label">IoTeams Squad</span>
+              <span class="qf-value">6 Students + 1 Advisor</span>
+            </div>
+          </div>
 
           <div class="info-box">
             <i class="bi bi-info-circle"></i>
             <p>
-              <strong style="color:var(--white);">Prerequisites:</strong>
-              Basic Arduino/ESP32 programming knowledge. You should be comfortable
-              uploading a sketch and reading serial output. No cloud experience required.
+              <strong style="color:var(--white);">In a hurry?</strong>
+              Jump straight to the <a href="#key-dates" style="color:var(--teal);">key dates</a>,
+              the <a href="#exhibition-topics" style="color:var(--teal);">awards on offer</a>, or
+              <a href="#grand-finale" style="color:var(--teal);">finale day itself</a> using the
+              table of contents on the right.
             </p>
           </div>
 
           <!-- Section 1 -->
-          <h2 id="what-is-mqtt">What is MQTT?</h2>
+          <h2 id="about-digitex">What Is DIGITEX 2026?</h2>
 
           <p>
-            MQTT stands for Message Queuing Telemetry Transport. It's a publish-subscribe
-            messaging protocol originally designed by IBM in the late 1990s for monitoring
-            oil pipelines via satellite. Today it's the de facto standard for IoT communication.
+            DIGITEX 2026 serves as a platform that brings together students, academics,
+            researchers, and industry professionals to explore advancements in digital
+            innovation, engineering, and emerging technologies. The programme aims to
+            foster collaboration and encourage the development of creative technological
+            solutions to real-world challenges.
           </p>
 
           <p>
-            The protocol has three key components — the <strong style="color:var(--white);">broker</strong>,
-            <strong style="color:var(--white);">publishers</strong>, and
-            <strong style="color:var(--white);">subscribers</strong>.
+            Beyond the competition format, DIGITEX promotes knowledge exchange and
+            professional networking, giving participants a space to showcase their
+            projects, gain exposure to current technological trends, and receive
+            feedback directly from industry experts and judges — while representing
+            their home institutions on an inter-university stage.
           </p>
 
           <ul>
-            <li>The <strong style="color:var(--white);">broker</strong> is a central server that receives all messages and routes them to the right subscribers.</li>
-            <li><strong style="color:var(--white);">Publishers</strong> are devices (like your ESP32) that send data to the broker.</li>
-            <li><strong style="color:var(--white);">Subscribers</strong> are clients that listen for messages on specific topics.</li>
+            <li><strong style="color:var(--white);">Web & Mobile Application</strong> — apps and platforms solving real-world problems.</li>
+            <li><strong style="color:var(--white);">Hardware & Software Innovation</strong> — integrated builds spanning both disciplines.</li>
+            <li><strong style="color:var(--white);">Internet of Things (IoT) Devices & Connected Systems</strong> — sensors, automation, and connected hardware.</li>
+            <li><strong style="color:var(--white);">Other Related Technologies & Devices Prototypes</strong> — open-category emerging tech.</li>
           </ul>
+
+          <!-- Section 2 -->
+          <h2 id="meet-the-team">Meet the IoTeams Squad</h2>
+
+          <p>
+            Representing KICT at DIGITEX 2026 was a six-member student team under the
+            guidance of our faculty advisor. The squad spent weeks refining their
+            submission before it was cleared for the Grand Finale stage.
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>Role</th><th>Name</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Advisor</strong></td><td>Ts. Dr. Ahmad Anwar bin Zainuddin</td></tr>
+              <tr><td>Team Member</td><td>Wan Zul 'Irfan bin Wan Zulkifli</td></tr>
+              <tr><td>Team Member</td><td>Rabi'atul Adawiyah binti Mohd Nazri</td></tr>
+              <tr><td>Team Member</td><td>Luqman Azhad bin Nazrulhisam</td></tr>
+              <tr><td>Team Member</td><td>Nor Amanina binti Zeham</td></tr>
+              <tr><td>Team Member</td><td>Muhammad Faris Fitrey bin Zukarnihasan</td></tr>
+              <tr><td>Team Member</td><td>Hannah Maisarah binti Mohammad Hassan</td></tr>
+            </tbody>
+          </table>
 
           <blockquote>
             <p>
-              "MQTT is to IoT what HTTP is to the web. Once you understand it,
-              you can build almost any connected system."
+              Showing up at DIGITEX wasn't just about the pitch on finale day —
+              it was weeks of paperwork, rehearsal, and late-night fixes that got
+              us onto that stage in the first place.
             </p>
           </blockquote>
 
-          <!-- Section 2 -->
-          <h2 id="setting-up-broker">Setting Up a Mosquitto Broker</h2>
-
-          <p>
-            The most popular open-source MQTT broker is <code>Mosquitto</code>.
-            We'll install it locally first, then discuss cloud options.
-          </p>
-
-          <h3 id="install-mosquitto">Installing Mosquitto</h3>
-
-          <p>On Ubuntu/Debian (including Raspberry Pi OS):</p>
-
-          <div style="position:relative;">
-            <button class="copy-btn" onclick="copyCode(this)">
-              <i class="bi bi-clipboard"></i> Copy
-            </button>
-            <span class="code-label">bash</span>
-            <pre><code>sudo apt update
-sudo apt install -y mosquitto mosquitto-clients
-sudo systemctl enable mosquitto
-sudo systemctl start mosquitto</code></pre>
-          </div>
-
-          <p>Verify it's running:</p>
-
-          <div style="position:relative;">
-            <button class="copy-btn" onclick="copyCode(this)">
-              <i class="bi bi-clipboard"></i> Copy
-            </button>
-            <span class="code-label">bash</span>
-            <pre><code>sudo systemctl status mosquitto
-# Should show: active (running)</code></pre>
-          </div>
-
-          <div class="warn-box">
-            <i class="bi bi-exclamation-triangle"></i>
-            <p>
-              By default, Mosquitto only accepts connections from localhost.
-              To allow external devices, you'll need to edit
-              <code>/etc/mosquitto/mosquitto.conf</code> and add
-              <code>listener 1883</code> and <code>allow_anonymous true</code>.
-              Don't do this on a public network without authentication.
-            </p>
-          </div>
-
           <!-- Section 3 -->
-          <h2 id="topics">Understanding Topics</h2>
+          <h2 id="getting-there">Getting the Green Light</h2>
 
           <p>
-            MQTT uses a topic-based routing system. Topics are hierarchical strings
-            separated by slashes, similar to file paths:
+            Before any team can represent IIUM externally, the Kulliyyah has to formally
+            sign off on it. UTM's Faculty of Computing first extended an invitation to
+            KICT in late March, encouraging students to take part and promote the
+            programme. From there, our advisor prepared a working paper outlining the
+            objectives, schedule, and budget for participation, which was routed through
+            the Department of Computer Science and the Kulliyyah for approval.
           </p>
-
-          <div style="position:relative;">
-            <button class="copy-btn" onclick="copyCode(this)">
-              <i class="bi bi-clipboard"></i> Copy
-            </button>
-            <span class="code-label">topics</span>
-            <pre><code>ioteams/sensors/temperature
-ioteams/sensors/humidity
-ioteams/lab/door/status
-ioteams/actuators/fan/speed</code></pre>
-          </div>
 
           <p>
-            Subscribers can use wildcards: <code>+</code> matches a single level,
-            <code>#</code> matches all remaining levels.
+            By 21 April 2026, the Kulliyyah of Information and Communication Technology
+            had officially approved the proposal — appointing Ts. Dr. Ahmad Anwar bin
+            Zainuddin as advisor and allocating budget support from the Student Operating
+            Trust to cover participation costs. With that approval in hand, the real
+            preparation began.
           </p>
-
-          <!-- Section 4 -->
-          <h2 id="esp32-code">Connecting ESP32 via MQTT</h2>
-
-          <p>
-            We'll use the <code>PubSubClient</code> library for Arduino.
-            Install it via the Arduino Library Manager.
-          </p>
-
-          <div style="position:relative;">
-            <button class="copy-btn" onclick="copyCode(this)">
-              <i class="bi bi-clipboard"></i> Copy
-            </button>
-            <span class="code-label">C++ (Arduino)</span>
-            <pre><code>#include &lt;WiFi.h&gt;
-#include &lt;PubSubClient.h&gt;
-#include &lt;DHT.h&gt;
-
-// WiFi credentials
-const char* ssid     = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
-
-// MQTT broker (your Raspberry Pi or cloud IP)
-const char* mqtt_server = "192.168.1.100";
-const int   mqtt_port   = 1883;
-
-// Topics
-const char* topic_temp = "ioteams/sensors/temperature";
-const char* topic_hum  = "ioteams/sensors/humidity";
-
-// DHT22 sensor on pin 4
-DHT dht(4, DHT22);
-WiFiClient espClient;
-PubSubClient client(espClient);
-
-void connectWiFi() {
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("\n✓ WiFi connected: " + WiFi.localIP().toString());
-}
-
-void connectMQTT() {
-  while (!client.connected()) {
-    String clientId = "ESP32-" + String(random(0xffff), HEX);
-    if (client.connect(clientId.c_str())) {
-      Serial.println("✓ MQTT connected");
-    } else {
-      Serial.print("MQTT failed, rc=");
-      Serial.println(client.state());
-      delay(2000);
-    }
-  }
-}
-
-void setup() {
-  Serial.begin(115200);
-  dht.begin();
-  connectWiFi();
-  client.setServer(mqtt_server, mqtt_port);
-  connectMQTT();
-}
-
-void loop() {
-  if (!client.connected()) connectMQTT();
-  client.loop();
-
-  float temp = dht.readTemperature();
-  float hum  = dht.readHumidity();
-
-  if (!isnan(temp) && !isnan(hum)) {
-    client.publish(topic_temp, String(temp).c_str());
-    client.publish(topic_hum,  String(hum).c_str());
-    Serial.printf("Published: temp=%.1f°C hum=%.1f%%\n", temp, hum);
-  }
-
-  delay(5000); // Publish every 5 seconds
-}</code></pre>
-          </div>
 
           <div class="info-box">
             <i class="bi bi-lightbulb"></i>
             <p>
-              <strong style="color:var(--white);">Tip:</strong>
-              In production, never hardcode credentials. Use
-              <code>EEPROM</code> or a config file approach, or flash
-              credentials separately using <code>WiFiManager</code>.
+              <strong style="color:var(--white);">Behind the scenes:</strong>
+              Every external competition IoTeams enters goes through this same approval
+              chain — advisor sign-off, working paper, Kulliyyah review — before a single
+              registration form gets submitted. It's not the most glamorous part of
+              competing, but it's what makes the trip possible.
             </p>
           </div>
 
-          <!-- Section 5 -->
-          <h2 id="testing">Testing Your Setup</h2>
+          <!-- Section 4 -->
+          <h2 id="key-dates">Programme Schedule & Key Dates</h2>
 
           <p>
-            With Mosquitto installed and your ESP32 running, open two terminal windows.
-            In one, subscribe to the temperature topic:
+            DIGITEX 2026 ran across several stages, from open registration in March all
+            the way through to the live pitching session in June:
           </p>
 
-          <div style="position:relative;">
-            <button class="copy-btn" onclick="copyCode(this)">
-              <i class="bi bi-clipboard"></i> Copy
-            </button>
-            <span class="code-label">bash</span>
-            <pre><code>mosquitto_sub -h localhost -t "ioteams/sensors/#" -v</code></pre>
-          </div>
+          <table>
+            <thead>
+              <tr><th>Date</th><th>Milestone</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1 March – 15 May 2026</td><td>Registration & video submission</td></tr>
+              <tr><td>20 May 2026</td><td>Finalist announcement</td></tr>
+              <tr><td>21 May – 10 June 2026</td><td>Poster submission & payment</td></tr>
+              <tr><td><strong>16 June 2026</strong></td><td><strong>Grand Finale — pitching session</strong></td></tr>
+            </tbody>
+          </table>
 
-          <p>You should see output like:</p>
+          <p>
+            For IoTeams specifically, that meant a tight internal timeline too —
+            registering and submitting our video before mid-May, refining the pitch
+            once we were confirmed as finalists, and finalising the poster ahead of
+            the 10 June deadline.
+          </p>
 
-          <div style="position:relative;">
-            <span class="code-label">output</span>
-            <pre><code>ioteams/sensors/temperature 27.3
-ioteams/sensors/humidity 65.2
-ioteams/sensors/temperature 27.4
-ioteams/sensors/humidity 65.1</code></pre>
+          <!-- Section 5 -->
+          <h2 id="exhibition-topics">Exhibition Topics & Awards</h2>
+
+          <p>
+            DIGITEX welcomed entries from a wide range of participants — public and
+            private agencies, institutions of higher learning, and even primary and
+            secondary schools, with separate categories for local and international
+            entrants. Finalists who made it to the Grand Finale competed for:
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>Award</th><th>Prize</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Best of the Best</strong></td><td>RM2,000 + Plaque + Certificate</td></tr>
+              <tr><td><strong>Best Award</strong></td><td>RM1,000 + Plaque + Certificate</td></tr>
+              <tr><td>Gold, Silver & Bronze</td><td>Medal + Certificate (Top 3 Winners)</td></tr>
+            </tbody>
+          </table>
+
+          <p>
+            Our team's submission fell under the <strong style="color:var(--white);">IoT Devices
+            & Connected Systems</strong> track — a natural fit given the kind of connected
+            hardware projects IoTeams builds on campus throughout the year.
+          </p>
+
+          <!-- Section 6 -->
+          <h2 id="grand-finale">Grand Finale Day at UTM Johor Bahru</h2>
+
+          <p>
+            The Grand Finale took place on Tuesday, 16 June 2026, at N28a, Faculty of
+            Computing, UTM Johor Bahru, running from 9:00 a.m. to 5:00 p.m. Finalists from
+            across institutions set up posters, demoed working prototypes, and pitched
+            their projects in front of judges and fellow participants.
+          </p>
+
+          <p>
+            For our squad, the day was the payoff for months of preparation — from the
+            first approval letter back in April, through the registration window, the
+            finalist announcement, and the poster deadline, all the way to standing in
+            front of a panel and defending the work in person.
+          </p>
+
+          <div class="warn-box">
+            <i class="bi bi-exclamation-triangle"></i>
+            <p>
+              Per the competition terms, travel and accommodation for finalists were
+              covered by the participants or their respective faculty — a good reminder
+              to budget early if your team makes it through to a Grand Finale.
+            </p>
           </div>
 
           <hr>
 
-          <h2 id="next-steps">Next Steps</h2>
+          <h2 id="next-steps">What's Next for IoTeams</h2>
 
           <p>
-            Now that you have basic MQTT working, here's what to explore next:
+            DIGITEX 2026 wraps up our latest external competition, but the momentum
+            doesn't stop here. A programme report and financial report are due back to
+            the Kulliyyah within two weeks of completion, and we're already looking
+            ahead to what's next:
           </p>
 
           <ol>
-            <li><strong style="color:var(--white);">Add authentication</strong> — configure Mosquitto with username/password</li>
-            <li><strong style="color:var(--white);">Enable TLS</strong> — encrypt your MQTT traffic with SSL certificates</li>
-            <li><strong style="color:var(--white);">Use Node-RED</strong> — visually wire your MQTT data to dashboards and alerts</li>
-            <li><strong style="color:var(--white);">Try AWS IoT Core</strong> — scale to thousands of devices with managed cloud MQTT</li>
-            <li><strong style="color:var(--white);">Implement QoS</strong> — understand Quality of Service levels 0, 1, and 2</li>
+            <li><strong style="color:var(--white);">Submit our reports</strong> — programme and financial reports back to KICT, as required by the approval terms.</li>
+            <li><strong style="color:var(--white);">Debrief as a team</strong> — what worked in the pitch, what we'd refine for the next competition.</li>
+            <li><strong style="color:var(--white);">Keep building</strong> — carry the IoT project forward beyond the exhibition stage.</li>
+            <li><strong style="color:var(--white);">Open the next call</strong> — start recruiting for the next competition cycle.</li>
           </ol>
 
           <p>
-            We'll cover Node-RED integration in a follow-up post. If you build
-            something with this tutorial, share it in our WhatsApp group or
-            present it at our next project demo day!
+            Want to be part of the next team that represents IoTeams on stage? Keep an
+            eye on our socials and project demo days — that's usually where the next
+            squad gets put together.
           </p>
 
           <!-- Post footer -->
@@ -1133,14 +1200,14 @@ ioteams/sensors/humidity 65.1</code></pre>
 
             <!-- Tags -->
             <div class="post-tags">
-              <a href="#" class="tag-link">MQTT</a>
-              <a href="#" class="tag-link">ESP32</a>
-              <a href="#" class="tag-link">Mosquitto</a>
-              <a href="#" class="tag-link">Tutorial</a>
-              <a href="#" class="tag-link">Beginner</a>
+              <a href="#" class="tag-link">DIGITEX 2026</a>
+              <a href="#" class="tag-link">UTM</a>
+              <a href="#" class="tag-link">Competition</a>
               <a href="#" class="tag-link">IoT</a>
-              <a href="#" class="tag-link">Arduino</a>
-              <a href="#" class="tag-link">Cloud</a>
+              <a href="#" class="tag-link">KICT</a>
+              <a href="#" class="tag-link">Exhibition</a>
+              <a href="#" class="tag-link">Pitching</a>
+              <a href="#" class="tag-link">IoTeams</a>
             </div>
 
             <!-- Author bio -->
@@ -1149,19 +1216,18 @@ ioteams/sensors/humidity 65.1</code></pre>
                 <i class="bi bi-person-fill"></i>
               </div>
               <div class="author-bio-info">
-                <h4>Ahmad Faris</h4>
+                <h4>Wan Zul 'Irfan bin Wan Zulkifli</h4>
                 <span class="role">President · IoTeams IIUM</span>
                 <p>
-                  Final year Electrical & Computer Engineering student at IIUM.
-                  Specialises in embedded systems, RTOS, and IoT cloud integration.
-                  Led IoTeams from 20 to 120+ members and built the club's first
-                  smart campus monitoring system.
+                  Second-year Computer Science student at IIUM.
+                  Led IoTeams 20+ members and represented the club at
+                  DIGITEX 2026.
                 </p>
-                <div class="author-bio-social">
+                <!-- <div class="author-bio-social">
                   <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
                   <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
                   <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -1177,8 +1243,8 @@ ioteams/sensors/humidity 65.1</code></pre>
                   </div>
                   <div class="related-card-body">
                     <span class="badge badge-teal" style="margin-bottom:0.4rem; display:inline-block;">Tutorial</span>
-                    <h5>Connecting ESP32 to AWS IoT Core — Step by Step</h5>
-                    <span>20 Apr 2025 · 12 min read</span>
+                    <h5>Getting Started with MQTT Protocol</h5>
+                    <span>12 May 2025 · 8 min read</span>
                   </div>
                 </a>
                 <a href="blog-details.html" class="related-card">
@@ -1204,13 +1270,13 @@ ioteams/sensors/humidity 65.1</code></pre>
           <div class="sidebar-widget">
             <h5>Table of Contents</h5>
             <div class="toc-list" id="toc">
-              <a href="#what-is-mqtt" class="toc-item active">What is MQTT?</a>
-              <a href="#setting-up-broker" class="toc-item">Setting Up a Broker</a>
-              <a href="#install-mosquitto" class="toc-item h3">Installing Mosquitto</a>
-              <a href="#topics" class="toc-item">Understanding Topics</a>
-              <a href="#esp32-code" class="toc-item">Connecting ESP32</a>
-              <a href="#testing" class="toc-item">Testing Your Setup</a>
-              <a href="#next-steps" class="toc-item">Next Steps</a>
+              <a href="#about-digitex" class="toc-item active">What Is DIGITEX 2026?</a>
+              <a href="#meet-the-team" class="toc-item">Meet the IoTeams Squad</a>
+              <a href="#getting-there" class="toc-item">Getting the Green Light</a>
+              <a href="#key-dates" class="toc-item">Key Dates</a>
+              <a href="#exhibition-topics" class="toc-item">Topics & Awards</a>
+              <a href="#grand-finale" class="toc-item">Grand Finale Day</a>
+              <a href="#next-steps" class="toc-item">What's Next</a>
             </div>
           </div>
 
@@ -1241,23 +1307,23 @@ ioteams/sensors/humidity 65.1</code></pre>
           <div class="sidebar-widget">
             <h5>Tags</h5>
             <div class="tags-cloud">
-              <a href="#" class="tag-link">MQTT</a>
-              <a href="#" class="tag-link">ESP32</a>
-              <a href="#" class="tag-link">Mosquitto</a>
+              <a href="#" class="tag-link">DIGITEX</a>
+              <a href="#" class="tag-link">UTM</a>
+              <a href="#" class="tag-link">Competition</a>
               <a href="#" class="tag-link">IoT</a>
-              <a href="#" class="tag-link">Tutorial</a>
-              <a href="#" class="tag-link">Arduino</a>
-              <a href="#" class="tag-link">C++</a>
-              <a href="#" class="tag-link">Cloud</a>
+              <a href="#" class="tag-link">KICT</a>
+              <a href="#" class="tag-link">Exhibition</a>
+              <a href="#" class="tag-link">Pitching</a>
+              <a href="#" class="tag-link">IoTeams</a>
             </div>
           </div>
 
           <!-- CTA -->
           <div class="sidebar-widget" style="background:var(--black-3); border-color:var(--border-gold-md); text-align:center;">
-            <span style="font-size:2rem; display:block; margin-bottom:var(--space-xs);">🔧</span>
-            <h5 style="text-align:center; border:none; padding:0; margin-bottom:var(--space-xs);">Try It Yourself</h5>
+            <span style="font-size:2rem; display:block; margin-bottom:var(--space-xs);">🏆</span>
+            <h5 style="text-align:center; border:none; padding:0; margin-bottom:var(--space-xs);">Join the Next Squad</h5>
             <p style="font-size:var(--fs-xs); color:var(--white-dim); margin-bottom:var(--space-md); line-height:1.6;">
-              Join IoTeams and get access to our ESP32 kits, lab space, and mentorship.
+              Join IoTeams and get the chance to represent KICT at the next external competition.
             </p>
           </div>
 
