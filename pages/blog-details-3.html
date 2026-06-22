@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ============================================================
+  IoTeams IIUM — Blog Details / Single Post
+  pages/blog-details.html
+
+  SECTIONS:
+  1. Nav (shared)
+  2. Marquee (shared)
+  3. Post Hero — title, meta, cover image
+  4. Post Content — article body with code blocks
+  5. Post Footer — tags, share, author bio
+  6. Related Posts
+  7. Sidebar — TOC, recent, tags
+  8. Footer (shared)
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Award at NSVIC'26: SignTalk AI — IoTeams Blog</title>
+  <meta name="description" content="IoTeams members won a Gold Award at NSVIC'26 with SignTalk AI, a wearable AI + IoT system that translates sign language gestures into spoken words in real time — achieving 92% gesture recognition accuracy.">
+  <!-- SEO: Open Graph -->
+  <meta property="og:title" content="Gold Award at NSVIC'26: SignTalk AI — IoTeams Blog">
+  <meta property="og:description" content="IoTeams members won a Gold Award at NSVIC'26 with SignTalk AI, a wearable AI + IoT system that translates sign language gestures into spoken words in real time.">
+  <meta property="og:image" content="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/blog_3/signtalk_img1.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ioteams.iium.edu.my/pages/blog-details-3.html">
+  <meta property="og:site_name" content="IoTeams IIUM">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ioteams_iium">
+  <meta name="twitter:title" content="Gold Award at NSVIC'26: SignTalk AI — IoTeams Blog">
+  <meta name="twitter:description" content="IoTeams members won a Gold Award at NSVIC'26 with SignTalk AI, a wearable AI + IoT system that translates sign language gestures into spoken words in real time.">
+  <meta name="twitter:image" content="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/blog/blog_3/signtalk_img1.jpg">
+
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://ioteams.iium.edu.my/pages/blog-details.html">
+
+  <!-- SEO: Favicon -->
+  <link rel="icon" href="../assets/img/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/apple-touch-icon.png">
+
+  <!-- SEO: Theme color (browser UI) -->
+  <meta name="theme-color" content="#C9A84C">
+
+<!-- Bootstrap 5.3.3 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+
+    /* ══════════════════════════════════════
+       POST HERO
+    ══════════════════════════════════════ */
+    #post-hero {
+      background: var(--black);
+      padding: var(--space-3xl) var(--space-2xl) 0;
+    }
+
+    .post-hero-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .post-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .post-hero-date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .post-hero-read {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .post-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: var(--space-md);
+      max-width: 800px;
+    }
+
+    .post-excerpt {
+      font-size: var(--fs-lg);
+      color: var(--white-dim);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-bottom: var(--space-xl);
+      font-weight: 300;
+    }
+
+    /* Author row */
+    .post-author-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) 0;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .author-avatar-lg {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 2px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .author-avatar-lg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-avatar-lg i {
+      color: var(--white-muted);
+      font-size: 1.2rem;
+    }
+
+    .author-details h6 {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 0.15rem;
+    }
+
+    .author-details span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .post-share {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .post-share span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .share-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white-dim);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all var(--transition-base);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Cover image */
+    .post-cover {
+      aspect-ratio: 21/9;
+      background: var(--black-3);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-3xl);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-xs);
+      border: 1px solid var(--border-dark);
+    }
+
+    .post-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-cover i {
+      font-size: 3rem;
+      color: var(--white-muted);
+    }
+
+    .post-cover span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+    }
+
+    /* ══════════════════════════════════════
+       POST BODY LAYOUT — Content + Sidebar
+    ══════════════════════════════════════ */
+    #post-body {
+      background: var(--black);
+      padding: 0 var(--space-2xl) var(--space-3xl);
+    }
+
+    .post-layout {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════
+       POST CONTENT / ARTICLE STYLES
+    ══════════════════════════════════════ */
+    .post-content {
+      font-size: var(--fs-md);
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    .post-content h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-sm);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .post-content h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-xs);
+    }
+
+    .post-content p {
+      margin-bottom: var(--space-md);
+      color: var(--white-dim);
+    }
+
+    /* Highlighted lead paragraph */
+    .post-content p.lead {
+      font-size: var(--fs-lg);
+      color: var(--white);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* Inline code */
+    .post-content code {
+      font-family: var(--font-mono);
+      font-size: 0.875em;
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      border-radius: 3px;
+      padding: 0.15em 0.45em;
+      color: var(--teal);
+    }
+
+    /* Code blocks */
+    .post-content pre {
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      overflow-x: auto;
+      margin: var(--space-md) 0 var(--space-lg);
+      position: relative;
+    }
+
+    .post-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--white-dim);
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+    }
+
+    /* Code language label */
+    .code-label {
+      position: absolute;
+      top: var(--space-xs);
+      right: var(--space-xs);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--white-muted);
+      background: var(--black-4);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+    }
+
+    /* Copy button on code blocks */
+    .copy-btn {
+      position: absolute;
+      top: var(--space-xs);
+      right: calc(var(--space-xs) + 52px);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--white-muted);
+      background: var(--black-4);
+      border: 1px solid var(--border-dark);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .copy-btn.copied {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* Blockquote */
+    .post-content blockquote {
+      border-left: 3px solid var(--gold);
+      background: rgba(201,168,76,0.05);
+      margin: var(--space-lg) 0;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    .post-content blockquote p {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: var(--fs-lg);
+      color: var(--white);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Lists */
+    .post-content ul,
+    .post-content ol {
+      padding-left: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .post-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .post-content ul li::marker { color: var(--gold); }
+    .post-content ol li::marker {
+      color: var(--teal);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+    }
+
+    /* Info box */
+    .info-box {
+      background: rgba(26,188,176,0.06);
+      border: 1px solid rgba(26,188,176,0.25);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      display: flex;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+
+    .info-box i {
+      color: var(--teal);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .info-box p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Warning box */
+    .warn-box {
+      background: rgba(245,197,24,0.06);
+      border: 1px solid rgba(245,197,24,0.25);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      display: flex;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+
+    .warn-box i {
+      color: var(--yellow);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .warn-box p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Tables */
+    .post-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0 var(--space-lg);
+      font-size: var(--fs-sm);
+      background: var(--black-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .post-content th,
+    .post-content td {
+      padding: 0.65rem var(--space-sm);
+      border-bottom: 1px solid var(--border-dark);
+      text-align: left;
+      color: var(--white-dim);
+    }
+
+    .post-content thead th {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--black-4);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .post-content tbody tr:last-child td { border-bottom: none; }
+    .post-content tbody tr:hover { background: rgba(201,168,76,0.04); }
+
+    .post-content td strong { color: var(--white); }
+
+    /* Quick-facts strip */
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: var(--space-lg) 0;
+    }
+
+    .quick-fact {
+      background: var(--black-3);
+      padding: var(--space-md);
+      text-align: center;
+    }
+
+    .quick-fact i {
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .quick-fact .qf-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .quick-fact .qf-value {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 576px) {
+      .quick-facts { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Images in content */
+    .post-content figure {
+      margin: var(--space-lg) 0;
+    }
+
+    .post-content figure img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-dark);
+    }
+
+    .post-content figcaption {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--white-muted);
+      text-align: center;
+      margin-top: var(--space-xs);
+      letter-spacing: 0.06em;
+    }
+
+    /* Divider */
+    .post-content hr {
+      border: none;
+      border-top: 1px solid var(--border-dark);
+      margin: var(--space-xl) 0;
+    }
+
+    /* ── Post Footer (tags + share + author bio) ── */
+    .post-footer {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-xl);
+    }
+
+    .author-bio-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      display: flex;
+      gap: var(--space-lg);
+      align-items: flex-start;
+      margin-bottom: var(--space-xl);
+    }
+
+    .author-bio-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 2px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .author-bio-avatar i { font-size: 2rem; color: var(--white-muted); }
+
+    .author-bio-info h4 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .author-bio-info .role {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .author-bio-info p {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      margin-bottom: var(--space-sm);
+      line-height: 1.65;
+    }
+
+    .author-bio-social {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .author-bio-social a {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .author-bio-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Related Posts ── */
+    .related-posts {
+      margin-top: var(--space-xl);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .related-card {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      text-decoration: none;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+      display: block;
+    }
+
+    .related-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-3px);
+    }
+
+    .related-card-img {
+      aspect-ratio: 16/9;
+      background: var(--black-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .related-card-img i { font-size: 2rem; color: var(--white-muted); }
+
+    .related-card-body {
+      padding: var(--space-md);
+    }
+
+    .related-card-body h5 {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .related-card-body span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--white-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .post-sidebar {
+      position: sticky;
+      top: calc(72px + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .sidebar-widget {
+      background: var(--black-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .sidebar-widget h5 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    /* Table of Contents */
+    .toc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .toc-item {
+      font-size: var(--fs-sm);
+      color: var(--white-dim);
+      text-decoration: none;
+      padding: 0.3rem var(--space-xs);
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: all var(--transition-base);
+      display: block;
+      line-height: 1.4;
+    }
+
+    .toc-item:hover,
+    .toc-item.active {
+      color: var(--gold);
+      border-left-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      padding-left: var(--space-sm);
+    }
+
+    .toc-item.h3 {
+      padding-left: var(--space-md);
+      font-size: var(--fs-xs);
+    }
+
+    /* Progress bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--gold);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Tags in sidebar */
+    .tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-link {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--white-dim);
+      border: 1px solid var(--border-dark);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .tag-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 991px) {
+      .post-layout    { grid-template-columns: 1fr; }
+      .post-sidebar   { position: static; }
+      .related-grid   { grid-template-columns: 1fr; }
+      .author-bio-card { flex-direction: column; }
+    }
+
+    @media (max-width: 576px) {
+      .post-author-row { flex-direction: column; align-items: flex-start; }
+      .post-title      { font-size: 2rem; }
+    }
+  </style>
+</head>
+
+<body class="blog-details-page">
+
+  <!-- Skip to content — keyboard accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-container">
+<a href="index.html" class="nav-logo">
+  <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
+       alt="IoTeams KICT Logo"
+       style="height: 48px; width: auto; object-fit: contain; background: transparent;">
+</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>IoTeams Blog</span><span class="dot">◆</span>
+      <span>NSVIC'26</span><span class="dot">◆</span>
+      <span>Gold Award</span><span class="dot">◆</span>
+      <span>SignTalk AI</span><span class="dot">◆</span>
+      <span>6 Min Read</span><span class="dot">◆</span>
+      <span>IoTeams Blog</span><span class="dot">◆</span>
+      <span>NSVIC'26</span><span class="dot">◆</span>
+      <span>Gold Award</span><span class="dot">◆</span>
+      <span>SignTalk AI</span><span class="dot">◆</span>
+      <span>6 Min Read</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- POST HERO -->
+    <section id="post-hero">
+      <div class="post-hero-inner">
+
+        <!-- Breadcrumb + meta -->
+        <div class="post-hero-meta" data-aos="fade-up">
+          <a href="blog.html" style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--teal); text-decoration:none; display:flex; align-items:center; gap:0.3rem; letter-spacing:0.06em;">
+            <i class="bi bi-arrow-left"></i> Back to Blog
+          </a>
+          <span style="color:var(--border-dark);">|</span>
+          <span class="badge badge-teal">Competition</span>
+          <span class="badge badge-gold">Gold Award</span>
+          <span class="post-hero-date"><i class="bi bi-calendar3"></i> 17 June 2026</span>
+          <span class="post-hero-read"><i class="bi bi-clock"></i> 6 min read</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="post-title" data-aos="fade-up" data-aos-delay="50">
+          Gold Award at NSVIC'26: How SignTalk AI Broke Communication Barriers
+        </h1>
+
+        <!-- Excerpt -->
+        <p class="post-excerpt" data-aos="fade-up" data-aos-delay="100">
+          Six IoTeams members built a wearable AI system that turns sign language gestures
+          into spoken words in real time — and walked away from NSVIC'26 with a Gold Award
+          and 92% gesture recognition accuracy to show for it.
+        </p>
+
+        <!-- Author + Share -->
+        <div class="post-author-row" data-aos="fade-up" data-aos-delay="150">
+          <div class="post-author">
+            <div class="author-avatar-lg">
+              <i class="bi bi-person-fill"></i>
+            </div>
+            <div class="author-details">
+              <h6>Muhammad Faizul Isyraf bin Md Nazri</h6>
+              <span>Treasurer · IoTeams IIUM</span>
+            </div>
+          </div>
+          <div class="post-share">
+            <span>Share:</span>
+            <a href="#" class="share-btn" title="Share on Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="share-btn" title="Share on LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="share-btn" title="Copy link" id="copyLinkBtn"><i class="bi bi-link-45deg"></i></a>
+          </div>
+        </div>
+
+        <!-- Cover image -->
+        <div class="post-cover" data-aos="fade-up" data-aos-delay="200">
+          <div class="featured-img">
+            <img src="#"
+                 alt="Gold Award at NSVIC'26: SignTalk AI"
+                 loading="lazy"
+                 style="width:100%; height:100%; object-fit:cover;">
+            <span class="featured-ribbon">🥇 Gold Award</span>
+          </div>
+
+      </div>
+    </section>
+
+    <!-- POST BODY -->
+    <section id="post-body">
+      <div class="post-layout">
+
+        <!-- ARTICLE CONTENT -->
+        <article class="post-content" data-aos="fade-up">
+
+          <p class="lead">
+            Most competition teams build for a panel of judges. This one built for people
+            who can't speak. Six IoTeams members spent months turning that purpose into a
+            working wearable — and NSVIC'26 gave them a Gold Award for it.
+          </p>
+
+          <p>
+            SignTalk AI is an AI and IoT-based wearable system that reads sign language
+            gestures through a glove fitted with EMG and motion sensors, processes them
+            through a trained machine learning model on an ESP32 microcontroller, and
+            outputs real-time spoken words through a paired speaker. No smartphone app.
+            No internet dependency. Just a glove that talks.
+          </p>
+
+          <div class="quick-facts" data-aos="fade-up">
+            <div class="quick-fact">
+              <i class="bi bi-trophy-fill" style="color:var(--gold);"></i>
+              <span class="qf-label">Award</span>
+              <span class="qf-value">Gold Award — NSVIC'26</span>
+            </div>
+            <div class="quick-fact">
+              <i class="bi bi-cpu"></i>
+              <span class="qf-label">Category</span>
+              <span class="qf-value">Community Wellbeing Technology (CWT)</span>
+            </div>
+            <div class="quick-fact">
+              <i class="bi bi-people"></i>
+              <span class="qf-label">Team Size</span>
+              <span class="qf-value">6 Members</span>
+            </div>
+            <div class="quick-fact">
+              <i class="bi bi-graph-up-arrow"></i>
+              <span class="qf-label">Model Accuracy</span>
+              <span class="qf-value">92% Gesture Recognition</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <i class="bi bi-info-circle"></i>
+            <p>
+              <strong style="color:var(--white);">Quick navigation:</strong>
+              Jump to <a href="#the-problem" style="color:var(--teal);">the problem SignTalk solves</a>,
+              <a href="#how-it-works" style="color:var(--teal);">how the system works</a>,
+              <a href="#the-team" style="color:var(--teal);">the team</a>, or
+              <a href="#results" style="color:var(--teal);">competition results</a>.
+            </p>
+          </div>
+
+          <!-- Section 1 -->
+          <h2 id="the-problem">The Problem They Set Out to Solve</h2>
+
+          <p>
+            Speech- and hearing-impaired individuals face a fundamental communication
+            barrier in a world built around spoken language. Sign language bridges that
+            gap within communities that know it — but outside those communities, the
+            barrier remains. Existing translation tools tend to be expensive, phone-dependent,
+            or too slow for natural conversation.
+          </p>
+
+          <p>
+            The team began with a literature review on assistive communication technology,
+            mapping the real-world constraints: affordability, portability, latency, and
+            independence from internet connectivity. Those four constraints shaped every
+            design decision that followed.
+          </p>
+
+          <blockquote>
+            <p>
+              User-centred design isn't a checkbox — when you're building for someone who
+              can't communicate in the way everyone else does, getting the interaction
+              model wrong means the system is useless no matter how technically impressive
+              it is.
+            </p>
+          </blockquote>
+
+          <!-- Section 2 -->
+          <h2 id="how-it-works">How SignTalk AI Works</h2>
+
+          <p>
+            The SignTalk AI wearable is built around three layers working in sequence:
+            sensing, inference, and output.
+          </p>
+
+          <ul>
+            <li>
+              <strong style="color:var(--white);">Sensing</strong> — EMG (electromyography)
+              sensors and motion sensors embedded in the glove capture the electrical
+              activity of hand muscles and the spatial orientation of the hand as a gesture
+              is made.
+            </li>
+            <li>
+              <strong style="color:var(--white);">Inference</strong> — A Random Forest
+              machine learning model, trained on labelled gesture data and deployed directly
+              on an ESP32 microcontroller, classifies the sensor readings into a recognised
+              gesture — all on-device, no cloud call required.
+            </li>
+            <li>
+              <strong style="color:var(--white);">Output</strong> — The classified gesture
+              is mapped to its spoken equivalent and played through an audio output module
+              in real time, giving the wearer an immediate spoken voice.
+            </li>
+          </ul>
+
+          <p>
+            Running inference on the ESP32 itself was a deliberate choice: it keeps
+            latency low, eliminates the need for a paired smartphone or Wi-Fi connection,
+            and keeps the unit cost of the hardware within reach for real-world deployment.
+            After training and evaluation, the model achieved <strong style="color:var(--white);">92% gesture recognition accuracy</strong> — high
+            enough for reliable use across common sign language gestures.
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>Component</th><th>Role</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>ESP32 microcontroller</strong></td><td>Central processing — runs the ML model on-device</td></tr>
+              <tr><td><strong>EMG sensors</strong></td><td>Detects muscle activity in the hand during gestures</td></tr>
+              <tr><td><strong>Motion sensors</strong></td><td>Tracks hand orientation and movement in 3D space</td></tr>
+              <tr><td><strong>Random Forest model</strong></td><td>Classifies sensor data into recognised gestures</td></tr>
+              <tr><td><strong>Audio output module</strong></td><td>Converts classified gesture to real-time spoken word</td></tr>
+            </tbody>
+          </table>
+
+          <!-- Section 3 -->
+          <h2 id="the-team">The SignTalk AI Team</h2>
+
+          <p>
+            Six IoTeams members from IIUM built and competed with SignTalk AI at NSVIC'26,
+            entering under the <strong style="color:var(--white);">Community Wellbeing
+            Technology (CWT)</strong> category — the same category in which the team's
+            entry ID <strong style="color:var(--white);">CWTT02</strong> was listed in the
+            official Gold Award winners announcement.
+          </p>
+
+          <table>
+            <thead>
+              <tr><th>Name</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Muhammad Faizul Isyraf bin Md Nazri</td></tr>
+              <tr><td>Muhammad Mukhrizq Wafiq bin Mohd Masri</td></tr>
+              <tr><td>Wan Nurqaisara Damia binti Wan Mohd Adnan</td></tr>
+              <tr><td>Ainin Sofiya binti Talib</td></tr>
+              <tr><td>Nur Ain Asyiqin binti Mohamad Husain</td></tr>
+              <tr><td>Auni Nazihah binti Kamaruddin</td></tr>
+            </tbody>
+          </table>
+
+          <p>
+            The team's preparation went well beyond the prototype itself — they produced
+            a full innovation summary document, a competition poster, a structured
+            presentation deck, and a demonstration video, all submitted as part of
+            the official competition entry.
+          </p>
+
+          <!-- Section 4 -->
+          <h2 id="about-nsvic">About NSVIC'26</h2>
+
+          <p>
+            The National Virtual STEM Innovation Competition 2026 (NSVIC'26) is organised
+            by the Persatuan Mahasiswa Sains (PMS) at Universiti Pendidikan Sultan Idris
+            (UPSI), under their STEM Innovation & Career Ecosystem (STEM-ICE) initiative.
+            The competition provides a national platform for students at all levels —
+            from primary school through university — to showcase creative STEM solutions
+            addressing real-world challenges, with judging by academic and industry experts.
+          </p>
+
+          <p>
+            NSVIC'26 ran fully online between 27 April and 17 June 2026 across four
+            competition categories:
+          </p>
+
+          <ul>
+            <li><strong style="color:var(--white);">Category A:</strong> Environmental Technology and Energy (ETE)</li>
+            <li><strong style="color:var(--white);">Category B:</strong> STEM Education (SE)</li>
+            <li><strong style="color:var(--white);">Category C:</strong> Community Wellbeing Technology (CWT)</li>
+            <li><strong style="color:var(--white);">Category D:</strong> Digital Technology and AI (DTAI)</li>
+          </ul>
+
+          <!-- Section 5 -->
+          <h2 id="results">Competition Results</h2>
+
+          <p>
+            SignTalk AI competed in the Tertiary (Professional) category under CWT,
+            listed as entry <strong style="color:var(--white);">CWTT02</strong> in the
+            official results. The Gold Award was confirmed in the national winners
+            announcement on 17 June 2026, placing SignTalk AI among the top performers
+            in one of the most competitive categories in the competition.
+          </p>
+
+          <div class="info-box">
+            <i class="bi bi-award-fill" style="color:var(--gold);"></i>
+            <p>
+              <strong style="color:var(--white);">NSVIC'26 Gold Award — CWTT02</strong><br>
+              SignTalk AI: Breaking Barriers with Wearable Gesture-to-Speech Technology<br>
+              <em style="color:var(--white-muted);">Community Wellbeing Technology · Tertiary Category · International Islamic University Malaysia</em>
+            </p>
+          </div>
+
+          <p>
+            For context, NSVIC'26 awards spanned three tiers: Best of Category (top entry
+            per track), Gold, Silver, and Bronze. SignTalk AI's Gold Award places it
+            directly below the Best of CWT Award winner, competing against entries from
+            universities, polytechnics, and professional colleges across Malaysia.
+          </p>
+
+          <!-- Section 6 -->
+          <h2 id="impact">Impact & What It Means</h2>
+
+          <p>
+            The Gold Award is recognition — but the team's reflection on what they
+            actually built matters more. A working prototype that achieves 92% accuracy
+            on-device, runs without internet, and costs a fraction of commercial
+            assistive devices isn't a competition entry. It's a proof of concept with a
+            credible path to real-world use.
+          </p>
+
+          <ul>
+            <li><strong style="color:var(--white);">For the community:</strong> an affordable, portable assistive communication option for speech- and hearing-impaired individuals.</li>
+            <li><strong style="color:var(--white);">For the team:</strong> hands-on experience combining AI, IoT, embedded systems, machine learning, and hardware — all in one project.</li>
+            <li><strong style="color:var(--white);">For IoTeams:</strong> national-level validation that the club's approach to project-based learning produces work that competes at the highest level.</li>
+          </ul>
+
+          <hr>
+
+          <!-- Section 7 -->
+          <h2 id="lessons">Lessons Learned</h2>
+
+          <p>
+            Four things the team would tell the next squad entering a similar competition:
+          </p>
+
+          <ol>
+            <li><strong style="color:var(--white);">Start with the user, not the hardware.</strong> Designing for someone who actually depends on the device forces better decisions at every layer of the stack.</li>
+            <li><strong style="color:var(--white);">Test continuously, not just at the end.</strong> Integrating hardware, firmware, AI inference, and audio output means there are many points of failure — the team that finds them early wins.</li>
+            <li><strong style="color:var(--white);">The demo and documentation matter as much as the prototype.</strong> Strong technical work combined with a clear, well-presented competition submission is what tips a Gold over a Silver.</li>
+            <li><strong style="color:var(--white);">Tight timelines reward structure.</strong> The team managed the submission window — concept, prototype, poster, presentation, video — by treating it as a proper project with milestones, not a single crunch at the end.</li>
+          </ol>
+
+          <!-- Section 8 -->
+          <h2 id="whats-next">What's Next</h2>
+
+          <p>
+            The Gold Award closes the competition chapter — but SignTalk AI as a project
+            isn't finished. The team is exploring what it would take to move from prototype
+            to a more refined, user-testable version of the glove, and the codebase and
+            hardware design remain open for future IoTeams members to build on.
+          </p>
+
+          <p>
+            If you want to contribute to the next iteration, or if this kind of
+            applied AI and IoT work is what you're looking for in a student club, keep
+            an eye on our socials and project demo days — that's where the next team
+            gets put together.
+          </p>
+
+          <!-- Post footer -->
+          <div class="post-footer">
+
+            <!-- Tags -->
+            <div class="post-tags">
+              <a href="#" class="tag-link">NSVIC'26</a>
+              <a href="#" class="tag-link">Gold Award</a>
+              <a href="#" class="tag-link">SignTalk AI</a>
+              <a href="#" class="tag-link">AI</a>
+              <a href="#" class="tag-link">IoT</a>
+              <a href="#" class="tag-link">Wearable</a>
+              <a href="#" class="tag-link">Assistive Tech</a>
+              <a href="#" class="tag-link">ESP32</a>
+            </div>
+
+            <!-- Author bio -->
+            <div class="author-bio-card">
+              <div class="author-bio-avatar">
+                <i class="bi bi-person-fill"></i>
+              </div>
+              <div class="author-bio-info">
+                <h4>Muhammad Faizul Isyraf bin Md Nazri</h4>
+                <span class="role">Treasurer · IoTeams IIUM</span>
+                <p>
+                  Second-year Computer Science student at IIUM.
+                  Treasurer of IoTeams and represented the club at
+                  NSVIC'26 and multiple national competitions.
+                </p>
+                <!-- <div class="author-bio-social">
+                  <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                  <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                  <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div> -->
+              </div>
+            </div>
+
+            <!-- Related Posts
+            <div class="related-posts">
+              <h4 style="font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; margin-bottom:var(--space-md);">
+                Related Posts
+              </h4>
+              <div class="related-grid">
+                <a href="blog-details-2.html" class="related-card">
+                  <div class="related-card-img">
+                    <i class="bi bi-image"></i>
+                  </div>
+                  <div class="related-card-body">
+                    <span class="badge badge-teal" style="margin-bottom:0.4rem; display:inline-block;">Competition</span>
+                    <h5>Silver at Home, Top 10 Abroad: IoTeams at NSVIC & TeknoCom 2026</h5>
+                    <span>18 June 2026 · 7 min read</span>
+                  </div>
+                </a>
+                <a href="blog-details.html" class="related-card">
+                  <div class="related-card-img">
+                    <i class="bi bi-image"></i>
+                  </div>
+                  <div class="related-card-body">
+                    <span class="badge badge-gold" style="margin-bottom:0.4rem; display:inline-block;">Competition</span>
+                    <h5>DIGITEX 2026: Exploring the Future of Digital Innovation</h5>
+                    <span>17 June 2026 · 6 min read</span>
+                  </div>
+                </a>
+              </div>
+            </div> -->
+
+          </div>
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="post-sidebar">
+
+          <!-- Table of Contents -->
+          <div class="sidebar-widget">
+            <h5>Table of Contents</h5>
+            <div class="toc-list" id="toc">
+              <a href="#the-problem" class="toc-item active">The Problem</a>
+              <a href="#how-it-works" class="toc-item">How SignTalk AI Works</a>
+              <a href="#the-team" class="toc-item">The Team</a>
+              <a href="#about-nsvic" class="toc-item">About NSVIC'26</a>
+              <a href="#results" class="toc-item">Competition Results</a>
+              <a href="#impact" class="toc-item">Impact</a>
+              <a href="#lessons" class="toc-item">Lessons Learned</a>
+              <a href="#whats-next" class="toc-item">What's Next</a>
+            </div>
+          </div>
+
+          <!-- Share widget -->
+          <div class="sidebar-widget">
+            <h5>Share This Post</h5>
+            <div style="display:flex; flex-direction:column; gap:var(--space-xs);">
+              <a href="#" style="display:flex; align-items:center; gap:var(--space-xs); padding:0.5rem var(--space-xs); border-radius:var(--radius-sm); text-decoration:none; font-size:var(--fs-sm); color:var(--white-dim); transition:background var(--transition-base);"
+                 onmouseover="this.style.background='var(--black-4)'"
+                 onmouseout="this.style.background='transparent'">
+                <i class="bi bi-twitter-x"></i> Share on X
+              </a>
+              <a href="#" style="display:flex; align-items:center; gap:var(--space-xs); padding:0.5rem var(--space-xs); border-radius:var(--radius-sm); text-decoration:none; font-size:var(--fs-sm); color:var(--white-dim); transition:background var(--transition-base);"
+                 onmouseover="this.style.background='var(--black-4)'"
+                 onmouseout="this.style.background='transparent'">
+                <i class="bi bi-linkedin"></i> Share on LinkedIn
+              </a>
+              <button onclick="navigator.clipboard.writeText(location.href); this.textContent='✓ Copied!'; setTimeout(()=>this.textContent='Copy Link',2000)"
+                style="display:flex; align-items:center; gap:var(--space-xs); padding:0.5rem var(--space-xs); border-radius:var(--radius-sm); font-size:var(--fs-sm); color:var(--white-dim); background:transparent; border:none; cursor:pointer; width:100%; text-align:left; font-family:var(--font-body); transition:background var(--transition-base);"
+                onmouseover="this.style.background='var(--black-4)'"
+                onmouseout="this.style.background='transparent'">
+                <i class="bi bi-link-45deg"></i> Copy Link
+              </button>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget">
+            <h5>Tags</h5>
+            <div class="tags-cloud">
+              <a href="#" class="tag-link">NSVIC'26</a>
+              <a href="#" class="tag-link">Gold Award</a>
+              <a href="#" class="tag-link">SignTalk AI</a>
+              <a href="#" class="tag-link">AI</a>
+              <a href="#" class="tag-link">IoT</a>
+              <a href="#" class="tag-link">Wearable</a>
+              <a href="#" class="tag-link">Assistive Tech</a>
+              <a href="#" class="tag-link">ESP32</a>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="sidebar-widget" style="background:var(--black-3); border-color:var(--border-gold-md); text-align:center;">
+            <span style="font-size:2rem; display:block; margin-bottom:var(--space-xs);">🤝</span>
+            <h5 style="text-align:center; border:none; padding:0; margin-bottom:var(--space-xs);">Build With Us</h5>
+            <p style="font-size:var(--fs-xs); color:var(--white-dim); margin-bottom:var(--space-md); line-height:1.6;">
+              Interested in contributing to SignTalk AI or the next IoTeams project? Join us.
+            </p>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+<footer id="footer">
+    <div class="footer-inner">
+
+      <!-- Brand + tagline -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="https://zxfinszfbnmatwamahyf.supabase.co/storage/v1/object/public/ioteams-media/icons/IoTeams_Logo_transparent.png"
+          alt="IoTeams KICT Logo"
+          style="height:72px; width:auto; object-fit:contain; background: transparent;">
+        </a>
+        <p class="footer-tagline">Building the Future of IoT Together.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/ioteams.kict?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61565885109209" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.tiktok.com/@ioteamskict?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="Tiktok"><i class="bi bi-tiktok"></i></a>
+          <a href="http://www.youtube.com/@IoTeamsKICT" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Nav links -->
+      <div class="footer-links">
+        <h6>Pages</h6>
+        <ul class="footer-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/our-story.html">Our Story</a></li>
+          <li><a href="pages/programmes.html">Programmes</a></li>
+          <li><a href="pages/events.html">Events</a></li>
+          <li><a href="pages/gallery.html">Gallery</a></li>
+          <li><a href="pages/blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact info -->
+      <div class="footer-contact">
+        <h6>Got questions? We don't bite.</h6>
+        <p>Reach out anytime — whether you want to join, collaborate, or just say hello. We reply within 48 hours.</p>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="bi bi-geo-alt"></i>
+            <span>Kulliyyah of ICT (KICT), IIUM Gombak, Kuala Lumpur</span>
+          </li>
+          <li>
+            <i class="bi bi-envelope"></i>
+            <a href="mailto:ioteamskict@gmail.com">ioteamskict@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 IoTeams IIUM. All rights reserved.</p>
+      <p style="font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--white-muted);">
+        IIUM Gombak · Kuala Lumpur · Malaysia
+      </p>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader">
+    <div class="preloader-inner">
+      <span class="bracket">[</span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="preloader-dot"></span>
+      <span class="bracket">]</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="../assets/js/main.js"></script>
+
+  <script>
+    /* ── Reading progress bar ── */
+    window.addEventListener('scroll', () => {
+      const article = document.querySelector('.post-content');
+      if (!article) return;
+      const articleTop  = article.offsetTop;
+      const articleH    = article.offsetHeight;
+      const scrolled    = window.scrollY - articleTop;
+      const progress    = Math.min(Math.max(scrolled / articleH * 100, 0), 100);
+      document.getElementById('readingProgress').style.width = progress + '%';
+    });
+
+    /* ── TOC active highlight on scroll ── */
+    const headings = document.querySelectorAll('.post-content h2, .post-content h3');
+    const tocLinks = document.querySelectorAll('.toc-item');
+
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.toc-item[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    headings.forEach(h => { if (h.id) tocObserver.observe(h); });
+
+    /* ── Copy code button ── */
+    function copyCode(btn) {
+      const code = btn.closest('[style*="position:relative"]').querySelector('code');
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i class="bi bi-clipboard"></i> Copy';
+        }, 2000);
+      });
+    }
+
+    /* ── Copy page link ── */
+    document.getElementById('copyLinkBtn')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(location.href);
+      const btn = e.currentTarget;
+      btn.title = 'Copied!';
+      setTimeout(() => btn.title = 'Copy link', 2000);
+    });
+  </script>
+
+</body>
+</html>
